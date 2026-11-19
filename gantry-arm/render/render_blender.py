@@ -277,6 +277,92 @@ def render(finish: str, view: str, samples: int, res: tuple, suffix: str = ""):
     print("wrote", path)
 
 
+# --------------------------------------------------------------------------- knolling (flat-lay of printed parts)
+
+KIT_GROUPS = {"arm": ("arm",), "gantry": ("gantry", "workcell")}
+
+
+def render_kit(finish: str, kit: str, samples: int, res: tuple, row_w: float):
+    """Every printed part (x qty), laid flat on its largest face, in rows, labelled - finished paint."""
+    sc = reset()
+    mats = make_materials(finish)
+    label_mat = principled("label", (0.03, 0.03, 0.035) if finish == "graphite" else (0.85, 0.85, 0.85), 0.6)
+    manifest = [m for m in json.loads((CAD_OUT / "manifest.json").read_text()) if m["printed"] and m["group"] in KIT_GROUPS[kit]]
+    items = []
+    for m in manifest:
+        for k in range(m["qty"]):
+            bpy.ops.wm.stl_import(filepath=str(STL / f"{m['name']}.stl"))
+            o = bpy.context.selected_objects[0]
+            o.name = f"{m['name']}_{k}"
+            o.data.materials.append(mats.get(m["role"], mats["shell"]))
+            # lay it on its largest face: the smallest bounding-box axis becomes vertical
+            xs = [v.co for v in o.data.vertices]
+            ext = [max(c[i] for c in xs) - min(c[i] for c in xs) for i in range(3)]
+            small = ext.index(min(ext))
+            o.scale = (0.001, 0.001, 0.001)
+            o.rotation_mode = "XYZ"
+            o.rotation_euler = {0: (0, math.radians(90), 0), 1: (math.radians(90), 0, 0), 2: (0, 0, 0)}[small]
+            bpy.context.view_layer.update()
+            try:
+                bpy.context.view_layer.objects.active = o
+                bpy.ops.object.shade_smooth_by_angle(angle=math.radians(35))
+            except Exception:
+                pass
+            items.append((m["name"] + (f" ({k + 1}/{m['qty']})" if m["qty"] > 1 else ""), o))
+    # shelf packing, biggest footprint first
+    def bbox(o):
+        pts = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        return [min(p[i] for p in pts) for i in range(3)], [max(p[i] for p in pts) for i in range(3)]
+
+    items.sort(key=lambda it: -(lambda b: (b[1][0] - b[0][0]) * (b[1][1] - b[0][1]))(bbox(it[1])))
+    gap, label_h = 0.03, 0.03
+    x = y = 0.0
+    row_h = 0.0
+    for name, o in items:
+        lo, hi = bbox(o)
+        w, d = hi[0] - lo[0], hi[1] - lo[1]
+        if x > 0 and x + w > row_w:
+            x, y = 0.0, y - row_h - gap - label_h
+            row_h = 0.0
+        o.location += Vector((x - lo[0], y - hi[1], -lo[2]))
+        bpy.ops.object.text_add(location=(x, y - d - 0.006 - 0.008, 0.0005))
+        t = bpy.context.object
+        t.data.body = name
+        t.data.size = 0.0105
+        t.data.materials.append(label_mat)
+        x += max(w, 0.0066 * len(name)) + gap
+        row_h = max(row_h, d)
+    total_h = -(y - row_h - label_h)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(row_w / 2, -total_h / 2, 0))
+    fl = bpy.context.object
+    fl.scale = (row_w * 1.6, total_h * 1.6, 1)
+    fl.data.materials.append(principled("mat", (0.50, 0.51, 0.52) if finish == "graphite" else (0.13, 0.135, 0.14), 0.85))
+    # soft overhead studio light
+    for loc, size, e in (((row_w * 0.3, -total_h * 0.2, 1.6), 2.5, 120), ((row_w * 0.9, -total_h * 0.9, 1.2), 2.0, 45)):
+        bpy.ops.object.light_add(type="AREA", location=loc)
+        L = bpy.context.object
+        L.data.size, L.data.energy = size, e
+        L.rotation_euler = (Vector((row_w / 2, -total_h / 2, 0)) - Vector(loc)).to_track_quat("-Z", "Y").to_euler()
+    # orthographic camera, tilted 25 deg from straight down
+    c = Vector((row_w / 2, -total_h / 2, 0))
+    tilt = math.radians(25)
+    loc = c + Vector((0, -math.sin(tilt), math.cos(tilt))) * 3.0
+    bpy.ops.object.camera_add(location=loc)
+    cam = bpy.context.object
+    cam.rotation_euler = (c - loc).to_track_quat("-Z", "Y").to_euler()
+    cam.data.type = "ORTHO"
+    aspect = res[0] / res[1]
+    cam.data.ortho_scale = max(row_w * 1.06, total_h * math.cos(tilt) * aspect * 1.12)
+    sc.camera = cam
+    sc.cycles.samples = samples
+    sc.render.resolution_x, sc.render.resolution_y = res
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / f"kit_{kit}_{finish}.png"
+    sc.render.filepath = str(path)
+    bpy.ops.render.render(write_still=True)
+    print("wrote", path, len(items), "parts")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--finish", default="graphite", choices=list(FINISHES))
@@ -285,8 +371,13 @@ if __name__ == "__main__":
     ap.add_argument("--res", default="1600x1100")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--suffix", default="")
+    ap.add_argument("--kit", choices=list(KIT_GROUPS), help="flat-lay of every printed part instead of the assembly")
+    ap.add_argument("--row-width", type=float, default=0.9, help="kit layout row width (m)")
     a = ap.parse_args()
     res = tuple(int(x) for x in a.res.split("x"))
+    if a.kit:
+        render_kit(a.finish, a.kit, a.samples, res, a.row_width)
+        raise SystemExit
     jobs = [(f, v) for f in FINISHES for v in ("threequarter", "side", "gripper", "head")] + [("graphite", "coupler"), ("white", "coupler")] if a.all else [(a.finish, a.view)]
     for f, v in jobs:
         render(f, v, a.samples, res, a.suffix)
