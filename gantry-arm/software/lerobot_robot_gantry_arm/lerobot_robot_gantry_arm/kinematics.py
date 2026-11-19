@@ -182,6 +182,33 @@ class Kinematics:
             raise IKError(f"unreachable: {p}")
         return best
 
+    def common_gantry(self, poses: list[Pose], prefer: dict | None = None, z_min: float = 0.0) -> tuple[float, float]:
+        """One (gantry_x, gantry_z) from which every pose is reachable (strokes, insertions).
+
+        Raises IKError if no single gantry position covers them all (caller splits the path).
+        """
+        g = self.g
+        cx = sum(p.x for p in poses) / len(poses)
+        ideal = cx - g.x0 - g.lateral
+        xs = sorted({min(max(ideal + d, 0.0), g.x_travel) for d in (0, -40, 40, -90, 90, -150, 150)})
+        best, best_cost = None, math.inf
+        for gx in xs:
+            for gz in range(int(math.ceil(z_min / 10.0)) * 10, int(g.z_travel) + 1, 10):
+                cost = 0.0
+                for p in poses:
+                    q = self._arm(p, gx, float(gz))
+                    if q is None or not self.within_limits(q) or self.collides(q):
+                        cost = math.inf
+                        break
+                    cost += (abs(q["elbow_flex"] - 90.0) / 90.0) ** 2 + (q["base_yaw"] / 150.0) ** 2
+                if prefer and cost < math.inf:
+                    cost += len(poses) * 0.5 * abs(gx - prefer.get("gantry_x", gx)) / g.x_travel
+                if cost < best_cost:
+                    best, best_cost = (gx, float(gz)), cost
+        if best is None:
+            raise IKError(f"no common gantry position for {len(poses)} poses")
+        return best
+
     def reachable(self, p: Pose, **kw) -> bool:
         try:
             self.ik(p, **kw)

@@ -30,7 +30,35 @@ def geometry() -> dict:
         "limits_deg": P.JOINT_LIMITS,
         "spring_k_N_per_mm": k,
         "servos": {j: {"model": s.model, "count": n, "stall_Nm": s.stall_Nm, "rated_Nm": s.rated_Nm} for j, (s, n) in P.JOINT_SERVOS.items()},
+        "rack": {**{k: v for k, v in P.RACK.items() if k != "slots"}, "slots": {str(k): v for k, v in P.RACK["slots"].items()}, "roll_deg": dock_roll()},
     }
+
+
+def dock_roll() -> float:
+    """Wrist roll that points the coupler's sleeve lever (tool-frame +X) at world -X (the rack cam post)."""
+    import math
+
+    import mujoco
+    import numpy as np
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "lerobot_robot_gantry_arm"))
+    from lerobot_robot_gantry_arm.kinematics import Kinematics, Pose
+
+    x = list(P.RACK["slots"].values())[0]
+    q = Kinematics().ik(Pose(x, P.RACK["y"], P.RACK["tcp_z"], 180.0, 0.0))
+    m = mujoco.MjModel.from_xml_string(M.to_mjcf(0.0))
+    d = mujoco.MjData(m)
+    best = (9.0, 0.0)
+    for roll in range(-180, 180):
+        for n, v in {**q, "wrist_roll": roll}.items():
+            j = m.joint(n)
+            d.qpos[m.jnt_qposadr[j.id]] = v / 1000 if n.startswith("gantry") else math.radians(v)
+        mujoco.mj_kinematics(m, d)
+        xaxis = d.xmat[m.body("tool").id].reshape(3, 3)[:, 0]
+        err = float(np.linalg.norm(xaxis - np.array([-1.0, 0.0, 0.0])))
+        if err < best[0]:
+            best = (err, float(roll))
+    return best[1]
 
 
 def main():
