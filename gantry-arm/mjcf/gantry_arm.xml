@@ -19,48 +19,45 @@
       <geom name="x_motor" type="box" size="0.021 0.021 0.02" pos="0 -0.06 0.025" mass="0.28" rgba="0.1 0.1 0.1 1"/>
       <geom name="column" type="box" size="0.01 0.02 0.35" pos="0 0 0.36" mass="0.511" rgba="0.75 0.75 0.78 1"/>
       <geom name="z_motor" type="box" size="0.021 0.021 0.024" pos="0 0 0.735" mass="0.28" rgba="0.1 0.1 0.1 1"/>
-      <body name="z_carriage" pos="0 0.032 0.13" quat="1 0 0 0">
+      <body name="z_carriage" pos="0 0.032 0.21" quat="1 0 0 0">
         <joint name="gantry_z" type="slide" axis="0 0 1" range="0.0000 0.5000" class="gantry"/>
-        <geom name="z_plate" type="box" size="0.035 0.004 0.06" pos="0 0 -0.06" mass="0.16" rgba="0.3 0.3 0.35 1"/>
-        <geom name="platform" type="box" size="0.045 0.07 0.004" pos="0 0.0475 -0.004" mass="0.21" rgba="0.85 0.45 0.1 1"/>
+        <geom name="cad_z_carriage" type="box" size="0.065 0.1135 0.0824" pos="0 0.04915 -0.01778" mass="0.6693" rgba="0.85 0.85 0.85 1"/>
         <site name="platform_top" pos="0 0.095 0" size="0.006"/>
         <body name="turret" pos="0 0.095 0" quat="0.707107 0 0 0.707107">
           <joint name="base_yaw" type="hinge" axis="0 0 1" range="-2.6180 2.6180"/>
-          <geom name="turret" type="box" size="0.035 0.035 0.035" pos="0 0 0.0315" mass="0.12" rgba="0.8 0.5 0.1 1"/>
           <geom name="j1_servo" type="box" size="0.0225 0.0125 0.0175" pos="0 0 -0.02" mass="0.055" rgba="0.1 0.1 0.1 1"/>
-          <geom name="j2_servo_a" type="box" size="0.0125 0.0175 0.0225" pos="0 0.032 0.07" mass="0.0745" rgba="0.1 0.1 0.1 1"/>
-          <geom name="j2_servo_b" type="box" size="0.0125 0.0175 0.0225" pos="0 -0.032 0.07" mass="0.0745" rgba="0.1 0.1 0.1 1"/>
-          <site name="spring_anchor" pos="0 0 0.11" size="0.006"/>
-          <body name="upper_arm" pos="0 0 0.07" quat="1 0 0 0">
+          <geom name="j2_servo_a" type="box" size="0.0125 0.0175 0.0225" pos="0 0.032 0.12" mass="0.0745" rgba="0.1 0.1 0.1 1"/>
+          <geom name="j2_servo_b" type="box" size="0.0125 0.0175 0.0225" pos="0 -0.032 0.12" mass="0.0745" rgba="0.1 0.1 0.1 1"/>
+          <geom name="cad_turret" type="box" size="0.056 0.056 0.06675" pos="-1e-05 0 0.08991" mass="0.2699" rgba="0.85 0.85 0.85 1"/>
+          <site name="spring_anchor" pos="0 0 0.16" size="0.006"/>
+          <body name="upper_arm" pos="0 0 0.12" quat="1 0 0 0">
             <joint name="shoulder_lift" type="hinge" axis="0 1 0" range="-1.7453 1.7453"/>
-            <geom name="upper_link" type="box" size="0.015 0.02 0.0875" pos="0 0 0.0875" mass="0.115" rgba="0.8 0.5 0.1 1"/>
-            <geom name="j3_servo" type="box" size="0.0125 0.0175 0.0225" pos="0 0 0.175" mass="0.0745" rgba="0.1 0.1 0.1 1"/>
+            <geom name="cad_upper_arm" type="box" size="0.046 0.013 0.1255" pos="-0 0.06308 0.07721" mass="0.1755" rgba="0.85 0.85 0.85 1"/>
             <site name="spring_attach" pos="0 0 0.06" size="0.006"/>
-            <body name="forearm" pos="0 0 0.175" quat="1 0 0 0">
+            <body name="forearm" pos="0 0 0.165" quat="1 0 0 0">
               <joint name="elbow_flex" type="hinge" axis="0 1 0" range="-2.4435 2.4435"/>
-              <geom name="fore_link" type="box" size="0.014 0.018 0.08" pos="0 0 0.08" mass="0.095" rgba="0.8 0.5 0.1 1"/>
-              <geom name="j4_servo" type="box" size="0.0125 0.0175 0.0225" pos="0 0 0.16" mass="0.055" rgba="0.1 0.1 0.1 1"/>
-              <body name="wrist" pos="0 0 0.16" quat="1 0 0 0">
+              <geom name="j3_servo" type="box" size="0.0125 0.035 0.0225" pos="0 0 0" mass="0.149" rgba="0.1 0.1 0.1 1"/>
+              <geom name="cad_forearm" type="box" size="0.04 0.055 0.111" pos="-0 -0.0253 0.04011" mass="0.2218" rgba="0.85 0.85 0.85 1"/>
+              <body name="wrist" pos="0 0 0.15" quat="1 0 0 0">
                 <joint name="wrist_flex" type="hinge" axis="0 1 0" range="-1.9199 1.9199"/>
-                <geom name="wrist_link" type="box" size="0.015 0.015 0.02" pos="0 0 0.02" mass="0.035" rgba="0.8 0.5 0.1 1"/>
-                <geom name="j5_servo" type="box" size="0.0125 0.0225 0.0175" pos="0 0 0.018" mass="0.055" rgba="0.1 0.1 0.1 1"/>
-                <body name="tool" pos="0 0 0.04" quat="1 0 0 0">
+                <geom name="j4_servo" type="box" size="0.0125 0.0175 0.0225" pos="0 0 0" mass="0.055" rgba="0.1 0.1 0.1 1"/>
+                <geom name="j5_servo" type="box" size="0.0125 0.0225 0.0175" pos="0 0 0.02475" mass="0.055" rgba="0.1 0.1 0.1 1"/>
+                <geom name="cad_wrist" type="box" size="0.032 0.032 0.0415" pos="0 -0.002 0.00892" mass="0.0791" rgba="0.85 0.85 0.85 1"/>
+                <body name="tool" pos="0 -0.002 0.055" quat="1 0 0 0">
                   <joint name="wrist_roll" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
-                  <geom name="coupler_robot" type="box" size="0.025 0.025 0.0045" pos="0 0 0.0045" mass="0.032" rgba="0.2 0.5 0.9 1"/>
-                  <geom name="coupler_tool" type="box" size="0.025 0.025 0.0045" pos="0 0 0.0135" mass="0.026" rgba="0.2 0.7 0.4 1"/>
-                  <geom name="gripper_servo" type="box" size="0.0225 0.0125 0.0175" pos="0 0 0.04" mass="0.055" rgba="0.1 0.1 0.1 1"/>
-                  <geom name="gripper_body" type="box" size="0.03 0.01 0.0171" pos="0 0 0.04935" mass="0.06" rgba="0.8 0.5 0.1 1"/>
-                  <site name="tcp" pos="0 0 0.075" size="0.006"/>
-                  <body name="payload" pos="0 0.015 0.075" quat="1 0 0 0">
+                  <geom name="gripper_servo" type="box" size="0.0225 0.0125 0.0175" pos="0 0 0.038" mass="0.055" rgba="0.1 0.1 0.1 1"/>
+                  <geom name="cad_tool" type="box" size="0.0358 0.0308 0.052" pos="0.00082 -3e-05 0.04049" mass="0.1808" rgba="0.85 0.85 0.85 1"/>
+                  <site name="tcp" pos="0 0 0.08" size="0.006"/>
+                  <body name="payload" pos="0 0.015 0.08" quat="1 0 0 0">
                     <geom name="payload" type="box" size="0.02 0.02 0.02" pos="0 0 0" mass="0.5" rgba="0.9 0.2 0.2 0.6"/>
                   </body>
-                  <body name="finger_left" pos="0 0 0.065" quat="1 0 0 0">
+                  <body name="finger_left" pos="0 0 0.07" quat="1 0 0 0">
                     <joint name="gripper_left" type="slide" axis="1 0 0" range="0.0000 0.0200"/>
-                    <geom name="finger_left" type="box" size="0.003 0.009 0.015" pos="0.004 0 0.005" mass="0.008" rgba="0.6 0.6 0.6 1"/>
+                    <geom name="finger_left" type="box" size="0.003 0.009 0.015" pos="0.004 0 0.005" mass="0.0005" rgba="0.6 0.6 0.6 1"/>
                   </body>
-                  <body name="finger_right" pos="0 0 0.065" quat="1 0 0 0">
+                  <body name="finger_right" pos="0 0 0.07" quat="1 0 0 0">
                     <joint name="gripper_right" type="slide" axis="-1 0 0" range="0.0000 0.0200"/>
-                    <geom name="finger_right" type="box" size="0.003 0.009 0.015" pos="-0.004 0 0.005" mass="0.008" rgba="0.6 0.6 0.6 1"/>
+                    <geom name="finger_right" type="box" size="0.003 0.009 0.015" pos="-0.004 0 0.005" mass="0.0005" rgba="0.6 0.6 0.6 1"/>
                   </body>
                 </body>
               </body>
@@ -75,7 +72,7 @@
   </equality>
   <tendon>
     <!-- shoulder counterbalance: zero-free-length spring (extension spring + cable over pulley) -->
-    <spatial name="shoulder_spring" stiffness="800" springlength="0 0" width="0.002" rgba="0.9 0.9 0.1 1">
+    <spatial name="shoulder_spring" stiffness="900" springlength="0 0" width="0.002" rgba="0.9 0.9 0.1 1">
       <site site="spring_anchor"/>
       <site site="spring_attach"/>
     </spatial>
@@ -83,7 +80,7 @@
   <actuator>
     <position name="base_yaw" joint="base_yaw" kp="17.8" forcerange="-2.942 2.942"/>
     <position name="shoulder_lift" joint="shoulder_lift" kp="59.3" forcerange="-9.807 9.807"/>
-    <position name="elbow_flex" joint="elbow_flex" kp="29.7" forcerange="-4.903 4.903"/>
+    <position name="elbow_flex" joint="elbow_flex" kp="59.3" forcerange="-9.807 9.807"/>
     <position name="wrist_flex" joint="wrist_flex" kp="17.8" forcerange="-2.942 2.942"/>
     <position name="wrist_roll" joint="wrist_roll" kp="17.8" forcerange="-2.942 2.942"/>
     <position name="gripper" joint="gripper_left" kp="400" forcerange="-294.2 294.2"/>

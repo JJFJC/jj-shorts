@@ -19,21 +19,25 @@ g = 9.81
 
 
 def hand_shoulder_torque(payload: bool) -> float:
-    """Sum of m*g*lever for everything outboard of J2, arm horizontal, from params only."""
-    A, Mm = P.ARM, P.MASS
-    c, t = A["coupler"], A["tool_tcp"]
-    j3, j4, j5 = A["upper"], A["upper"] + A["fore"], A["upper"] + A["fore"] + A["wrist"]
-    items = [
-        (Mm["upper"], A["upper"] / 2), (P.STS3250.mass_g, j3),
-        (Mm["fore"], j3 + A["fore"] / 2), (P.STS3215.mass_g, j4),
-        (Mm["wrist"], j4 + A["wrist"] * 0.5), (P.STS3215.mass_g, j4 + A["wrist"] * 0.45),
-        (Mm["coupler_robot"], j5 + c * 0.25), (Mm["coupler_tool"], j5 + c * 0.75),
-        (P.STS3215.mass_g, j5 + c + 22), (Mm["gripper_parts"], j5 + c + t * 0.55),
-        (8.0, j5 + c + t - 10 + 5), (8.0, j5 + c + t - 10 + 5),  # fingers
-    ]
-    if payload:
-        items.append((Mm["payload"], j5 + c + t))
-    return sum(m / 1000 * g * L / 1000 for m, L in items)
+    """Sum of m*g*lever for every lumped part outboard of J2 with the arm horizontal.
+
+    Uses the model's own part list but none of MuJoCo's physics: lever = distance along the arm.
+    """
+    bodies = {b.name: b for b in M.build_chain()}
+    chain = ["upper_arm", "forearm", "wrist", "tool"]
+    offset = {"upper_arm": 0.0}
+    for prev, nxt in zip(chain, chain[1:]):
+        offset[nxt] = offset[prev] + bodies[nxt].pos[2]
+    offset["payload"] = offset["tool"] + bodies["payload"].pos[2]
+    for f in ("finger_left", "finger_right"):
+        offset[f] = offset["tool"] + bodies[f].pos[2]
+    tau = 0.0
+    for name, z0 in offset.items():
+        if name == "payload" and not payload:
+            continue
+        for part in bodies[name].parts:
+            tau += part.mass_g / 1000 * g * (z0 + part.pos[2]) / 1000
+    return tau
 
 
 @pytest.mark.parametrize("payload", [True, False])
@@ -55,7 +59,7 @@ def test_spring_torque_is_k_a_b_sin_theta():
 def test_vertical_arm_needs_no_pitch_torque():
     tq = S.Arm(0.0).torques({"shoulder_lift": 0, "elbow_flex": 0, "wrist_flex": 0})
     for j in ("shoulder_lift", "elbow_flex", "wrist_flex"):
-        assert abs(tq[j]) < 1e-6
+        assert abs(tq[j]) < 0.01  # only the small off-axis CoM of the wrist camera pod
 
 
 def test_reach_matches_params():

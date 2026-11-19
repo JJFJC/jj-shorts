@@ -9,6 +9,7 @@ Positive shoulder/elbow/wrist pitch tilts the arm toward +Y (out over the work a
 
 from __future__ import annotations
 
+import json
 import math
 import sys
 from dataclasses import dataclass, field
@@ -121,7 +122,6 @@ def build_chain() -> list[Body]:
         "upper_arm", "turret", (0, 0, A["base_h"]), "shoulder_lift", "hinge", (0, 1, 0), P.JOINT_LIMITS["shoulder_lift"],
         parts=[
             Part("upper_link", M["upper"], (0, 0, A["upper"] / 2), (30, 40, A["upper"])),
-            Part("j3_servo", s50.mass_g, (0, 0, A["upper"]), (25, 35, 45), "0.1 0.1 0.1 1"),
         ],
         sites={"spring_attach": (0, 0, P.SPRING["b"])},
     )
@@ -129,14 +129,15 @@ def build_chain() -> list[Body]:
     fore = Body(
         "forearm", "upper_arm", (0, 0, A["upper"]), "elbow_flex", "hinge", (0, 1, 0), P.JOINT_LIMITS["elbow_flex"],
         parts=[
+            Part("j3_servo", s50.mass_g * P.ELBOW_SERVOS, (0, 0, 0), (25, 35 * P.ELBOW_SERVOS, 45), "0.1 0.1 0.1 1"),
             Part("fore_link", M["fore"], (0, 0, A["fore"] / 2), (28, 36, A["fore"])),
-            Part("j4_servo", s15.mass_g, (0, 0, A["fore"]), (25, 35, 45), "0.1 0.1 0.1 1"),
         ],
     )
     bodies.append(fore)
     wrist = Body(
         "wrist", "forearm", (0, 0, A["fore"]), "wrist_flex", "hinge", (0, 1, 0), P.JOINT_LIMITS["wrist_flex"],
         parts=[
+            Part("j4_servo", s15.mass_g, (0, 0, 0), (25, 35, 45), "0.1 0.1 0.1 1"),
             Part("wrist_link", M["wrist"], (0, 0, A["wrist"] * 0.5), (30, 30, A["wrist"])),
             Part("j5_servo", s15.mass_g, (0, 0, A["wrist"] * 0.45), (25, 45, 35), "0.1 0.1 0.1 1"),
         ],
@@ -144,7 +145,7 @@ def build_chain() -> list[Body]:
     bodies.append(wrist)
     c, t = A["coupler"], A["tool_tcp"]
     roll = Body(
-        "tool", "wrist", (0, 0, A["wrist"]), "wrist_roll", "hinge", (0, 0, 1), P.JOINT_LIMITS["wrist_roll"],
+        "tool", "wrist", (0, wrist_center_y(), A["wrist"]), "wrist_roll", "hinge", (0, 0, 1), P.JOINT_LIMITS["wrist_roll"],
         parts=[
             Part("coupler_robot", M["coupler_robot"], (0, 0, c * 0.25), (50, 50, c / 2), "0.2 0.5 0.9 1"),
             Part("coupler_tool", M["coupler_tool"], (0, 0, c * 0.75), (50, 50, c / 2), "0.2 0.7 0.4 1"),
@@ -162,10 +163,42 @@ def build_chain() -> list[Body]:
         bodies.append(
             Body(
                 f"finger_{side}", "tool", (0, 0, c + t - 10), f"gripper_{side}", "slide", (sgn, 0, 0), (0, P.GRIPPER["stroke"] / 2),
-                parts=[Part(f"finger_{side}", 8.0, (sgn * 4, 0, 5), (6, 18, 30), "0.6 0.6 0.6 1")],
+                parts=[Part(f"finger_{side}", 0.5 if CAD_PROPS else 8.0, (sgn * 4, 0, 5), (6, 18, 30), "0.6 0.6 0.6 1")],
             )
         )
+    if CAD_PROPS:
+        apply_cad_props(bodies)
     return bodies
+
+
+# --------------------------------------------------------------------------- CAD mass properties
+
+CAD_PROPS_FILE = ROOT / "cad" / "out" / "mass_props.json"
+CAD_PROPS = json.loads(CAD_PROPS_FILE.read_text()) if CAD_PROPS_FILE.exists() else None
+# lumped estimates that the CAD shells replace, per body
+REPLACED = {
+    "z_carriage": {"z_plate", "platform"},
+    "turret": {"turret"},
+    "upper_arm": {"upper_link"},
+    "forearm": {"fore_link"},
+    "wrist": {"wrist_link"},
+    "tool": {"coupler_robot", "coupler_tool", "gripper_body"},
+}
+
+
+def wrist_center_y() -> float:
+    """Lateral (joint-axis) position of the J5 roll axis; mirrors cad/parts.py."""
+    return 48.0 - (82.0 if P.ELBOW_SERVOS == 2 else 48.0) + 32.0
+
+
+def apply_cad_props(bodies):
+    """Swap lumped link estimates for CAD-measured printed shells + hardware (mass, CoM)."""
+    for b in bodies:
+        if b.name not in REPLACED or b.name not in CAD_PROPS:
+            continue
+        cp = CAD_PROPS[b.name]
+        b.parts = [p for p in b.parts if p.name not in REPLACED[b.name]]
+        b.parts.append(Part(f"cad_{b.name}", cp["mass_g"], tuple(cp["com"]), tuple(max(5.0, x) for x in cp["size"]), "0.85 0.85 0.85 1"))
 
 
 # --------------------------------------------------------------------------- MJCF

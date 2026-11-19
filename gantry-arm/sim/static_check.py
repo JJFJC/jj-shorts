@@ -317,33 +317,31 @@ def capacity(joint: str) -> tuple[float, float, int]:
 
 
 def elbow_options(k: float) -> list:
-    """What-if study for the flagged elbow: returns rows (label, J2 Nm, J3 Nm, J3 stall frac, J3 rated frac)."""
+    """What-if study for the elbow: rows (label, J2 Nm, J3 Nm, J3 stall frac, J3 rated frac)."""
     cases = [
-        ("Baseline: 1x STS3250, 500 g, 450 mm", {}, 1, 0.0),
-        ("Payload target 400 g", {("MASS", "payload"): 400.0}, 1, 0.0),
-        ("Payload target 300 g", {("MASS", "payload"): 300.0}, 1, 0.0),
-        ("Forearm 160 -> 120 mm (reach 410 mm)", {("ARM", "fore"): 120.0}, 1, 0.0),
-        ("2x STS3250 at elbow (ganged like J2)", {}, 2, P.STS3250.mass_g),
+        ("1x STS3250, 500 g, 450 mm", {}, 1),
+        ("1x STS3250, payload 400 g", {("MASS", "payload"): 400.0}, 1),
+        ("1x STS3250, payload 300 g", {("MASS", "payload"): 300.0}, 1),
+        ("1x STS3250, forearm 150 -> 110 mm (reach 410)", {("ARM", "fore"): 110.0}, 1),
+        ("2x STS3250 ganged (current design)", {}, 2),
     ]
     rows = []
-    for label, ch, n, extra_g in cases:
+    n0 = P.ELBOW_SERVOS
+    for label, ch, n in cases:
         saved_m, saved_a = dict(P.MASS), dict(P.ARM)
         for (table, key), v in ch.items():
             getattr(P, table)[key] = v
+        P.ELBOW_SERVOS = n
+        P.JOINT_SERVOS["elbow_flex"] = (P.STS3250, n)
         arm = Arm(k)
-        if extra_g:
-            # second elbow servo sits at the elbow: add its weight to the upper-arm body at the elbow
-            b = arm.m.body("upper_arm").id
-            m0, c0 = arm.m.body_mass[b], arm.m.body_ipos[b].copy()
-            m1 = extra_g / 1000
-            arm.m.body_ipos[b] = (m0 * c0 + m1 * np.array([0, 0, P.ARM["upper"] / 1000])) / (m0 + m1)
-            arm.m.body_mass[b] = m0 + m1
         arm.set_payload(True)
         t = arm.torques(FULL_REACH)
         P.MASS.clear(); P.MASS.update(saved_m)
         P.ARM.clear(); P.ARM.update(saved_a)
         j3 = abs(t["elbow_flex"])
         rows.append((label, abs(t["shoulder_lift"]), j3, j3 / (P.STS3250.stall_Nm * n), j3 / (P.STS3250.rated_Nm * n)))
+    P.ELBOW_SERVOS = n0
+    P.JOINT_SERVOS["elbow_flex"] = (P.STS3250, n0)
     return rows
 
 

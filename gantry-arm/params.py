@@ -55,7 +55,7 @@ Z_COLUMN_LEN = 700.0
 Z_TRAVEL = 500.0
 Z_CARRIAGE = dict(length=120.0, width=70.0, thick=8.0, row_pitch=90.0, wheels_per_row=4)
 Z_SCREW = dict(dia=8.0, lead=2.0, starts=1, mu_nut=0.12)  # T8x2 single start: self-locking
-Z_BOTTOM_CLEAR = 120.0  # column base to lowest platform top
+Z_BOTTOM_CLEAR = 200.0  # column base to lowest platform top (clears the X carriage shroud)
 Z_SPEED = 20.0  # mm/s (T8x2 -> 600 rpm)
 
 # lift platform: cantilever from Z carriage face to the J1 axis
@@ -63,12 +63,29 @@ PLATFORM = dict(offset=95.0, width=90.0, plate=8.0, rib_h=36.0, rib_t=6.0, ribs=
 
 # ---------------------------------------------------------------- arm
 ARM = dict(
-    base_h=70.0,  # platform top -> J2 axis
-    upper=175.0,  # J2 -> J3
-    fore=160.0,  # J3 -> J4
-    wrist=40.0,  # J4 -> coupler face (includes J5 roll servo)
-    coupler=18.0,  # coupler stack height (both halves)
-    tool_tcp=57.0,  # coupler tool face -> gripper TCP
+    base_h=120.0,  # platform top -> J2 axis (shoulder puck sits on the J1 column)
+    upper=165.0,  # J2 -> J3
+    fore=150.0,  # J3 -> J4
+    wrist=55.0,  # J4 -> J5 output flange (roll housing holds the J5 servo)
+    coupler=16.0,  # coupler stack height (both halves, 8 + 8)
+    tool_tcp=64.0,  # coupler tool face -> gripper TCP
+)
+
+# PENDING USER DECISION (elbow fix, see SIM_REPORT): 2 = ganged twin STS3250 (recommended), 1 = single
+ELBOW_SERVOS = 2
+
+# ---------------------------------------------------------------- industrial design language
+STYLE = dict(
+    wall=2.4,  # shell wall (6 perimeters of 0.4)
+    link_thick=26.0,  # offset side-link thickness along the joint axis
+    fillet=7.0,  # outer edge radius on links
+    gap=2.0,  # running gap between a puck face and the next link
+    shoulder_puck=(48.0, 96.0),  # radius, width
+    elbow_puck_r=40.0,
+    wrist_puck=(32.0, 64.0),
+    roll_r=28.0,
+    link_r=dict(upper=(46.0, 40.0), fore=(38.0, 32.0)),  # hub radii at each end
+    led=dict(width=5.0, depth=1.6, z0=30.0, z1=130.0),
 )
 REACH = ARM["upper"] + ARM["fore"] + ARM["wrist"] + ARM["coupler"] + ARM["tool_tcp"]  # J2->TCP
 
@@ -89,7 +106,7 @@ MASS = dict(
 JOINT_SERVOS = {
     "base_yaw": (STS3215, 1),
     "shoulder_lift": (STS3250, 2),
-    "elbow_flex": (STS3250, 1),
+    "elbow_flex": (STS3250, ELBOW_SERVOS),
     "wrist_flex": (STS3215, 1),
     "wrist_roll": (STS3215, 1),
     "gripper": (STS3215, 1),
@@ -126,3 +143,11 @@ class Cameras:
 
 
 CAMERAS = Cameras()
+
+
+# hardware not modelled in CAD (screws, inserts, wiring, bearings, LED strip, PCBs), grams per body
+# z_carriage: 6 mm Al carriage plate + 8 V-wheels + eccentric spacers + T8 anti-backlash nut
+HARDWARE_G = dict(z_carriage=260.0, turret=80.0, upper_arm=25.0, forearm=25.0, wrist=15.0, tool=20.0)
+
+# densities for CAD mass properties, g/mm^3
+DENSITY = dict(PETG=1.27e-3, steel=7.9e-3, brass=8.5e-3, rubber=1.2e-3, magnet=7.5e-3, aluminium=2.7e-3, glass=2.5e-3)
