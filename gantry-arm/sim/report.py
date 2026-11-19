@@ -44,7 +44,7 @@ w(f"- Model: `urdf/gantry_arm.urdf` and `mjcf/gantry_arm.xml` (generated). 2 pri
 w(f"- Arm: J2→TCP reach **{r['reach_mm']:.0f} mm** (upper {P.ARM['upper']:.0f}, fore {P.ARM['fore']:.0f}, wrist {P.ARM['wrist']:.0f}, coupler {P.ARM['coupler']:.0f}, tool {P.ARM['tool_tcp']:.0f}).")
 w(f"- Payload {P.MASS['payload']:.0f} g at the TCP, {P.MASS['payload_offset']:.0f} mm off the roll axis. Arm mass without payload {S['m_arm_kg'] - P.MASS['payload'] / 1000:.2f} kg.")
 w("- **Masses come from the CAD**: every printed shell's volume × PETG density (`cad/out/mass_props.json`), plus a hardware allowance per body (`params.HARDWARE_G`) and the servos at their real positions. Re-run `cad/build_all.py` before the sim after any CAD change.")
-w(f"- Elbow: **{P.ELBOW_SERVOS}× STS3250** (`params.ELBOW_SERVOS`, pending your confirmation).")
+w(f"- Elbow: **{P.ELBOW_SERVOS}× STS3250** (`params.ELBOW_SERVOS`, confirmed).")
 w("- **Full reach** = shoulder 90° (arm horizontal), elbow 0, wrist 0, Z at top of travel. Static torques from MuJoCo `mj_inverse` (gravity + spring, zero velocity).")
 w("- **Worst case** = max |torque| over a sweep of shoulder −100…100°, elbow −140…140°, wrist −110…110° (10° steps), with and without payload.")
 w("- Servo ratings at 12 V: STS3215 stall 30 kg·cm (2.94 N·m), rated ~10 kg·cm; STS3250 stall 50 kg·cm (4.90 N·m), rated 16 kg·cm (1.57 N·m).")
