@@ -46,7 +46,7 @@ w(f"- Payload {P.MASS['payload']:.0f} g at the TCP, {P.MASS['payload_offset']:.0
 w("- **Masses come from the CAD**: every printed shell's volume × PETG density (`cad/out/mass_props.json`), plus a hardware allowance per body (`params.HARDWARE_G`) and the servos at their real positions. Re-run `cad/build_all.py` before the sim after any CAD change.")
 w(f"- Elbow: **{P.ELBOW_SERVOS}× STS3250** (`params.ELBOW_SERVOS`, confirmed).")
 w("- **Full reach** = shoulder 90° (arm horizontal), elbow 0, wrist 0, Z at top of travel. Static torques from MuJoCo `mj_inverse` (gravity + spring, zero velocity).")
-w("- **Worst case** = max |torque| over a sweep of shoulder −100…100°, elbow −140…140°, wrist −110…110° (10° steps), with and without payload.")
+w(f"- **Worst case** = max |torque| over a sweep of shoulder {P.JOINT_LIMITS["shoulder_lift"][0]}…{P.JOINT_LIMITS["shoulder_lift"][1]}° (5° steps), elbow −140…140°, wrist −110…110° (10° steps), with and without payload.")
 w("- Servo ratings at 12 V: STS3215 stall 30 kg·cm (2.94 N·m), rated ~10 kg·cm; STS3250 stall 50 kg·cm (4.90 N·m), rated 16 kg·cm (1.57 N·m).")
 w(f"- Shoulder spring: ideal zero-free-length spring (extension spring + cable over a pulley), anchor a = {P.SPRING['a']:.0f} mm above J2, attach b = {P.SPRING['b']:.0f} mm up the upper arm. "
   f"Stiffness swept 0–2 N/mm; **k = {r['k_opt']:.1f} N/mm** gives the lowest worst-case shoulder torque. Spring force {r['spring_Fh_N']:.0f} N with the arm horizontal, max {r['spring_Fmax_N']:.0f} N.")

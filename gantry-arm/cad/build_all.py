@@ -20,7 +20,9 @@ sys.path[:0] = [str(HERE), str(ROOT), str(ROOT / "sim")]
 import params as P  # noqa: E402
 import parts as C  # noqa: E402
 
-OUT = HERE / "out"
+import os
+
+OUT = Path(os.environ.get("GANTRY_CAD_OUT", HERE / "out"))
 ARM_BODIES = ("z_carriage", "turret", "upper_arm", "forearm", "wrist", "tool")
 
 MAT_DENSITY = {
@@ -67,7 +69,7 @@ def print_time_h(mass_g: float) -> float:
 
 
 def main():
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "step").mkdir(exist_ok=True)
     (OUT / "stl").mkdir(exist_ok=True)
     parts = C.build_all()
@@ -103,7 +105,8 @@ def main():
     (OUT / "mass_props.json").write_text(json.dumps(mass_props, indent=1))
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))
     assembly(parts)
-    write_print_list(manifest, mass_props)
+    if "GANTRY_CAD_OUT" not in os.environ:  # concept builds never overwrite the real print list
+        write_print_list(manifest, mass_props)
     bad = [m["name"] for m in manifest if not m["fits_bed"]]
     print(f"{len(manifest)} parts, {sum(m['printed'] for m in manifest)} printed; bed misfits: {bad or 'none'}")
     print(json.dumps(mass_props, indent=1))

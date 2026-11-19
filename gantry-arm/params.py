@@ -71,6 +71,17 @@ ARM = dict(
     tool_tcp=64.0,  # coupler tool face -> gripper TCP
 )
 
+# ---- design variants (env vars so a preview can be built/rendered without editing this file)
+import os as _os
+
+# Forearm extension, mm. Owner chose 0 (450 mm reach, 500 g). The env var only builds previews.
+FORE_EXT = float(_os.environ.get("GANTRY_FORE_EXT", "0"))
+ARM["fore"] += FORE_EXT
+REACH = ARM["upper"] + ARM["fore"] + ARM["wrist"] + ARM["coupler"] + ARM["tool_tcp"]
+# Stereo-camera "eyes" head on the column top (owner chose it; replaces the plain overhead camera)
+HEAD = _os.environ.get("GANTRY_HEAD", "1") == "1"
+HEAD_GEOM = dict(width=112.0, depth=48.0, height=46.0, eye_dx=30.0, lens_r=8.5, ring_r=(11.0, 15.0), tilt_deg=38.0, center=(0.0, 18.0, 792.0))
+
 # Elbow: 2 = ganged twin STS3250 (confirmed by owner 2026-11-19, see SIM_REPORT), 1 = single
 ELBOW_SERVOS = 2
 
@@ -115,7 +126,7 @@ DUAL_SHARE = 0.85  # worst-case load split for the twin shoulder servos (one car
 
 JOINT_LIMITS = {  # degrees
     "base_yaw": (-150, 150),
-    "shoulder_lift": (-100, 100),
+    "shoulder_lift": (-100, 135),  # forward to 135: reach the table past the platform (checked in IK collision model)
     "elbow_flex": (-140, 140),
     "wrist_flex": (-110, 110),
     "wrist_roll": (-180, 180),

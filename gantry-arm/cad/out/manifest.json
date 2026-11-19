@@ -107,7 +107,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "inner face down (flat), supports in hub bores only",
-  "mass_g": 87.6,
+  "mass_g": 86.6,
   "dims_mm": [
    251.0,
    92.0,
@@ -115,7 +115,7 @@
   ],
   "fits_bed": true,
   "bed_note": "rotated 19\u00b0 on bed",
-  "print_h": 5.04,
+  "print_h": 4.98,
   "group": "arm",
   "note": ""
  },
@@ -131,10 +131,10 @@
   "dims_mm": [
    251.0,
    92.0,
-   7.0
+   13.0
   ],
   "fits_bed": true,
-  "bed_note": "rotated 16\u00b0 on bed",
+  "bed_note": "rotated 17\u00b0 on bed",
   "print_h": 3.62,
   "group": "arm",
   "note": "LED channel for WS2812 strip (60/m, 6 LEDs) under a diffuser"
@@ -227,7 +227,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "inner face down, supports in hub bores only",
-  "mass_g": 67.4,
+  "mass_g": 66.4,
   "dims_mm": [
    220.0,
    76.0,
@@ -235,7 +235,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 3.92,
+  "print_h": 3.86,
   "group": "arm",
   "note": ""
  },
@@ -251,7 +251,7 @@
   "dims_mm": [
    220.0,
    76.0,
-   7.0
+   13.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
@@ -1198,5 +1198,105 @@
   "print_h": 12.24,
   "group": "gantry",
   "note": "option: 4 mm 6061 plate sandwich if long-term creep shows"
+ },
+ {
+  "name": "head_shell",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "split on the XY mid-plane, outer faces down",
+  "mass_g": 49.4,
+  "dims_mm": [
+   112.0,
+   54.0,
+   53.7
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 2.91,
+  "group": "gantry",
+  "note": "houses a USB stereo camera board (60 mm baseline) + 2x 12-LED WS2812 rings; split on the mid-plane"
+ },
+ {
+  "name": "head_eye_bezels",
+  "body": "x_carriage",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat",
+  "mass_g": 0.4,
+  "dims_mm": [
+   92.0,
+   26.3,
+   21.1
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.19,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_lenses",
+  "body": "x_carriage",
+  "role": "lens",
+  "qty": 1,
+  "printed": false,
+  "material": "stereo camera lenses",
+  "orient": "",
+  "mass_g": 2.5,
+  "dims_mm": [
+   77.0,
+   14.8,
+   12.2
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_led_rings",
+  "body": "x_carriage",
+  "role": "accent",
+  "qty": 1,
+  "printed": false,
+  "material": "2x WS2812 12-LED ring (diffused)",
+  "orient": "",
+  "mass_g": 1.2,
+  "dims_mm": [
+   90.0,
+   24.5,
+   19.6
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_neck",
+  "body": "x_carriage",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upright",
+  "mass_g": 24.0,
+  "dims_mm": [
+   50.0,
+   22.0,
+   22.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.5,
+  "group": "gantry",
+  "note": ""
  }
 ]

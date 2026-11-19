@@ -9,7 +9,8 @@ Design rules:
     - servos sit fully inside pucks / housings; wiring runs through hollow links and
       14 mm bores at every joint centre
     - shells split on a fillet tangent line (seam reads as a design line); M3 screws
-      enter from the hidden inner face into heat-set inserts in the cover bosses
+      enter from the inner face only inside the shadow of the neighbouring puck (hub zones)
+      into heat-set inserts; the visible mid-span is held by snap clips
 """
 
 from __future__ import annotations
@@ -173,6 +174,31 @@ def split_shell(outer, inner, y_split, keep_cover_side: str, bosses: list, y_inn
 # ============================================================================ arm
 
 
+def hub_bosses(L: float, r_a: float, r_b: float) -> list:
+    """Screw positions hidden behind the neighbouring pucks: two per hub, inside the puck shadow
+    (radius r_a at z=0, r_b at z=L) and clear of the 14 mm wiring bore."""
+    da, db = 0.5 * r_a, 0.5 * r_b
+    return [(-da * 0.8, da * 0.6), (da * 0.8, da * 0.6), (-db * 0.8, L - db * 0.6), (db * 0.8, L - db * 0.6)]
+
+
+def add_snap_clips(body, cover, L, r_mid, y_split, cover_side: str):
+    """Two mid-span snap clips: a flexible tongue on the cover hooks under a ridge in the body.
+    No screws in the visible middle of the link."""
+    sgn = 1 if cover_side == "+" else -1
+    for sx in (-1, 1):
+        x_in = sx * (r_mid - WALL - 1.2)  # just inside the side wall
+        x0, x1 = sorted((x_in, x_in - sx * 1.6))
+        y0, y1 = sorted((y_split + sgn * 1.0, y_split - sgn * 6.0))
+        tongue = box(x0, x1, y0, y1, L / 2 - 5, L / 2 + 5)
+        hook = box(*sorted((x_in - sx * 1.6, x_in - sx * 2.6)), *sorted((y_split - sgn * 4.6, y_split - sgn * 6.0)), L / 2 - 5, L / 2 + 5)
+        cover = cover.union(tongue).union(hook)
+        ridge = box(*sorted((x_in - sx * 1.7, x_in + sx * 0.4)), *sorted((y_split - sgn * 6.2, y_split - sgn * 7.4)), L / 2 - 7, L / 2 + 7)
+        body = body.union(ridge)
+    return body, cover
+
+
+
+
 def elbow_width() -> float:
     return 82.0 if P.ELBOW_SERVOS == 2 else 48.0
 
@@ -222,7 +248,8 @@ def build_arm():
     outer = stadium(r1, r2, L, y0, y1, fr)
     inner = stadium(r1 - WALL, r2 - WALL, L, y0 + WALL, y1 - WALL, 0)
     led = S["led"]
-    body, cover = split_shell(outer, inner, y1 - fr, "+", [(0, 45), (0, 85), (0, 125), (0, 0), (0, L)], y0 + WALL, y1 - WALL)
+    body, cover = split_shell(outer, inner, y1 - fr, "+", hub_bosses(L, rs, S["elbow_puck_r"]), y0 + WALL, y1 - WALL)
+    body, cover = add_snap_clips(body, cover, L, (r1 + r2) / 2, y1 - fr, "+")
     for z in (0, L):  # wiring bores at joint centres on the inner face
         body = body.cut(cyl(7, (0, y0 - 1, z), (0, y0 + WALL + 1, z)))
     cover = cover.cut(box(-led["width"] / 2, led["width"] / 2, y1 - led["depth"], y1 + 1, led["z0"], led["z1"]))
@@ -250,7 +277,8 @@ def build_arm():
     fy0 = fy1 - T
     outer = stadium(r1, r2, L, fy0, fy1, fr)
     inner = stadium(r1 - WALL, r2 - WALL, L, fy0 + WALL, fy1 - WALL, 0)
-    body, cover = split_shell(outer, inner, fy0 + fr, "-", [(0, 40), (0, 80), (0, 115), (0, 0), (0, L)], fy1 - WALL, fy0 + WALL)
+    body, cover = split_shell(outer, inner, fy0 + fr, "-", hub_bosses(L, re_, S["wrist_puck"][0]), fy1 - WALL, fy0 + WALL)
+    body, cover = add_snap_clips(body, cover, L, (r1 + r2) / 2, fy0 + fr, "-")
     for z in (0, L):
         body = body.cut(cyl(7, (0, fy1 - WALL - 1, z), (0, fy1 + 1, z)))
     reg("forearm_body", "forearm", "shell", body, orient="inner face down, supports in hub bores only", fill=1.0)
@@ -493,6 +521,36 @@ def build_gantry():
         extra=dict(note="option: 4 mm 6061 plate sandwich if long-term creep shows"))
 
 
+def build_head():
+    """Stereo-camera head with LED-ring "eyes" on the Z column top (rides on the X carriage)."""
+    hg = P.HEAD_GEOM
+    w, dp, h = hg["width"], hg["depth"], hg["height"]
+    shell = fil(box(-w / 2, w / 2, -dp / 2, dp / 2, -h / 2, h / 2), 15.0)
+    shell = shell.cut(fil(box(-w / 2 + WALL, w / 2 - WALL, -dp / 2 + WALL, dp / 2 - WALL, -h / 2 + WALL, h / 2 - WALL), 12.0))
+    visor = None
+    lenses = None
+    rings = None
+    for sx in (-1, 1):
+        x = sx * hg["eye_dx"]
+        shell = shell.cut(cyl(hg["ring_r"][1] + 1.0, (x, dp / 2 - 3.0, 0), (x, dp / 2 + 1, 0)))
+        bezel = cyl(hg["ring_r"][1] + 1.0, (x, dp / 2 - 3.0, 0), (x, dp / 2 - 1.2, 0)).cut(cyl(hg["ring_r"][1], (x, dp / 2 - 4, 0), (x, dp / 2, 0)))
+        visor = bezel if visor is None else visor.union(bezel)
+        ln = cyl(hg["lens_r"], (x, dp / 2 - 3.0, 0), (x, dp / 2 - 0.8, 0))
+        lenses = ln if lenses is None else lenses.union(ln)
+        rg = cyl(hg["ring_r"][1], (x, dp / 2 - 3.0, 0), (x, dp / 2 - 1.6, 0)).cut(cyl(hg["ring_r"][0], (x, dp / 2 - 4, 0), (x, dp / 2, 0)))
+        rings = rg if rings is None else rings.union(rg)
+    def place(wp):
+        return wp.rotate((0, 0, 0), (1, 0, 0), -hg["tilt_deg"]).translate(hg["center"])
+    reg("head_shell", "x_carriage", "shell", place(shell), orient="split on the XY mid-plane, outer faces down", fill=1.0, group="gantry",
+        extra=dict(note="houses a USB stereo camera board (60 mm baseline) + 2x 12-LED WS2812 rings; split on the mid-plane"))
+    reg("head_eye_bezels", "x_carriage", "cap", place(visor), orient="flat", fill=1.0, group="gantry")
+    reg("head_lenses", "x_carriage", "lens", place(lenses), printed=False, material="stereo camera lenses", group="gantry")
+    reg("head_led_rings", "x_carriage", "accent", place(rings), printed=False, material="2x WS2812 12-LED ring (diffused)", group="gantry")
+    cx, cy, cz = hg["center"]
+    neck = fil(cyl(11, (cx, cy - 6, 10 + P.Z_COLUMN_LEN + 20), (cx, cy - 6, cz - 12)), 2, "%CIRCLE")
+    reg("head_neck", "x_carriage", "cap", neck, orient="upright", fill=1.0, group="gantry")
+
+
 def build_all():
     PARTS.clear()
     build_arm()
@@ -500,4 +558,6 @@ def build_all():
     coupler_robot(0.0)
     build_tools(0.0)
     build_gantry()
+    if P.HEAD:
+        build_head()
     return PARTS

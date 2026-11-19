@@ -66,7 +66,7 @@ class Arm:
 # --------------------------------------------------------------------------- sweeps
 
 SWEEP = {
-    "shoulder_lift": np.arange(-100, 101, 10),
+    "shoulder_lift": np.arange(P.JOINT_LIMITS["shoulder_lift"][0], P.JOINT_LIMITS["shoulder_lift"][1] + 1, 5),
     "elbow_flex": np.arange(-140, 141, 10),
     "wrist_flex": np.arange(-110, 111, 10),
 }

@@ -8,8 +8,8 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | 1 | `coupler_lock_sleeve` | 1 | PETG | 5 | 0.5 | 70 × 61 × 10 | ✅ flat | flat, no supports | quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock) |
 | 2 | `coupler_robot_half` | 1 | PETG | 16 | 1.1 | 56 × 56 × 8 | ✅ flat | flat, magnet face up | 3x 8x3 mm N52 magnets, 4x pogo pins (12V, GND, DATA, TOOL_ID), cone socket |
 | 3 | `coupler_tool_half` | 4 | PETG | 18 | 1.2 | 59 × 56 × 13 | ✅ flat | flat, cone up, no supports | one per tool; 3 steel discs face the magnets, 4 brass contact pads |
-| 4 | `forearm_body` | 1 | PETG | 67 | 3.9 | 220 × 76 × 19 | ✅ flat | inner face down, supports in hub bores only |  |
-| 5 | `forearm_cover` | 1 | PETG | 46 | 2.7 | 220 × 76 × 7 | ✅ flat | outer face down on smooth PEI |  |
+| 4 | `forearm_body` | 1 | PETG | 66 | 3.9 | 220 × 76 × 19 | ✅ flat | inner face down, supports in hub bores only |  |
+| 5 | `forearm_cover` | 1 | PETG | 46 | 2.7 | 220 × 76 × 13 | ✅ flat | outer face down on smooth PEI |  |
 | 6 | `gripper_housing` | 1 | PETG | 26 | 1.6 | 58 × 58 × 38 | ✅ flat | open end up, no supports | STS3215 lies across the housing; pinion drives a twin rack |
 | 7 | `gripper_smoke_cap` | 1 | PETG translucent grey (or smoked PETG) | 4 | 0.4 | 54 × 54 × 8 | ✅ flat | dome down, 100% infill, slow outer wall |  |
 | 8 | `j1_base_housing` | 1 | PETG | 89 | 5.1 | 120 × 120 × 34 | ✅ flat | top face down, no supports | holds STS3215 (J1) + 6 mm-thick lazy-susan / thrust bearing ring |
@@ -26,29 +26,32 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | 19 | `tool_pen_holder` | 1 | PETG | 21 | 1.4 | 52 × 36 × 28 | ✅ flat | flat end down | spring-loaded sleeve, side thumb screw; fits 8-12 mm pens |
 | 20 | `tool_phone_mount` | 1 | PETG | 27 | 1.7 | 96 × 60 × 24 | ✅ flat | clamp face down | spring jaw clamps phones 60-90 mm wide |
 | 21 | `tool_suction_body` | 1 | PETG | 42 | 2.5 | 58 × 48 × 48 | ✅ flat | flat end down | holds a 370-size 12 V mini vacuum pump + solenoid; power via pogo 12 V |
-| 22 | `upper_arm_body` | 1 | PETG | 88 | 5.0 | 251 × 92 × 19 | ✅ rotated 19° on bed | inner face down (flat), supports in hub bores only |  |
-| 23 | `upper_arm_cover` | 1 | PETG | 62 | 3.6 | 251 × 92 × 7 | ✅ rotated 16° on bed | outer face down on smooth PEI (best surface) | LED channel for WS2812 strip (60/m, 6 LEDs) under a diffuser |
+| 22 | `upper_arm_body` | 1 | PETG | 87 | 5.0 | 251 × 92 × 19 | ✅ rotated 19° on bed | inner face down (flat), supports in hub bores only |  |
+| 23 | `upper_arm_cover` | 1 | PETG | 62 | 3.6 | 251 × 92 × 13 | ✅ rotated 17° on bed | outer face down on smooth PEI (best surface) | LED channel for WS2812 strip (60/m, 6 LEDs) under a diffuser |
 | 24 | `upper_arm_led_diffuser` | 1 | PETG natural (translucent) | 1 | 0.2 | 99 × 5 × 1 | ✅ flat | on edge |  |
 | 25 | `wrist_camera_pod` | 1 | PETG | 3 | 0.3 | 20 × 18 × 12 | ✅ flat | back face down | fits a 32x32 mm USB UVC board |
 | 26 | `wrist_shell_back` | 1 | PETG | 27 | 1.7 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
 | 27 | `wrist_shell_front` | 1 | PETG | 27 | 1.7 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
 | 28 | `controller_enclosure` | 1 | PETG | 104 | 6.0 | 120 × 86 × 78 | ✅ flat | open bottom down | ESP32 + 2x TMC2209 + Waveshare bus adapter + 12/24 V distribution |
-| 29 | `lift_platform` | 1 | PETG | 217 | 12.2 | 165 × 130 × 76 | ✅ flat | top face down, ribs up, 5 walls 40% gyroid | option: 4 mm 6061 plate sandwich if long-term creep shows |
-| 30 | `x_cable_trough_1` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
-| 31 | `x_cable_trough_2` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
-| 32 | `x_cable_trough_3` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
-| 33 | `x_cable_trough_4` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
-| 34 | `x_carriage_shroud` | 1 | PETG | 196 | 11.1 | 156 × 134 × 77 | ✅ flat | top face down | covers 6 V-wheels, Z motor (NEMA17 under the column) and the column foot |
-| 35 | `x_chain_arm` | 1 | PETG | 14 | 0.9 | 50 × 24 × 12 | ✅ flat | flat |  |
-| 36 | `x_idler_cap` | 1 | PETG | 20 | 1.3 | 84 × 42 × 38 | ✅ flat | open bottom down |  |
-| 37 | `x_motor_housing` | 1 | PETG | 94 | 5.4 | 126 × 80 × 70 | ✅ flat | open bottom down | NEMA17 vertical, GT2 20T pulley; printed as 2 halves split at x=-540 (lap joint) if needed |
-| 38 | `z_carriage_shroud` | 1 | PETG | 103 | 5.9 | 131 × 72 × 68 | ✅ flat | top face down | covers 8 double-row V-wheels (2 rows x 4) and the T8 anti-backlash nut |
-| 39 | `z_column_top_cap` | 1 | PETG | 96 | 5.5 | 88 × 52 × 22 | ✅ flat | top down | holds the T8x2 top bearing (608ZZ) |
-| 40 | `z_rear_cover_1` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
-| 41 | `z_rear_cover_2` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
-| 42 | `z_rear_cover_3` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
+| 29 | `head_eye_bezels` | 1 | PETG | 0 | 0.2 | 92 × 26 × 21 | ✅ flat | flat |  |
+| 30 | `head_neck` | 1 | PETG | 24 | 1.5 | 50 × 22 × 22 | ✅ flat | upright |  |
+| 31 | `head_shell` | 1 | PETG | 49 | 2.9 | 112 × 54 × 54 | ✅ flat | split on the XY mid-plane, outer faces down | houses a USB stereo camera board (60 mm baseline) + 2x 12-LED WS2812 rings; split on the mid-plane |
+| 32 | `lift_platform` | 1 | PETG | 217 | 12.2 | 165 × 130 × 76 | ✅ flat | top face down, ribs up, 5 walls 40% gyroid | option: 4 mm 6061 plate sandwich if long-term creep shows |
+| 33 | `x_cable_trough_1` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
+| 34 | `x_cable_trough_2` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
+| 35 | `x_cable_trough_3` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
+| 36 | `x_cable_trough_4` | 1 | PETG | 181 | 10.2 | 237 × 78 × 64 | ✅ flat | upside down (top on bed) | 4 segments, hidden lap joint, brush strip in top slot |
+| 37 | `x_carriage_shroud` | 1 | PETG | 196 | 11.1 | 156 × 134 × 77 | ✅ flat | top face down | covers 6 V-wheels, Z motor (NEMA17 under the column) and the column foot |
+| 38 | `x_chain_arm` | 1 | PETG | 14 | 0.9 | 50 × 24 × 12 | ✅ flat | flat |  |
+| 39 | `x_idler_cap` | 1 | PETG | 20 | 1.3 | 84 × 42 × 38 | ✅ flat | open bottom down |  |
+| 40 | `x_motor_housing` | 1 | PETG | 94 | 5.4 | 126 × 80 × 70 | ✅ flat | open bottom down | NEMA17 vertical, GT2 20T pulley; printed as 2 halves split at x=-540 (lap joint) if needed |
+| 41 | `z_carriage_shroud` | 1 | PETG | 103 | 5.9 | 131 × 72 × 68 | ✅ flat | top face down | covers 8 double-row V-wheels (2 rows x 4) and the T8 anti-backlash nut |
+| 42 | `z_column_top_cap` | 1 | PETG | 96 | 5.5 | 88 × 52 × 22 | ✅ flat | top down | holds the T8x2 top bearing (608ZZ) |
+| 43 | `z_rear_cover_1` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
+| 44 | `z_rear_cover_2` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
+| 45 | `z_rear_cover_3` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
 
-**Total printed: 2.72 kg PETG, ≈ 159 h of printing** (+15% for supports, brims and failed prints → buy 4 kg + 1 kg of white or graphite for the finish you pick).
+**Total printed: 2.79 kg PETG, ≈ 163 h of printing** (+15% for supports, brims and failed prints → buy 4 kg + 1 kg of white or graphite for the finish you pick).
 
 ## Bought / non-printed parts shown in CAD
 
@@ -72,6 +75,8 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | `estop_button` | 22 mm e-stop |
 | `z_column_2040` | 2040 V-slot 700 mm, black anodised |
 | `z_column_cover_strips` | V-slot cover strip (PVC), 4x 650 mm |
+| `head_lenses` | stereo camera lenses |
+| `head_led_rings` | 2x WS2812 12-LED ring (diffused) |
 
 ## Arm mass properties used in the torque check (CAD shells + hardware)
 
@@ -79,8 +84,8 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 |---|---|---|---|---|
 | z_carriage | 409 | 260 | 669 | [0.0, 49.15, -17.78] |
 | turret | 190 | 80 | 270 | [-0.01, 0.0, 89.91] |
-| upper_arm | 150 | 25 | 176 | [-0.0, 63.08, 77.21] |
-| forearm | 197 | 25 | 222 | [-0.0, -25.3, 40.11] |
+| upper_arm | 150 | 25 | 174 | [-0.0, 63.08, 77.15] |
+| forearm | 196 | 25 | 221 | [0.0, -25.18, 39.9] |
 | wrist | 64 | 15 | 79 | [0.0, -2.0, 8.92] |
 | tool | 161 | 20 | 181 | [0.82, -0.03, 40.49] |
 

@@ -24,7 +24,10 @@ ROOT = HERE.parent
 sys.path[:0] = [str(ROOT), str(ROOT / "sim")]
 import fk  # noqa: E402
 
-STL = ROOT / "cad" / "out" / "stl"
+import os
+
+CAD_OUT = Path(os.environ.get("GANTRY_CAD_OUT", ROOT / "cad" / "out"))
+STL = CAD_OUT / "stl"
 OUT = ROOT / "render" / "out"
 
 POSES = {
@@ -110,7 +113,7 @@ def reset():
 
 
 def add_parts(mats: dict, pose: dict, explode: float = 0.0):
-    manifest = json.loads((ROOT / "cad" / "out" / "manifest.json").read_text())
+    manifest = json.loads((CAD_OUT / "manifest.json").read_text())
     poses = fk.body_poses(pose)
     objs = []
     for m in manifest:
@@ -229,6 +232,7 @@ VIEWS = {
     "side": "side",
     "gripper": "close",
     "coupler": "close",
+    "head": "hero",
 }
 
 
@@ -250,6 +254,13 @@ def render(finish: str, view: str, samples: int, res: tuple, suffix: str = ""):
         tgt = tool + (tcp - tool) * 0.55
         loc = tgt + Vector((0.36, 0.22, -0.06)).normalized() * 0.55
         camera(loc, tgt, lens=85, fstop=8.0)
+    elif view == "head":
+        import params as PP
+
+        xc = Vector(fk.body_poses(pose)["x_carriage"][0]) / 1000
+        tgt = xc + Vector(PP.HEAD_GEOM["center"]) / 1000 + Vector((0, 0.01, -0.01))
+        loc = tgt + Vector((0.28, 0.42, -0.02)).normalized() * 0.62
+        camera(loc, tgt, lens=70, fstop=8.0)
     else:  # coupler, exploded 22 mm
         tgt = tool + Vector((0, 0, -0.004))
         tgt = tool + (tcp - tool) * 0.42
@@ -276,6 +287,6 @@ if __name__ == "__main__":
     ap.add_argument("--suffix", default="")
     a = ap.parse_args()
     res = tuple(int(x) for x in a.res.split("x"))
-    jobs = [(f, v) for f in FINISHES for v in ("threequarter", "side", "gripper")] + [("graphite", "coupler"), ("white", "coupler")] if a.all else [(a.finish, a.view)]
+    jobs = [(f, v) for f in FINISHES for v in ("threequarter", "side", "gripper", "head")] + [("graphite", "coupler"), ("white", "coupler")] if a.all else [(a.finish, a.view)]
     for f, v in jobs:
         render(f, v, a.samples, res, a.suffix)
