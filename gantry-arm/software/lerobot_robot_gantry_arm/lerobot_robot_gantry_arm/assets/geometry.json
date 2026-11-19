@@ -1,0 +1,72 @@
+{
+ "fore": 150.0,
+ "j1_y": 127.0,
+ "j2_z0": 350.0,
+ "lateral": 2.0,
+ "limits_deg": {
+  "base_yaw": [
+   -150,
+   150
+  ],
+  "elbow_flex": [
+   -140,
+   140
+  ],
+  "shoulder_lift": [
+   -100,
+   135
+  ],
+  "wrist_flex": [
+   -110,
+   110
+  ],
+  "wrist_roll": [
+   -180,
+   180
+  ]
+ },
+ "servos": {
+  "base_yaw": {
+   "count": 1,
+   "model": "sts3215",
+   "rated_Nm": 0.980665,
+   "stall_Nm": 2.941995
+  },
+  "elbow_flex": {
+   "count": 2,
+   "model": "sts3250",
+   "rated_Nm": 1.569064,
+   "stall_Nm": 4.903325
+  },
+  "gripper": {
+   "count": 1,
+   "model": "sts3215",
+   "rated_Nm": 0.980665,
+   "stall_Nm": 2.941995
+  },
+  "shoulder_lift": {
+   "count": 2,
+   "model": "sts3250",
+   "rated_Nm": 1.569064,
+   "stall_Nm": 4.903325
+  },
+  "wrist_flex": {
+   "count": 1,
+   "model": "sts3215",
+   "rated_Nm": 0.980665,
+   "stall_Nm": 2.941995
+  },
+  "wrist_roll": {
+   "count": 1,
+   "model": "sts3215",
+   "rated_Nm": 0.980665,
+   "stall_Nm": 2.941995
+  }
+ },
+ "spring_k_N_per_mm": 0.9,
+ "tool": 135.0,
+ "upper": 165.0,
+ "x0": -400.0,
+ "x_travel": 800.0,
+ "z_travel": 500.0
+}
