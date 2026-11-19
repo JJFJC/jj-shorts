@@ -71,7 +71,7 @@ ARM = dict(
     tool_tcp=64.0,  # coupler tool face -> gripper TCP
 )
 
-# PENDING USER DECISION (elbow fix, see SIM_REPORT): 2 = ganged twin STS3250 (recommended), 1 = single
+# Elbow: 2 = ganged twin STS3250 (confirmed by owner 2026-11-19, see SIM_REPORT), 1 = single
 ELBOW_SERVOS = 2
 
 # ---------------------------------------------------------------- industrial design language

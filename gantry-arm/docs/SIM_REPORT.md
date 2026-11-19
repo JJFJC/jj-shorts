@@ -86,7 +86,7 @@ Hanging mass on the Z carriage: 2.62 kg, CoM 294 mm in front of the column. Mome
 | Rank | Severity | Item | Number | Mitigation |
 |---|---|---|---|---|
 | 1 | HIGH | Servo position compliance | 37 mm TCP drop at full reach with the default P gain (the spring already helps). This is 10× all the structural flex. | Step 3: raise P_Coefficient on J2–J4 (lekiwi_pincopen heavy-joint pattern) **and** add gravity feed-forward to the goal positions. |
-| 2 | MED | J3 elbow (2× STS3250) | 24% of stall, 75% of rated (a single servo would be at 48% / 150%) | Twin ganged servos (pending your confirmation). Watch Present_Load on both servos for imbalance. |
+| 2 | MED | J3 elbow (2× STS3250) | 24% of stall, 75% of rated (a single servo would be at 48% / 150%) | Twin ganged servos. Watch Present_Load on both servos for imbalance. |
 | 3 | MED | J2 shoulder without spring | 47% of combined stall; one servo goes over 40% if the two share load unevenly. | Keep the spring (k 0.9 N/mm): drops to 25%. Monitor both servos' Present_Load. |
 | 4 | MED | J4 wrist pitch (STS3215) | 31% stall but 92% of rated | OK for intermittent holds. Keep the tools light; the gripper tool is the heaviest. |
 | 5 | MED | J1 bending moment | 4.6 N·m on the base | Crossed-roller or lazy-susan bearing + a flex-free coupling to the STS3215 horn. |

@@ -143,7 +143,7 @@ rows = [
     ("HIGH", "Servo position compliance", f"{sag:.0f} mm TCP drop at full reach with the default P gain (the spring already helps). This is 10× all the structural flex.", "Step 3: raise P_Coefficient on J2–J4 (lekiwi_pincopen heavy-joint pattern) **and** add gravity feed-forward to the goal positions."),
     (("HIGH" if n3 == 1 else "MED"), f"J3 elbow ({n3}× STS3250)",
      f"{pct(j3_now / (s50.stall_Nm * n3))} of stall, {pct(j3_now / (s50.rated_Nm * n3))} of rated (a single servo would be at {pct(e3[3])} / {pct(e3[4])})",
-     "Twin ganged servos (pending your confirmation). Watch Present_Load on both servos for imbalance." if n3 == 2 else "Needs a design decision (see the elbow fix table)."),
+     "Twin ganged servos. Watch Present_Load on both servos for imbalance." if n3 == 2 else "Needs a design decision (see the elbow fix table)."),
     ("MED", "J2 shoulder without spring", f"{pct(sh_ns)} of combined stall; one servo goes over 40% if the two share load unevenly.", f"Keep the spring (k {r['k_opt']:.1f} N/mm): drops to {pct(abs(r['spring']['full_reach']['shoulder_lift']) / (2 * P.STS3250.stall_Nm))}. Monitor both servos' Present_Load."),
     ("MED", "J4 wrist pitch (STS3215)", f"{pct(abs(r['spring']['full_reach']['wrist_flex']) / s15.stall_Nm)} stall but {pct(abs(r['spring']['full_reach']['wrist_flex']) / s15.rated_Nm)} of rated", "OK for intermittent holds. Keep the tools light; the gripper tool is the heaviest."),
     ("MED", "J1 bending moment", f"{S['j1_moment_Nm']:.1f} N·m on the base", "Crossed-roller or lazy-susan bearing + a flex-free coupling to the STS3215 horn."),
