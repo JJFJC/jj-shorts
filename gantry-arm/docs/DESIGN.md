@@ -14,6 +14,19 @@ This is an original design in an industrial-cobot style. It copies no brand's sh
 | Gripper | Compact Ø58 cylinder, smoked translucent cap, two stainless V-linkage fingers with TPU pads. | `gripper_*` |
 | Gantry | Black anodised extrusions with flush cover strips; covered X and Z carriages; the cable chain is hidden in a rear trough (X) and a rear column cover (Z); end housings; controller box with a hardware e-stop. | `build_gantry()` |
 
+## Eyes head
+
+A stereo USB camera (60 mm baseline) sits in a capsule head on the Z-column top, with a 12-LED WS2812 ring around each lens. It rides on the X carriage, so the vision calibration follows `gantry_x`. It gives depth for picking and replaces the plain overhead camera. The rings show the same status colours as the arm strip, and can blink or "look". Chosen by the owner over the ring-only and no-head options.
+
+## Tool rack (passive tool changer)
+
+Two printed 2-slot modules (`tool_rack_1/2`) screw to the table inside the work area.
+- **Holding the tool:** each tool's coupler half has a parking groove. The rack fork slides into it horizontally.
+- **Unlocking the coupler:** a cam channel on the rack post holds the bayonet sleeve's lever open while the tool is docked.
+- **No actuators on the rack:** the Z gantry provides the force to break the magnets.
+
+The sequence is in `skills/tool_changer.py`, and `docs/img/demo_tool_change.png` shows it on the sim.
+
 ## LED status colours (firmware/plugin, Step 3)
 
 | State | Colour |
@@ -33,7 +46,7 @@ This is an original design in an industrial-cobot style. It copies no brand's sh
 ## Shell splitting and fasteners
 
 - Links split on the fillet tangent line of the outer face. The cover is a lid with the cosmetic face printed down on smooth PEI, so the seam reads as a design line.
-- M3 screws go in from the inner face (hidden against the pucks) into M3×4 heat-set inserts in bosses on the cover.
+- M3 screws go in from the inner face, **only in the hub zones hidden by the neighbouring puck**, into M3×4 heat-set inserts in bosses on the cover. The visible middle of each link is held by two snap clips. An earlier version had screws mid-span, and they showed in the renders.
 - Puck seams are hidden under the end caps. The wrist shell splits on its mid-plane.
 - Every printed part fits the P2S bed. The upper arm halves (251 mm) print rotated on the bed diagonal. Long gantry covers are segmented (4 trough segments, 3 column-cover segments) with lap joints.
 

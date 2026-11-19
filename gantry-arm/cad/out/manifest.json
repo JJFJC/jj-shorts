@@ -487,7 +487,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, cone up, no supports",
-  "mass_g": 18.2,
+  "mass_g": 16.6,
   "dims_mm": [
    59.0,
    56.0,
@@ -495,7 +495,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.18,
+  "print_h": 1.09,
   "group": "arm",
   "note": "one per tool; 3 steel discs face the magnets, 4 brass contact pads"
  },
@@ -1298,5 +1298,45 @@
   "print_h": 1.5,
   "group": "gantry",
   "note": ""
+ },
+ {
+  "name": "tool_rack_1",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "back wall down (face on bed), supports under forks",
+  "mass_g": 201.4,
+  "dims_mm": [
+   124.0,
+   109.8,
+   73.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 11.36,
+  "group": "workcell",
+  "note": "slots for tools 1+2; two modules screw to the table side by side"
+ },
+ {
+  "name": "tool_rack_2",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "back wall down (face on bed), supports under forks",
+  "mass_g": 211.0,
+  "dims_mm": [
+   134.0,
+   109.8,
+   73.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 11.89,
+  "group": "workcell",
+  "note": "slots for tools 3+4; two modules screw to the table side by side"
  }
 ]

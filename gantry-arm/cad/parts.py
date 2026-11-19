@@ -357,6 +357,9 @@ def coupler_tool_half(yc, z0=8.0):
         h = h.union(box(-3, 3, -2, 2, z0 + 0.5, z0 + 4).rotate((0, 0, 0), (0, 0, 1), ang).translate((rr * math.cos(a), yc + rr * math.sin(a), 0)))
     for dx in (-4.5, -1.5, 1.5, 4.5):
         h = h.cut(cyl(1.3, (dx, yc - 13, z0 - 0.1), (dx, yc - 13, z0 + 0.6)))
+    # parking groove for the tool rack fork (tool-frame z from..to, depth)
+    gz0, gz1, gd = P.RACK["groove"]
+    h = h.cut(cyl(rr + 1, (0, yc, gz0), (0, yc, gz1)).cut(cyl(rr - gd, (0, yc, gz0 - 1), (0, yc, gz1 + 1))))
     return h
 
 
@@ -551,6 +554,36 @@ def build_head():
     reg("head_neck", "x_carriage", "cap", neck, orient="upright", fill=1.0, group="gantry")
 
 
+def build_rack():
+    """Passive tool rack on the table: one fork + cam channel per tool, fork opening toward -Y."""
+    R = P.RACK
+    rr = S["roll_r"]
+    gz0, gz1, gd = R["groove"]
+    tcp_from_origin = A["coupler"] + A["tool_tcp"]  # tool frame: origin at the J5 flange, z toward the TCP
+    z_fork_top = R["tcp_z"] + tcp_from_origin - gz0 - 0.2  # fork sits inside the groove (tool hangs below)
+    z_fork_bot = R["tcp_z"] + tcp_from_origin - gz1 + 0.2
+    y = R["y"]
+    items = sorted(R["slots"].items(), key=lambda kv: kv[1])
+    for mod, pair in enumerate((items[:2], items[2:]), start=1):  # two printable 2-slot modules
+        xs = [x for _, x in pair]
+        x0, x1 = min(xs) - 29.5, max(xs) + 29.5
+        rack = rbox(x0, x1, y - 30, y + 43, 0, 6, 2.5)
+        rack = rack.union(rbox(x0, x1, y + 35, y + 43, 0, z_fork_top + 10, 2.5))
+        for tid, x in pair:
+            fork = box(x - 29, x + 29, y - 30, y + 36, z_fork_bot, z_fork_top)
+            fork = fork.cut(cyl(rr - gd + 0.4, (x, y, z_fork_bot - 1), (x, y, z_fork_top + 1)))
+            fork = fork.cut(box(x - (rr - gd + 0.4), x + (rr - gd + 0.4), y - 31, y, z_fork_bot - 1, z_fork_top + 1))
+            fork = fil(fork, 1.0, "|Z")
+            # cam post on -X: vertical channel the sleeve lever tab drops into (holds the bayonet open)
+            post = rbox(x - rr - 1, x - rr + 11, y + 4, y + 36, 0, z_fork_top + 10, 2)
+            post = post.cut(box(x - rr + 2, x - rr + 8, y + 3, y + 12, z_fork_top - 6, z_fork_top + 11))
+            rib = box(x - 3, x + 3, y + 10, y + 36, 6, z_fork_bot)  # gusset under the fork
+            rack = rack.union(fork).union(post).union(rib)
+        names = "+".join(str(t) for t, _ in pair)
+        reg(f"tool_rack_{mod}", "world", "shell", rack, orient="back wall down (face on bed), supports under forks", fill=0.6, group="workcell",
+            extra=dict(note=f"slots for tools {names}; two modules screw to the table side by side"))
+
+
 def build_all():
     PARTS.clear()
     build_arm()
@@ -560,4 +593,5 @@ def build_all():
     build_gantry()
     if P.HEAD:
         build_head()
+    build_rack()
     return PARTS

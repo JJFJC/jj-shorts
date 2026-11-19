@@ -21,7 +21,7 @@ Flag rule: > 40% of stall torque. The **% rated** column matters for holding a p
 
 | Joint | Servo | No spring N·m | % stall | With spring N·m | % stall | % rated | Worst-case (spring) N·m | % stall | Flag |
 |---|---|---|---|---|---|---|---|---|---|
-| J1 base yaw † | 1× STS3215 | 0.68 | 23% | 0.68 | 23% | 69% | 0.00 | 0% | ok |
+| J1 base yaw † | 1× STS3215 | 0.67 | 23% | 0.67 | 23% | 69% | 0.00 | 0% | ok |
 | J2 shoulder | 2× STS3250 | 4.58 | 47% | 2.42 | 25% | 77% | 2.42 | 25% | **FLAG without spring**, ok with |
 | J3 elbow | 2× STS3250 | 2.35 | 24% | 2.35 | 24% | 75% | 2.35 | 24% | ok |
 | J4 wrist pitch | 1× STS3215 | 0.90 | 31% | 0.90 | 31% | 92% | 0.90 | 31% | ok |
@@ -38,10 +38,10 @@ Twin shoulder servos: with no spring and equal load sharing, J2 is at 47% of com
 
 | Option | J2 N·m | J3 N·m | J3 % stall | J3 % rated |
 |---|---|---|---|---|
-| 1x STS3250, 500 g, 450 mm | 2.30 | 2.35 | 48% | 150% |
-| 1x STS3250, payload 400 g | 1.86 | 2.07 | 42% | 132% |
-| 1x STS3250, payload 300 g | 1.42 | 1.79 | 37% | 114% |
-| 1x STS3250, forearm 150 -> 110 mm (reach 410) | 1.94 | 1.99 | 41% | 127% |
+| 1x STS3250, 500 g, 450 mm | 2.29 | 2.35 | 48% | 150% |
+| 1x STS3250, payload 400 g | 1.85 | 2.07 | 42% | 132% |
+| 1x STS3250, payload 300 g | 1.41 | 1.79 | 36% | 114% |
+| 1x STS3250, forearm 150 -> 110 mm (reach 410) | 1.93 | 1.99 | 41% | 127% |
 | 2x STS3250 ganged (current design) | 2.42 | 2.35 | 24% | 75% |
 
 ## Servo compliance (forward sim, holding the full-reach pose for 3 s)
@@ -50,8 +50,8 @@ MuJoCo position actuators use the SO-101 measured STS3215 stiffness (kp = 17.8 N
 
 | Case | J2 err ° | J3 err ° | J4 err ° | TCP drop mm |
 |---|---|---|---|---|
-| Default P gain, no spring | 4.40 | 2.25 | 2.84 | 52.9 |
-| Default P gain, spring | 2.33 | 2.26 | 2.91 | 36.9 |
+| Default P gain, no spring | 4.39 | 2.25 | 2.84 | 52.9 |
+| Default P gain, spring | 2.32 | 2.26 | 2.90 | 36.9 |
 | 2× P gain (P_Coefficient 16→32), spring | 1.17 | 1.13 | 1.45 | 18.5 |
 | Gravity feed-forward on goal, spring | -0.00 | -0.00 | -0.00 | 0.6 |
 
@@ -63,7 +63,7 @@ Hanging mass on the Z carriage: 2.61 kg, CoM 294 mm in front of the column. Mome
 
 | Contribution | TCP sag (mm) | Notes |
 |---|---|---|
-| 2040 column bending (strong axis) | 0.92 | rotation 0.091° |
+| 2040 column bending (strong axis) | 0.91 | rotation 0.091° |
 | Z carriage rocking on V-wheels | 0.18 – 0.89 | max wheel load 24 N (check against the wheel datasheet rating) |
 | X carriage rocking on 2060 | 0.39 – 1.97 | max wheel load 42 N |
 | PETG platform (ribbed, I = 181×10³ mm⁴) | 0.96 | bending stress 1.1 MPa (low, but PETG creeps under constant load) |

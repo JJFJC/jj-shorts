@@ -46,7 +46,7 @@
                 <body name="tool" pos="0 -0.002 0.055" quat="1 0 0 0">
                   <joint name="wrist_roll" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
                   <geom name="gripper_servo" type="box" size="0.0225 0.0125 0.0175" pos="0 0 0.038" mass="0.055" rgba="0.1 0.1 0.1 1"/>
-                  <geom name="cad_tool" type="box" size="0.0358 0.0308 0.052" pos="0.00082 -3e-05 0.04049" mass="0.1808" rgba="0.85 0.85 0.85 1"/>
+                  <geom name="cad_tool" type="box" size="0.0358 0.0308 0.052" pos="0.00083 -3e-05 0.04077" mass="0.1792" rgba="0.85 0.85 0.85 1"/>
                   <site name="tcp" pos="0 0 0.08" size="0.006"/>
                   <body name="payload" pos="0 0.015 0.08" quat="1 0 0 0">
                     <geom name="payload" type="box" size="0.02 0.02 0.02" pos="0 0 0" mass="0.5" rgba="0.9 0.2 0.2 0.6"/>
