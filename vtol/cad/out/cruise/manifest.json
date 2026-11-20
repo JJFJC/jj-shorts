@@ -1,0 +1,457 @@
+[
+ {
+  "name": "body_front_L",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   210.0,
+   130.0,
+   67.2
+  ],
+  "fits_bed": true,
+  "volume_cm3": 957.0
+ },
+ {
+  "name": "body_rear_L",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   210.0,
+   130.0,
+   59.2
+  ],
+  "fits_bed": true,
+  "volume_cm3": 645.7
+ },
+ {
+  "name": "wing_inner_L",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   269.7,
+   185.0,
+   27.5
+  ],
+  "fits_bed": true,
+  "volume_cm3": 497.5
+ },
+ {
+  "name": "wing_outer_L",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   214.6,
+   185.0,
+   19.9
+  ],
+  "fits_bed": true,
+  "volume_cm3": 265.5
+ },
+ {
+  "name": "winglet_L",
+  "role": "accent2",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   196.5,
+   10.4,
+   95.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 46.4
+ },
+ {
+  "name": "body_front_R",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   210.0,
+   130.0,
+   67.2
+  ],
+  "fits_bed": true,
+  "volume_cm3": 957.0
+ },
+ {
+  "name": "body_rear_R",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   210.0,
+   130.0,
+   59.2
+  ],
+  "fits_bed": true,
+  "volume_cm3": 645.7
+ },
+ {
+  "name": "wing_inner_R",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   269.7,
+   185.0,
+   27.5
+  ],
+  "fits_bed": true,
+  "volume_cm3": 497.5
+ },
+ {
+  "name": "wing_outer_R",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   214.6,
+   185.0,
+   19.9
+  ],
+  "fits_bed": true,
+  "volume_cm3": 265.5
+ },
+ {
+  "name": "winglet_R",
+  "role": "accent2",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   196.5,
+   10.4,
+   95.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 46.4
+ },
+ {
+  "name": "nose_front",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   165.0,
+   105.4,
+   63.5
+  ],
+  "fits_bed": true,
+  "volume_cm3": 606.5
+ },
+ {
+  "name": "nose_rear",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   165.0,
+   105.3,
+   74.7
+  ],
+  "fits_bed": true,
+  "volume_cm3": 905.5
+ },
+ {
+  "name": "canard_L",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   114.9,
+   270.0,
+   13.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 208.3
+ },
+ {
+  "name": "canard_R",
+  "role": "shell",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   114.9,
+   270.0,
+   13.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 208.3
+ },
+ {
+  "name": "nose_camera",
+  "role": "lens",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   7.0,
+   18.0,
+   18.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 1.8
+ },
+ {
+  "name": "front_pod_L",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   87.0,
+   32.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 62.8
+ },
+ {
+  "name": "front_tilt_L",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   39.0,
+   32.0,
+   30.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 25.7
+ },
+ {
+  "name": "front_motor_L",
+  "role": "motor",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   28.0,
+   28.0,
+   28.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 11.3
+ },
+ {
+  "name": "front_prop_L",
+  "role": "prop",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   10.0,
+   177.8,
+   14.2
+  ],
+  "fits_bed": null,
+  "volume_cm3": 6.7
+ },
+ {
+  "name": "front_pod_R",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   87.0,
+   32.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 62.8
+ },
+ {
+  "name": "front_tilt_R",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   39.0,
+   32.0,
+   30.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 25.7
+ },
+ {
+  "name": "front_motor_R",
+  "role": "motor",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   28.0,
+   28.0,
+   28.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 11.3
+ },
+ {
+  "name": "front_prop_R",
+  "role": "prop",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   10.0,
+   177.8,
+   14.2
+  ],
+  "fits_bed": null,
+  "volume_cm3": 6.7
+ },
+ {
+  "name": "rear_pod_L",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   135.9,
+   32.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 102.1
+ },
+ {
+  "name": "rear_skid_L",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   50.0,
+   4.0,
+   60.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 12.0
+ },
+ {
+  "name": "rear_tilt_L",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   39.0,
+   32.0,
+   30.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 25.7
+ },
+ {
+  "name": "rear_motor_L",
+  "role": "motor",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   28.0,
+   28.0,
+   28.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 11.3
+ },
+ {
+  "name": "rear_prop_L",
+  "role": "prop",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   10.0,
+   177.8,
+   14.2
+  ],
+  "fits_bed": null,
+  "volume_cm3": 6.7
+ },
+ {
+  "name": "rear_pod_R",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   135.9,
+   32.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 102.1
+ },
+ {
+  "name": "rear_skid_R",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   50.0,
+   4.0,
+   60.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 12.0
+ },
+ {
+  "name": "rear_tilt_R",
+  "role": "cap",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   39.0,
+   32.0,
+   30.0
+  ],
+  "fits_bed": true,
+  "volume_cm3": 25.7
+ },
+ {
+  "name": "rear_motor_R",
+  "role": "motor",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   28.0,
+   28.0,
+   28.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 11.3
+ },
+ {
+  "name": "rear_prop_R",
+  "role": "prop",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   10.0,
+   177.8,
+   14.2
+  ],
+  "fits_bed": null,
+  "volume_cm3": 6.7
+ },
+ {
+  "name": "nav_left",
+  "role": "nav_red",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   8.0,
+   3.0,
+   8.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 0.2
+ },
+ {
+  "name": "nav_right",
+  "role": "nav_green",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   8.0,
+   3.0,
+   8.0
+  ],
+  "fits_bed": null,
+  "volume_cm3": 0.2
+ }
+]
