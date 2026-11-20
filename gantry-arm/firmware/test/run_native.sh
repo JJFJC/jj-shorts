@@ -10,5 +10,8 @@ fi
 mkdir -p .build
 gcc -O1 -c "$UNITY_DIR/src/unity.c" -I "$UNITY_DIR/src" -o .build/unity.o
 g++ -std=c++17 -Wall -Wextra -Werror -O1 -I lib/gantry_core/src -I "$UNITY_DIR/src" \
-  lib/gantry_core/src/gantry_core.cpp test/test_core/test_main.cpp .build/unity.o -o .build/test_core
+  lib/gantry_core/src/gantry_core.cpp lib/gantry_core/src/arm_can.cpp test/test_core/test_main.cpp .build/unity.o -o .build/test_core
+g++ -std=c++17 -Wall -Wextra -Werror -O1 -I lib/gantry_core/src -I "$UNITY_DIR/src" \
+  lib/gantry_core/src/gantry_core.cpp lib/gantry_core/src/arm_can.cpp test/test_arm/test_main.cpp .build/unity.o -o .build/test_arm
 ./.build/test_core
+./.build/test_arm

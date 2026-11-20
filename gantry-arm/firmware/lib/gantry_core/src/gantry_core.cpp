@@ -70,7 +70,8 @@ ParseErr parseLine(const char* line, Request& out) {
   struct { const char* name; Cmd cmd; } table[] = {
       {"PING", Cmd::PING}, {"HOME", Cmd::HOME},   {"MOVE", Cmd::MOVE},     {"JOG", Cmd::JOG},
       {"STOP", Cmd::STOP}, {"ESTOP", Cmd::ESTOP}, {"RESET", Cmd::RESET},   {"STATUS", Cmd::STATUS},
-      {"LED", Cmd::LED},   {"TOOL", Cmd::TOOL},   {"LIMITS", Cmd::LIMITS},
+      {"LED", Cmd::LED},   {"TOOL", Cmd::TOOL},   {"LIMITS", Cmd::LIMITS}, {"JMOVE", Cmd::JMOVE},
+      {"JPOS", Cmd::JPOS}, {"JHOME", Cmd::JHOME},
   };
   for (auto& t : table)
     if (strcmp(c, t.name) == 0) out.cmd = t.cmd;
@@ -78,7 +79,28 @@ ParseErr parseLine(const char* line, Request& out) {
 
   switch (out.cmd) {
     case Cmd::PING: case Cmd::STOP: case Cmd::ESTOP: case Cmd::RESET: case Cmd::STATUS: case Cmd::TOOL:
+    case Cmd::JPOS: case Cmd::JHOME:
       return nt == 1 ? ParseErr::OK : ParseErr::BAD_ARG;
+    case Cmd::JMOVE: {  // JMOVE J1<deg> ... J5<deg> [F<speed 0..1>]
+      if (nt < 2) return ParseErr::BAD_ARG;
+      bool any = false;
+      for (int i = 1; i < nt; ++i) {
+        float v;
+        if (tok[i][0] == 'F') {
+          if (out.has_feed || !parseFloat(tok[i] + 1, v) || v <= 0 || v > 1) return ParseErr::BAD_ARG;
+          out.has_feed = true;
+          out.feed = v;
+          continue;
+        }
+        if (tok[i][0] != 'J' || tok[i][1] < '1' || tok[i][1] > '0' + NUM_JOINTS) return ParseErr::BAD_ARG;
+        int j = tok[i][1] - '1';
+        if (out.jhas[j] || !parseFloat(tok[i] + 2, v)) return ParseErr::BAD_ARG;
+        out.jhas[j] = true;
+        out.jval[j] = v;
+        any = true;
+      }
+      return any ? ParseErr::OK : ParseErr::BAD_ARG;
+    }
     case Cmd::HOME:
       if (nt == 1) { out.has[AX_X] = out.has[AX_Z] = true; return ParseErr::OK; }
       for (int i = 1; i < nt; ++i) {
@@ -228,10 +250,13 @@ SysState Controller::state() const {
   if (estop_latched_ || io_.estopPressed()) return SysState::ESTOP;
   for (int i = 0; i < NUM_AXES; ++i)
     if (axes_[i]->limitFault() || axes_[i]->homeState() == HomeState::FAILED) return SysState::FAULT;
+  if (arm_ && arm_->anyFault()) return SysState::FAULT;
+  if (arm_ && arm_->homing()) return SysState::HOMING;
   for (int i = 0; i < NUM_AXES; ++i)
     if (homingActive(axes_[i]->homeState()) || home_queue_[i]) return SysState::HOMING;
   for (int i = 0; i < NUM_AXES; ++i)
     if (axes_[i]->hal().running()) return SysState::MOVING;
+  if (arm_ && arm_->moving()) return SysState::MOVING;
   return SysState::IDLE;
 }
 
@@ -276,6 +301,18 @@ void Controller::handleLine(const char* line, char* reply, size_t rn) {
     case Cmd::PING: snprintf(reply, rn, "ok PONG %s", FW_VERSION); return;
     case Cmd::STATUS: statusLine(reply, rn); return;
     case Cmd::TOOL: snprintf(reply, rn, "ok TOOL %d", toolId()); return;
+    case Cmd::JPOS: {
+      if (!arm_) { snprintf(reply, rn, "err NO_ARM"); return; }
+      char h[NUM_JOINTS + 1], f[NUM_JOINTS + 1];
+      for (int j = 0; j < NUM_JOINTS; ++j) {
+        h[j] = arm_->homed(j) ? char('1' + j) : '-';
+        f[j] = arm_->stalled(j) ? 'S' : arm_->commFault(j) ? 'C' : arm_->fault(j) ? 'H' : '-';
+      }
+      h[NUM_JOINTS] = f[NUM_JOINTS] = 0;
+      snprintf(reply, rn, "ok JPOS %.3f %.3f %.3f %.3f %.3f H=%s F=%s", (double)arm_->deg(0), (double)arm_->deg(1), (double)arm_->deg(2),
+               (double)arm_->deg(3), (double)arm_->deg(4), h, f);
+      return;
+    }
     case Cmd::LED:
       led_req_ = !strcmp(r.led, "FAULT") ? Led::FAULT : !strcmp(r.led, "OFF") ? Led::OFF : Led::IDLE;
       snprintf(reply, rn, "ok");
@@ -286,12 +323,14 @@ void Controller::handleLine(const char* line, char* reply, size_t rn) {
       ax_x_.setHomed(false);  // belt axis can be pushed when unpowered; Z (T8x2) self-locks
       jogging_ = false;
       home_queue_[AX_X] = home_queue_[AX_Z] = false;
+      if (arm_) { arm_->estop(); arm_homed_reported_ = false; }
       snprintf(reply, rn, "ok");
       return;
     case Cmd::RESET:
       if (io_.estopPressed()) { snprintf(reply, rn, "err ESTOP_HW"); return; }
       estop_latched_ = false;
       for (auto* a : axes_) { a->clearFault(); a->hal().enable(true); }
+      if (arm_) arm_->enable(true);  // also releases a latched stall
       snprintf(reply, rn, "ok");
       return;
     default:
@@ -316,6 +355,24 @@ void Controller::handleLine(const char* line, char* reply, size_t rn) {
       }
       snprintf(reply, rn, "ok");
       return;
+    case Cmd::JHOME:
+      if (!arm_) { snprintf(reply, rn, "err NO_ARM"); return; }
+      arm_->home();
+      arm_homed_reported_ = false;
+      snprintf(reply, rn, "ok");
+      return;
+    case Cmd::JMOVE: {
+      if (!arm_) { snprintf(reply, rn, "err NO_ARM"); return; }
+      int bad = -1;
+      Arm::Err e = arm_->move(r.jhas, r.jval, r.has_feed ? r.feed : 0.5f, &bad);
+      switch (e) {
+        case Arm::Err::OK: snprintf(reply, rn, "ok"); return;
+        case Arm::Err::NOT_HOMED: snprintf(reply, rn, "err NOT_HOMED J%d", bad + 1); return;
+        case Arm::Err::LIMIT: snprintf(reply, rn, "err LIMIT J%d", bad + 1); return;
+        case Arm::Err::BUSY: snprintf(reply, rn, "err BUSY"); return;
+        default: snprintf(reply, rn, "err ARM_FAULT"); return;
+      }
+    }
     case Cmd::LIMITS:
       for (int i = 0; i < NUM_AXES; ++i)
         if (r.has[i] && (r.lo[i] < hard_[i].soft_min || r.hi[i] > hard_[i].soft_max)) {
@@ -382,10 +439,27 @@ bool Controller::update(uint32_t now_ms, char* ev, size_t en) {
     ax_x_.setHomed(false);
     jogging_ = false;
     home_queue_[AX_X] = home_queue_[AX_Z] = false;
+    if (arm_) { arm_->estop(); arm_homed_reported_ = false; }
     snprintf(ev, en, "ev ESTOP");
     return true;
   }
   for (auto* a : axes_) a->update();
+  if (arm_) {
+    arm_->update(now_ms);
+    for (int j = 0; j < NUM_JOINTS; ++j) {
+      if (arm_->fault(j) && !arm_fault_reported_[j]) {
+        arm_fault_reported_[j] = true;
+        snprintf(ev, en, "ev %s J%d", arm_->stalled(j) ? "JSTALL" : arm_->commFault(j) ? "JCOMM" : "JHOME_FAIL", j + 1);
+        return true;
+      }
+      if (!arm_->fault(j)) arm_fault_reported_[j] = false;
+    }
+    if (!arm_homed_reported_ && arm_->allHomed()) {
+      arm_homed_reported_ = true;
+      snprintf(ev, en, "ev JHOMED");
+      return true;
+    }
+  }
   if (jogging_ && now_ms - last_jog_ms_ > JOG_WATCHDOG_MS) {
     jogging_ = false;
     for (auto* a : axes_) a->hal().stop();

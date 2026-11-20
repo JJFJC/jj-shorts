@@ -22,8 +22,9 @@ def build_lib() -> Path | None:
         return None
     BUILD.mkdir(exist_ok=True)
     out = BUILD / "libgantry_bridge.so"
-    srcs = [FW / "lib/gantry_core/src/gantry_core.cpp", FW / "test/bridge/bridge.cpp"]
-    if not out.exists() or any(s.stat().st_mtime > out.stat().st_mtime for s in srcs):
+    srcs = [FW / "lib/gantry_core/src/gantry_core.cpp", FW / "lib/gantry_core/src/arm_can.cpp", FW / "test/bridge/bridge.cpp"]
+    deps = [*srcs, FW / "lib/gantry_core/src/gantry_core.h", FW / "lib/gantry_core/src/arm_can.h", FW / "test/sim_mks.h"]
+    if not out.exists() or any(s.stat().st_mtime > out.stat().st_mtime for s in deps):
         subprocess.run(["g++", "-std=c++17", "-O1", "-shared", "-fPIC", "-I", str(FW / "lib/gantry_core/src"), *map(str, srcs), "-o", str(out)], check=True)
     return out
 
@@ -36,7 +37,8 @@ class FirmwareTransport:
         self.lib.gb_create.restype = ctypes.c_void_p
         for fn, args in (("gb_destroy", [ctypes.c_void_p]), ("gb_handle", [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]),
                          ("gb_tick", [ctypes.c_void_p, ctypes.c_float, ctypes.c_char_p, ctypes.c_int]),
-                         ("gb_set_estop", [ctypes.c_void_p, ctypes.c_int]), ("gb_set_tool_raw", [ctypes.c_void_p, ctypes.c_int])):
+                         ("gb_set_estop", [ctypes.c_void_p, ctypes.c_int]), ("gb_set_tool_raw", [ctypes.c_void_p, ctypes.c_int]),
+                         ("gb_arm_block", [ctypes.c_void_p, ctypes.c_int, ctypes.c_float]), ("gb_arm_unblock", [ctypes.c_void_p, ctypes.c_int])):
             getattr(self.lib, fn).argtypes = args
         self.lib.gb_tick.restype = ctypes.c_int
         self.board = self.lib.gb_create()
@@ -82,3 +84,9 @@ class FirmwareTransport:
 
     def set_tool_raw(self, raw: int):
         self.lib.gb_set_tool_raw(self.board, raw)
+
+    def arm_block(self, joint: int, deg: float):
+        self.lib.gb_arm_block(self.board, joint, ctypes.c_float(deg))
+
+    def arm_unblock(self, joint: int):
+        self.lib.gb_arm_unblock(self.board, joint)

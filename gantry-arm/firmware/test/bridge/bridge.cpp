@@ -3,7 +3,9 @@
 // Built on the fly by software/lerobot_robot_gantry_arm/tests/firmware_bridge.py.
 #include <string.h>
 
+#include "arm_can.h"
 #include "gantry_core.h"
+#include "../sim_mks.h"
 
 using namespace gantry;
 
@@ -43,12 +45,27 @@ AxisConfig cz() {
   AxisConfig c; c.soft_min = 0; c.soft_max = 500; c.max_speed = 20; c.home_fast = 15; c.home_slow = 3;
   c.home_backoff = 2; c.home_offset = 1; c.home_search = 600; return c;
 }
+const JointConfig* joints() {  // same table as src/main.cpp
+  static JointConfig j[NUM_JOINTS];
+  const float ratio[NUM_JOINTS] = {10, 20, 25, 15, 5};
+  const float lo[NUM_JOINTS] = {-150, -100, -140, -110, -180};
+  const float hi[NUM_JOINTS] = {150, 135, 140, 110, 180};
+  for (int i = 0; i < NUM_JOINTS; ++i) {
+    j[i].can_id = static_cast<uint16_t>(i + 1);
+    j[i].counts_per_deg = mks::COUNTS_PER_REV * ratio[i] / 360.0f;
+    j[i].min_deg = lo[i]; j[i].max_deg = hi[i]; j[i].home_deg = lo[i];
+    j[i].max_rpm = 600; j[i].acc = 20;
+  }
+  return j;
+}
 struct Board {
   SimAxis x, z;
   SimIo io;
+  sim::Bus bus;
+  Arm arm{bus, joints()};
   Controller c{x, z, io, cx(), cz()};
   uint32_t t = 0;
-  Board() { x.pos = 350; z.pos = 220; }
+  Board() { x.pos = 350; z.pos = 220; c.attachArm(&arm); }
 };
 }  // namespace
 
@@ -60,9 +77,26 @@ void gb_handle(void* b, const char* line, char* out, int n) { static_cast<Board*
 int gb_tick(void* bp, float dt, char* ev, int n) {
   Board* b = static_cast<Board*>(bp);
   b->x.tick(dt); b->z.tick(dt);
-  b->t += (uint32_t)(dt * 1000.0f);
-  return b->c.update(b->t, ev, (size_t)n) ? 1 : 0;
+  // the CAN side runs in 5 ms steps (poll period 20 ms); report the first event of this tick
+  int got = 0;
+  uint32_t steps = (uint32_t)(dt * 1000.0f) / 5;
+  if (steps == 0) steps = 1;
+  for (uint32_t i = 0; i < steps; ++i) {
+    b->bus.tick(0.005);
+    b->t += 5;
+    if (!got && b->c.update(b->t, ev, (size_t)n)) got = 1;
+    else if (got) { char tmp[160]; b->c.update(b->t, tmp, sizeof(tmp)); }
+  }
+  return got;
 }
 void gb_set_estop(void* b, int on) { static_cast<Board*>(b)->io.estop = on != 0; }
 void gb_set_tool_raw(void* b, int raw) { static_cast<Board*>(b)->io.tool = raw; }
+// put an obstacle in a joint's way at `deg` (joint angle): the simulated driver stalls there
+void gb_arm_block(void* bp, int joint, float deg) {
+  Board* b = static_cast<Board*>(bp);
+  const JointConfig& c = b->arm.cfg(joint);
+  b->bus.drv[joint].block_at = true;
+  b->bus.drv[joint].block_axis = c.sign * (deg - c.home_deg) * c.counts_per_deg;
+}
+void gb_arm_unblock(void* bp, int joint) { static_cast<Board*>(bp)->bus.drv[joint].block_at = false; }
 }

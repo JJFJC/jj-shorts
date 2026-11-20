@@ -10,6 +10,7 @@
 #include <TMCStepper.h>
 
 #include "gantry_core.h"
+#include "driver/twai.h"  // ESP32 built-in CAN controller (+ SN65HVD230 3.3 V transceiver)
 
 using namespace gantry;
 
@@ -24,6 +25,7 @@ constexpr int PIN_ESTOP = 39;                    // NC e-stop loop to GND; open 
 constexpr int PIN_TOOL_ID = 36;                  // ADC1_CH0 (VP), 10k pull-up to 3.3 V on the PCB
 constexpr int PIN_LED = 4;                       // WS2812 chain: 6 on the upper arm (+24 head rings if fitted)
 constexpr int NUM_LEDS = 30;
+constexpr gpio_num_t PIN_CAN_TX = GPIO_NUM_21, PIN_CAN_RX = GPIO_NUM_22;  // arm v2: MKS SERVO42D/57D bus, 500 kbit/s
 
 // ------------------------------------------------------------------ mechanics
 constexpr float X_STEPS_PER_MM = 200.0f * 16 / (20 * 2.0f);  // GT2 20T pulley, 1/16 microstep -> 80
@@ -103,6 +105,56 @@ AxisConfig cfgZ() {
 }
 Controller* ctl = nullptr;
 
+// ---------------------------------------------------------------- arm v2 (CAN)
+struct TwaiPort : CanPort {
+  bool ok = false;
+  bool begin() {
+    twai_general_config_t g = TWAI_GENERAL_CONFIG_DEFAULT(PIN_CAN_TX, PIN_CAN_RX, TWAI_MODE_NORMAL);
+    g.rx_queue_len = 32;
+    twai_timing_config_t t = TWAI_TIMING_CONFIG_500KBITS();  // set the drivers to 500K (MKS command 8AH)
+    twai_filter_config_t f = TWAI_FILTER_CONFIG_ACCEPT_ALL();
+    ok = twai_driver_install(&g, &t, &f) == ESP_OK && twai_start() == ESP_OK;
+    return ok;
+  }
+  bool send(const mks::Frame& fr) override {
+    if (!ok) return false;
+    twai_message_t m = {};
+    m.identifier = fr.id;
+    m.data_length_code = fr.dlc;
+    memcpy(m.data, fr.d, fr.dlc);
+    return twai_transmit(&m, 0) == ESP_OK;  // non-blocking; the 20 ms poll keeps the TX queue short
+  }
+  bool receive(mks::Frame& fr) override {
+    if (!ok) return false;
+    twai_message_t m;
+    if (twai_receive(&m, 0) != ESP_OK) return false;
+    fr.id = static_cast<uint16_t>(m.identifier);
+    fr.dlc = m.data_length_code;
+    memcpy(fr.d, m.data, 8);
+    return true;
+  }
+};
+TwaiPort canPort;
+
+// joint table, from v2/sizing.py: total ratio (belt x gearbox), limits, home switch angle (VERIFY on the build)
+const JointConfig* armJoints() {
+  static JointConfig j[NUM_JOINTS];
+  const float ratio[NUM_JOINTS] = {10, 20, 25, 15, 5};
+  const float lo[NUM_JOINTS] = {-150, -100, -140, -110, -180};
+  const float hi[NUM_JOINTS] = {150, 135, 140, 110, 180};
+  const uint16_t rpm[NUM_JOINTS] = {600, 500, 600, 600, 600};
+  for (int i = 0; i < NUM_JOINTS; ++i) {
+    j[i].can_id = static_cast<uint16_t>(i + 1);
+    j[i].counts_per_deg = mks::COUNTS_PER_REV * ratio[i] / 360.0f;
+    j[i].min_deg = lo[i];
+    j[i].max_deg = hi[i];
+    j[i].home_deg = lo[i];  // home switch at the negative end of each joint (driver IN_1)
+    j[i].max_rpm = rpm[i];
+    j[i].acc = 20;
+  }
+  return j;
+}
+
 void setupDriver(TMC2209Stepper& d, uint16_t ma) {
   d.begin();
   d.toff(4);
@@ -146,6 +198,10 @@ void setup() {
   axZ.attach(PIN_Z_STEP, PIN_Z_DIR);
   static Controller c(axX, axZ, io, cfgX(), cfgZ());
   ctl = &c;
+  if (canPort.begin()) {  // arm v2 present: attach the CAN arm; without it the gantry runs alone
+    static Arm arm(canPort, armJoints());
+    c.attachArm(&arm);
+  }
   leds.begin();
   leds.setBrightness(60);
   digitalWrite(PIN_EN, LOW);

@@ -6,6 +6,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "arm_can.h"
+
 namespace gantry {
 
 constexpr const char* FW_VERSION = "0.1.0";
@@ -35,7 +37,7 @@ struct IoHal {
 };
 
 // ------------------------------------------------------------------ protocol
-enum class Cmd : uint8_t { NONE, PING, HOME, MOVE, JOG, STOP, ESTOP, RESET, STATUS, LED, TOOL, LIMITS };
+enum class Cmd : uint8_t { NONE, PING, HOME, MOVE, JOG, STOP, ESTOP, RESET, STATUS, LED, TOOL, LIMITS, JMOVE, JPOS, JHOME };
 
 struct Request {
   Cmd cmd = Cmd::NONE;
@@ -46,6 +48,8 @@ struct Request {
   bool has_feed = false;
   float feed = 0;                    // F<mm/s>
   char led[12] = {0};                // LED state word
+  bool jhas[NUM_JOINTS] = {false, false, false, false, false};  // JMOVE J1<deg> .. J5<deg>
+  float jval[NUM_JOINTS] = {0, 0, 0, 0, 0};
 };
 
 enum class ParseErr : uint8_t { OK, EMPTY, TOO_LONG, CHECKSUM, UNKNOWN_CMD, BAD_ARG };
@@ -111,6 +115,7 @@ class Controller {
   Led led() const;
   int toolId() const;
   Axis& axis(int i) { return *axes_[i]; }
+  void attachArm(Arm* arm) { arm_ = arm; }  // v2 stepper arm on CAN (optional)
 
   static constexpr uint32_t JOG_WATCHDOG_MS = 300;
 
@@ -128,6 +133,9 @@ class Controller {
   HomeState last_hs_[NUM_AXES] = {HomeState::IDLE, HomeState::IDLE};
   bool home_queue_[NUM_AXES] = {false, false};
   bool reported_fault_[NUM_AXES] = {false, false};
+  Arm* arm_ = nullptr;
+  bool arm_homed_reported_ = false;
+  bool arm_fault_reported_[NUM_JOINTS] = {false, false, false, false, false};
 };
 
 const char* stateName(SysState s);
