@@ -134,6 +134,7 @@ def size():
     arm_m = sum(m for _, m, _ in parts)
     out["mass"] = dict(arm_moving=arm_m, turret_and_drives=turret_drives + 0.6, total_on_z=arm_m + turret_drives + 0.6 + 0.37)
     out["gantry"] = gantry(out)
+    out["gantry_rails"] = gantry_rails(out)
     return out
 
 
@@ -171,6 +172,41 @@ def gantry(out):
         k_rot_y = 2 * n_side * k * (pitch_x / 2) ** 2
         kx = 1 / (1 / k_col_x + h**2 / k_rot_y)
         res[f"fx_hz_{tag}"] = math.sqrt(kx / (m_hang + 0.2)) / (2 * math.pi)
+    return res
+
+
+# linear-rail gantry (owner choice 2026-11-20). Class values, VERIFY against the chosen rail/profile datasheets.
+GANTRY_V2 = dict(
+    z_column="4080 V-slot/T-slot, 80 mm side facing the arm (strong axis)", I_strong=8.4e5, I_weak=2.0e5,  # mm^4
+    z_rails="2x MGN15H, 50 mm apart, 2 blocks each, 100 mm block pitch", z_pitch=100.0, z_span=50.0,
+    x_rails="2x HGR15 on a 4080 base (or a flat plate), 80 mm apart, 2 blocks each, 120 mm block pitch", x_pitch=120.0, x_span=80.0,
+    block_k=60000.0,  # N/mm per block, radial; miniature/compact guides are tens of N/um (vs V-wheels 0.3-1.5 N/um)
+)
+
+
+def gantry_rails(out):
+    g = GANTRY_V2
+    m_hang = out["mass"]["total_on_z"] + 0.6  # heavier Z carriage plate + 2 extra blocks
+    lever = out["gantry"]["lever_mm"] / 1000
+    W = m_hang * G
+    M = W * lever
+    E = P.AL_E * 1e6
+    h = (P.Z_BOTTOM_CLEAR + P.Z_TRAVEL) / 1000
+    tcp_lever = (P.PLATFORM["offset"] + REACH) / 1000
+    k = g["block_k"] * 1000
+    res = {"m_hang_kg": m_hang, "M_col_Nm": M}
+    res["col_tcp_mm"] = M * h / (E * g["I_strong"] * 1e-12) * tcp_lever * 1000
+    # Z carriage: 4 blocks, moment taken as a couple over the block pitch
+    d = (M / (g["z_pitch"] / 1000)) / (2 * k)
+    res["zc_tcp_mm"] = 2 * d / (g["z_pitch"] / 1000) * tcp_lever * 1000
+    # X carriage: moment about X taken by the two rails' span
+    d = (M / (g["x_span"] / 1000)) / (2 * k)
+    res["xc_tcp_mm"] = 2 * d / (g["x_span"] / 1000) * tcp_lever * 1000
+    k_col_x = 3 * E * g["I_weak"] * 1e-12 / h**3
+    k_rot = 4 * k * (g["x_pitch"] / 2000) ** 2
+    kx = 1 / (1 / k_col_x + h**2 / k_rot)
+    res["fx_hz"] = math.sqrt(kx / (m_hang + 0.5)) / (2 * math.pi)
+    res["total_tcp_mm"] = res["col_tcp_mm"] + res["zc_tcp_mm"] + res["xc_tcp_mm"]
     return res
 
 
@@ -241,8 +277,25 @@ def report(r):
     w(f"| Z wheel load / X wheel load | 24 N / 42 N | {g['zc_wheel_N']:.0f} N / {g['xc_wheel_N']:.0f} N |")
     w(f"| First wobble mode | 6–8 Hz | {g['fx_hz_lo']:.1f}–{g['fx_hz_hi']:.1f} Hz |")
     w("")
-    w("**The arm can now hold 0.1–0.2 mm, but the V-wheel gantry would move the whole arm by millimetres and wobble at a few Hz.**")
-    w("A precise arm needs a stiffer gantry. That is the next decision (see the summary).")
+    w("On the V-wheel gantry the whole arm would move by millimetres and wobble at a few Hz, wasting the arm's precision.")
+    w("")
+    w("### Linear-rail gantry (owner's choice, 2026-11-20)")
+    w("")
+    gr, G2 = r["gantry_rails"], GANTRY_V2
+    w(f"- Z column: {G2['z_column']}")
+    w(f"- Z guides: {G2['z_rails']}")
+    w(f"- X guides: {G2['x_rails']}")
+    w("- The figures below are class values: VERIFY the profile inertia and the block stiffness on the chosen parts' datasheets.")
+    w("")
+    w("| Check | V-wheel gantry | Linear rails |")
+    w("|---|---|---|")
+    w(f"| Column bending at the TCP | {g['col_tcp_mm']:.1f} mm | {gr['col_tcp_mm']:.2f} mm |")
+    w(f"| Z carriage rocking at the TCP | up to {g['zc_tcp_mm_lo']:.1f} mm | {gr['zc_tcp_mm']:.3f} mm |")
+    w(f"| X carriage rocking at the TCP | up to {g['xc_tcp_mm_lo']:.1f} mm | {gr['xc_tcp_mm']:.3f} mm |")
+    w(f"| **Total gantry sag at the TCP** | **{g['col_tcp_mm'] + g['zc_tcp_mm_lo'] + g['xc_tcp_mm_lo']:.1f} mm** | **{gr['total_tcp_mm']:.2f} mm** (static and repeatable, so calibration takes it out) |")
+    w(f"| First wobble mode | {g['fx_hz_lo']:.1f} Hz | {gr['fx_hz']:.0f} Hz |")
+    w("")
+    w("The gantry is now stiffer than the arm. What's left is the arm's own repeatability.")
     return "\n".join(L) + "\n"
 
 

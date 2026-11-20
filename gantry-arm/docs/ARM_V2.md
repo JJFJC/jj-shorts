@@ -68,5 +68,21 @@ Load on the Z carriage: **7.6 kg** (servo arm 2.6 kg). Moment on the column: **1
 | Z wheel load / X wheel load | 24 N / 42 N | 58 N / 99 N |
 | First wobble mode | 6–8 Hz | 3.8–4.6 Hz |
 
-**The arm can now hold 0.1–0.2 mm, but the V-wheel gantry would move the whole arm by millimetres and wobble at a few Hz.**
-A precise arm needs a stiffer gantry. That is the next decision (see the summary).
+On the V-wheel gantry the whole arm would move by millimetres and wobble at a few Hz, wasting the arm's precision.
+
+### Linear-rail gantry (owner's choice, 2026-11-20)
+
+- Z column: 4080 V-slot/T-slot, 80 mm side facing the arm (strong axis)
+- Z guides: 2x MGN15H, 50 mm apart, 2 blocks each, 100 mm block pitch
+- X guides: 2x HGR15 on a 4080 base (or a flat plate), 80 mm apart, 2 blocks each, 120 mm block pitch
+- The figures below are class values: VERIFY the profile inertia and the block stiffness on the chosen parts' datasheets.
+
+| Check | V-wheel gantry | Linear rails |
+|---|---|---|
+| Column bending at the TCP | 2.0 mm | 0.12 mm |
+| Z carriage rocking at the TCP | up to 2.0 mm | 0.017 mm |
+| X carriage rocking at the TCP | up to 4.3 mm | 0.027 mm |
+| **Total gantry sag at the TCP** | **8.3 mm** | **0.17 mm** (static and repeatable, so calibration takes it out) |
+| First wobble mode | 3.8 Hz | 18 Hz |
+
+The gantry is now stiffer than the arm. What's left is the arm's own repeatability.
