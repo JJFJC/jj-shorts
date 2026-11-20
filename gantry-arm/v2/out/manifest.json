@@ -1,0 +1,591 @@
+[
+ {
+  "name": "j1_drum",
+  "body": "z_carriage",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_spigot",
+  "body": "z_carriage",
+  "role": "metal",
+  "bom": [
+   "aluminium spigot (turned)",
+   1
+  ],
+  "note": "carries both 61812 bearings",
+  "valid": true
+ },
+ {
+  "name": "j1_motor",
+  "body": "z_carriage",
+  "role": "motor",
+  "bom": [
+   "NEMA17-48 closed-loop (14-bit encoder driver)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_motor_caps",
+  "body": "z_carriage",
+  "role": "motor_cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_motor_shaft",
+  "body": "z_carriage",
+  "role": "metal",
+  "bom": null,
+  "note": "\u00d85 shaft + extension through the platform",
+  "valid": true
+ },
+ {
+  "name": "j1_pulley_20t",
+  "body": "z_carriage",
+  "role": "metal",
+  "bom": [
+   "GT2 20T pulley",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_ring_200t",
+  "body": "turret",
+  "role": "metal",
+  "bom": [
+   "GT2 200T pulley ring (or printed + belt-tooth insert)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_belt",
+  "body": "turret",
+  "role": "rubber",
+  "bom": [
+   "GT2 6 mm closed belt",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j1_turret_skirt",
+  "body": "turret",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "turret_column",
+  "body": "turret",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_housing",
+  "body": "turret",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF, split on the XZ mid-plane",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_housing_cap",
+  "body": "turret",
+  "role": "cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_motor",
+  "body": "turret",
+  "role": "motor",
+  "bom": [
+   "NEMA23-76 closed-loop (57 mm driver on the back)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_motor_caps",
+  "body": "turret",
+  "role": "motor_cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_gearbox",
+  "body": "turret",
+  "role": "gearbox",
+  "bom": [
+   "precision planetary 20:1, NEMA23 input, flange output, <= 5 arcmin",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j2_output_flange",
+  "body": "upper_arm",
+  "role": "metal",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "upper_hub",
+  "body": "upper_arm",
+  "role": "cap",
+  "bom": [
+   "aluminium hub plate 6 mm",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "upper_link",
+  "body": "upper_arm",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF over an aluminium spine",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "upper_spine",
+  "body": "upper_arm",
+  "role": "metal",
+  "bom": [
+   "aluminium 20x20 spine (or 20x20 tube)",
+   1
+  ],
+  "note": "carries the bending load; the printed shell is the cover",
+  "valid": true
+ },
+ {
+  "name": "j3_housing",
+  "body": "upper_arm",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j3_motor",
+  "body": "upper_arm",
+  "role": "motor",
+  "bom": [
+   "NEMA17-60 closed-loop (driver board remote, in the turret)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j3_motor_caps",
+  "body": "upper_arm",
+  "role": "motor_cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j3_gearbox",
+  "body": "upper_arm",
+  "role": "gearbox",
+  "bom": [
+   "precision planetary 25:1, NEMA17, flange output, <= 7 arcmin",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j3_output_flange",
+  "body": "forearm",
+  "role": "metal",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "forearm_hub",
+  "body": "forearm",
+  "role": "cap",
+  "bom": [
+   "aluminium hub plate",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "forearm_link",
+  "body": "forearm",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF over an aluminium spine",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "forearm_spine",
+  "body": "forearm",
+  "role": "metal",
+  "bom": [
+   "aluminium 20x20 spine",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_motor",
+  "body": "forearm",
+  "role": "motor",
+  "bom": [
+   "NEMA17-40 closed-loop",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_motor_caps",
+  "body": "forearm",
+  "role": "motor_cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_gearbox",
+  "body": "forearm",
+  "role": "gearbox",
+  "bom": [
+   "precision planetary 15:1, NEMA17, <= 7 arcmin",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_pod",
+  "body": "forearm",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_pulley_motor",
+  "body": "forearm",
+  "role": "metal",
+  "bom": [
+   "GT2 30T pulley",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_pulley_wrist",
+  "body": "forearm",
+  "role": "metal",
+  "bom": [
+   "GT2 30T pulley",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_belt",
+  "body": "forearm",
+  "role": "rubber",
+  "bom": [
+   "GT2 6 mm closed belt + idler tensioner",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j4_shaft",
+  "body": "wrist",
+  "role": "metal",
+  "bom": [
+   "steel shaft \u00d812",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "wrist_shell",
+  "body": "wrist",
+  "role": "shell",
+  "bom": [
+   "printed PETG-CF, split on the XZ mid-plane",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j5_motor",
+  "body": "wrist",
+  "role": "motor",
+  "bom": [
+   "NEMA14-34 closed-loop",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j5_motor_caps",
+  "body": "wrist",
+  "role": "motor_cap",
+  "bom": null,
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "j5_gearbox",
+  "body": "wrist",
+  "role": "gearbox",
+  "bom": [
+   "precision planetary 5:1, NEMA14",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_base_plate",
+  "body": "world",
+  "role": "extrusion",
+  "bom": [
+   "aluminium plate 10 mm (or a 4080 profile)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_rail_a",
+  "body": "world",
+  "role": "metal",
+  "bom": [
+   "HGR15 rail",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_rail_b",
+  "body": "world",
+  "role": "metal",
+  "bom": [
+   "HGR15 rail",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_block_-60_-40",
+  "body": "x_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_block_-60_40",
+  "body": "x_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_block_60_-40",
+  "body": "x_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_block_60_40",
+  "body": "x_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_carriage_plate",
+  "body": "x_carriage",
+  "role": "extrusion",
+  "bom": [
+   "aluminium plate 12 mm",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_column_4080",
+  "body": "x_carriage",
+  "role": "extrusion",
+  "bom": [
+   "4080 aluminium profile",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_rail",
+  "body": "x_carriage",
+  "role": "metal",
+  "bom": [
+   "HGR15 rail",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_motor",
+  "body": "x_carriage",
+  "role": "motor",
+  "bom": [
+   "NEMA17 for Z (T8x2 lead screw)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_screw",
+  "body": "x_carriage",
+  "role": "metal",
+  "bom": [
+   "T8x2 lead screw",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "x_motor_v2",
+  "body": "x_carriage",
+  "role": "motor",
+  "bom": [
+   "NEMA17 for X (GT2 belt)",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_block_100",
+  "body": "z_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_block_10",
+  "body": "z_carriage",
+  "role": "block",
+  "bom": [
+   "HGR15CA block",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "z_carriage_plate",
+  "body": "z_carriage",
+  "role": "extrusion",
+  "bom": [
+   "aluminium plate 10 mm",
+   1
+  ],
+  "note": "",
+  "valid": true
+ },
+ {
+  "name": "platform_v2",
+  "body": "z_carriage",
+  "role": "extrusion",
+  "bom": [
+   "aluminium plate 12 mm + gusset",
+   1
+  ],
+  "note": "",
+  "valid": true
+ }
+]

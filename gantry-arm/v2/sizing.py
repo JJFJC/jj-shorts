@@ -36,7 +36,8 @@ MOTORS = {
     "NEMA23-56": dict(hold=1.26, usable=0.85, mass=0.70, rpm=500),
     "NEMA23-76": dict(hold=1.90, usable=1.25, mass=1.00, rpm=500),
 }
-GEARBOX = {  # precision planetary: efficiency, lost motion (arcmin), mass (kg), torsional stiffness (N·m/arcmin)
+GEARBOX = {  # precision planetary (stages 0 = no gearbox): efficiency, lost motion (arcmin), mass (kg), torsional stiffness (N·m/arcmin)
+    ("NEMA17", 0): dict(eff=1.0, arcmin=0.0, mass=0.0, stiff=50.0),
     ("NEMA17", 1): dict(eff=0.90, arcmin=5.0, mass=0.25, stiff=0.6),
     ("NEMA17", 2): dict(eff=0.81, arcmin=7.0, mass=0.35, stiff=0.6),
     ("NEMA23", 2): dict(eff=0.81, arcmin=5.0, mass=0.65, stiff=1.5),
@@ -49,7 +50,7 @@ ALPHA = {"base_yaw": 3.0, "shoulder_lift": 5.0, "elbow_flex": 5.0, "wrist_flex":
 # ----------------------------------------------------------------------------- drive choice per joint
 DRIVES = {
     # joint: motor, gearbox stages, gear ratio, extra belt ratio, where the drive sits
-    "base_yaw": dict(motor="NEMA17-48", stages=1, ratio=5.0, belt=4.0, where="on the platform, GT2 belt 20T->80T to the turret"),
+    "base_yaw": dict(motor="NEMA17-48", stages=0, ratio=1.0, belt=10.0, where="under the platform, GT2 belt 20T -> 200T ring on the turret (no gearbox, no gear backlash)"),
     "shoulder_lift": dict(motor="NEMA23-76", stages=2, ratio=20.0, belt=1.0, where="in the turret, output flange on the J2 axis"),
     "elbow_flex": dict(motor="NEMA17-60", stages=2, ratio=25.0, belt=1.0, where="at the elbow, coaxial"),
     "wrist_flex": dict(motor="NEMA17-40", stages=2, ratio=15.0, belt=1.0, where="behind the elbow in the forearm, GT2 belt 1:1 to the wrist"),
@@ -178,7 +179,7 @@ def gantry(out):
 # linear-rail gantry (owner choice 2026-11-20). Class values, VERIFY against the chosen rail/profile datasheets.
 GANTRY_V2 = dict(
     z_column="4080 V-slot/T-slot, 80 mm side facing the arm (strong axis)", I_strong=8.4e5, I_weak=2.0e5,  # mm^4
-    z_rails="2x MGN15H, 50 mm apart, 2 blocks each, 100 mm block pitch", z_pitch=100.0, z_span=50.0,
+    z_rails="1x HGR15 on the 40 mm face (two rails don't fit), 2 blocks, 90 mm block pitch", z_pitch=90.0, z_span=0.0,
     x_rails="2x HGR15 on a 4080 base (or a flat plate), 80 mm apart, 2 blocks each, 120 mm block pitch", x_pitch=120.0, x_span=80.0,
     block_k=60000.0,  # N/mm per block, radial; miniature/compact guides are tens of N/um (vs V-wheels 0.3-1.5 N/um)
 )
@@ -196,8 +197,8 @@ def gantry_rails(out):
     k = g["block_k"] * 1000
     res = {"m_hang_kg": m_hang, "M_col_Nm": M}
     res["col_tcp_mm"] = M * h / (E * g["I_strong"] * 1e-12) * tcp_lever * 1000
-    # Z carriage: 4 blocks, moment taken as a couple over the block pitch
-    d = (M / (g["z_pitch"] / 1000)) / (2 * k)
+    # Z carriage: one rail, 2 blocks: the moment is a couple over the block pitch
+    d = (M / (g["z_pitch"] / 1000)) / k
     res["zc_tcp_mm"] = 2 * d / (g["z_pitch"] / 1000) * tcp_lever * 1000
     # X carriage: moment about X taken by the two rails' span
     d = (M / (g["x_span"] / 1000)) / (2 * k)
@@ -228,7 +229,7 @@ def report(r):
     names = {"base_yaw": "J1 base yaw", "shoulder_lift": "J2 shoulder", "elbow_flex": "J3 elbow", "wrist_flex": "J4 wrist pitch", "wrist_roll": "J5 wrist roll"}
     for j in ("base_yaw", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll"):
         x, d = r["joints"][j], DRIVES[j]
-        gb = f"{d['ratio']:g}:1 planetary ({d['stages']}-stage)" + (f" + belt {d['belt']:g}:1" if d["belt"] > 1 else "")
+        gb = (f"{d['ratio']:g}:1 planetary ({d['stages']}-stage)" if d["stages"] else "none") + (f" + belt {d['belt']:g}:1" if d["belt"] > 1 else "")
         flag = "✓" if x["margin"] >= 1.0 else "**✗**"
         w(f"| {names[j]} | {d['motor']} | {gb} | {x['n']:g}:1 | {x['static']:.2f} | {x['accel']:.2f} | {x['need']:.2f} | {x['usable']:.2f} | {x['margin']:.2f} {flag} | {x['speed_dps']:.0f} | {d['where']} |")
     w("")
@@ -296,6 +297,21 @@ def report(r):
     w(f"| First wobble mode | {g['fx_hz_lo']:.1f} Hz | {gr['fx_hz']:.0f} Hz |")
     w("")
     w("The gantry is now stiffer than the arm. What's left is the arm's own repeatability.")
+    w("")
+    w("## CAD (`v2/cad_v2.py`, renders `v2/out/v2_*.png` from `v2/render_v2.py`)")
+    w("")
+    w("Same kinematics and body frames as the servo arm, so the IK, the tool changer and the workshop layout still apply. 56 parts, zero clashes with the arm straight (checked).")
+    w("")
+    w("| Joint | Layout |")
+    w("|---|---|")
+    w("| J1 | NEMA17 under the platform, 20T pulley → 200T belt ring on the turret. Two 61812 bearings on a fixed spigot carry the moment. |")
+    w("| J2 | NEMA23-76 + 20:1 planetary lying along the J2 axis inside the turret capsule; the gearbox output flange carries the upper-arm hub. |")
+    w("| J3 | NEMA17-60 + 25:1 planetary coaxial at the elbow, its back end inside the upper link. The upper link has a 20×20 aluminium spine under a printed cover. |")
+    w("| J4 | NEMA17-40 + 15:1 in a pod 72 mm behind the elbow, where it also counterweights. A 30T/30T belt runs inside the forearm link to the wrist shaft (2× 6801 bearings). |")
+    w("| J5 | NEMA14 + 5:1 coaxial in the roll housing, with a 6805 at the flange. |")
+    w("| Gantry | X: 2× HGR15 rails on a 10 mm plate, 4 blocks. Z: 4080 column, 1× HGR15 rail (two don't fit the 40 mm face), 2 blocks, T8×2 screw. |")
+    w("")
+    w("**Not checked yet:** self-collision across the joint ranges (the IK collision model is still the servo arm's), cable routing, and the 24 V power budget.")
     return "\n".join(L) + "\n"
 
 

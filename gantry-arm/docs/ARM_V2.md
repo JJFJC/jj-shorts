@@ -9,7 +9,7 @@ These are hand calculations with **catalogue class values** for the motors and g
 
 | Joint | Motor (closed-loop, 24 V) | Gearbox | Total ratio | Static N·m | Accel N·m | Needed (×1.3) N·m | Usable N·m | Margin | Speed °/s | Where |
 |---|---|---|---|---|---|---|---|---|---|---|
-| J1 base yaw | NEMA17-48 | 5:1 planetary (1-stage) + belt 4:1 | 20:1 | 0.00 | 1.15 | 1.89 | 5.59 | 2.96 ✓ | 180 | on the platform, GT2 belt 20T->80T to the turret |
+| J1 base yaw | NEMA17-48 | none + belt 10:1 | 10:1 | 0.00 | 1.15 | 1.89 | 3.10 | 1.64 ✓ | 360 | under the platform, GT2 belt 20T -> 200T ring on the turret (no gearbox, no gear backlash) |
 | J2 shoulder | NEMA23-76 | 20:1 planetary (2-stage) | 20:1 | 11.15 | 1.92 | 16.99 | 20.25 | 1.19 ✓ | 150 | in the turret, output flange on the J2 axis |
 | J3 elbow | NEMA17-60 | 25:1 planetary (2-stage) | 25:1 | 4.63 | 0.61 | 6.82 | 8.10 | 1.19 ✓ | 144 | at the elbow, coaxial |
 | J4 wrist pitch | NEMA17-40 | 15:1 planetary (2-stage) | 15:1 | 1.78 | 0.22 | 2.60 | 3.16 | 1.21 ✓ | 240 | behind the elbow in the forearm, GT2 belt 1:1 to the wrist |
@@ -30,8 +30,8 @@ The gripper stays an STS3215 bus servo. It doesn't need precision, and its finge
 | coupler + gripper (STS3215 gripper) | 0.35 | 420 |
 | payload | 1.00 | 450 |
 | **Moving arm (beyond J2)** | **4.25** | |
-| Turret + J1/J2 drives | 2.94 | at the J1 axis |
-| **Total on the Z carriage** | **7.6** | servo arm: 2.6 kg |
+| Turret + J1/J2 drives | 2.69 | at the J1 axis |
+| **Total on the Z carriage** | **7.3** | servo arm: 2.6 kg |
 
 ## Precision budget
 
@@ -45,10 +45,10 @@ The gripper stays an STS3215 bus servo. It doesn't need precision, and its finge
 | J3 elbow | | 0.120 |
 | J4 wrist pitch | | 0.106 |
 | J5 wrist roll | | 0.010 |
-| J1 base yaw | | 0.297 |
-| **Total (RSS)** | | **0.36 mm** with these gearboxes; **0.26 mm** with ≤3 arcmin gearboxes on J1–J3 |
+| J1 base yaw | | 0.174 |
+| **Total (RSS)** | | **0.27 mm** with these gearboxes; **0.26 mm** with ≤3 arcmin gearboxes on J1–J3 |
 
-Worst-case backlash error if every joint reverses at once: 2.2 mm. Avoid it by approaching poses from one direction and keeping gravity on one flank.
+Worst-case backlash error if every joint reverses at once: 1.5 mm. Avoid it by approaching poses from one direction and keeping gravity on one flank.
 **The gearbox lost-motion spec is the number that decides precision. Buy ≤5 arcmin (precision grade), not the 15–30 arcmin generic ones.**
 
 Static droop from gearbox torsional stiffness (repeatable, so it can be calibrated or fed forward):
@@ -58,31 +58,46 @@ Static droop from gearbox torsional stiffness (repeatable, so it can be calibrat
 
 ## Gantry with the heavier arm
 
-Load on the Z carriage: **7.6 kg** (servo arm 2.6 kg). Moment on the column: **17.6 N·m** (servo arm 7.5 N·m).
+Load on the Z carriage: **7.3 kg** (servo arm 2.6 kg). Moment on the column: **17.4 N·m** (servo arm 7.5 N·m).
 
 | Check | Servo arm | Arm v2 on the same gantry |
 |---|---|---|
 | Column bending at the TCP | 0.9 mm | 2.0 mm |
 | Z carriage V-wheel rocking at the TCP | 0.2–0.9 mm | 0.4–2.0 mm |
 | X carriage V-wheel rocking at the TCP | 0.4–2.0 mm | 0.9–4.3 mm |
-| Z wheel load / X wheel load | 24 N / 42 N | 58 N / 99 N |
-| First wobble mode | 6–8 Hz | 3.8–4.6 Hz |
+| Z wheel load / X wheel load | 24 N / 42 N | 57 N / 97 N |
+| First wobble mode | 6–8 Hz | 3.9–4.7 Hz |
 
 On the V-wheel gantry the whole arm would move by millimetres and wobble at a few Hz, wasting the arm's precision.
 
 ### Linear-rail gantry (owner's choice, 2026-11-20)
 
 - Z column: 4080 V-slot/T-slot, 80 mm side facing the arm (strong axis)
-- Z guides: 2x MGN15H, 50 mm apart, 2 blocks each, 100 mm block pitch
+- Z guides: 1x HGR15 on the 40 mm face (two rails don't fit), 2 blocks, 90 mm block pitch
 - X guides: 2x HGR15 on a 4080 base (or a flat plate), 80 mm apart, 2 blocks each, 120 mm block pitch
 - The figures below are class values: VERIFY the profile inertia and the block stiffness on the chosen parts' datasheets.
 
 | Check | V-wheel gantry | Linear rails |
 |---|---|---|
 | Column bending at the TCP | 2.0 mm | 0.12 mm |
-| Z carriage rocking at the TCP | up to 2.0 mm | 0.017 mm |
+| Z carriage rocking at the TCP | up to 2.0 mm | 0.042 mm |
 | X carriage rocking at the TCP | up to 4.3 mm | 0.027 mm |
-| **Total gantry sag at the TCP** | **8.3 mm** | **0.17 mm** (static and repeatable, so calibration takes it out) |
-| First wobble mode | 3.8 Hz | 18 Hz |
+| **Total gantry sag at the TCP** | **8.2 mm** | **0.19 mm** (static and repeatable, so calibration takes it out) |
+| First wobble mode | 3.9 Hz | 18 Hz |
 
 The gantry is now stiffer than the arm. What's left is the arm's own repeatability.
+
+## CAD (`v2/cad_v2.py`, renders `v2/out/v2_*.png` from `v2/render_v2.py`)
+
+Same kinematics and body frames as the servo arm, so the IK, the tool changer and the workshop layout still apply. 56 parts, zero clashes with the arm straight (checked).
+
+| Joint | Layout |
+|---|---|
+| J1 | NEMA17 under the platform, 20T pulley → 200T belt ring on the turret. Two 61812 bearings on a fixed spigot carry the moment. |
+| J2 | NEMA23-76 + 20:1 planetary lying along the J2 axis inside the turret capsule; the gearbox output flange carries the upper-arm hub. |
+| J3 | NEMA17-60 + 25:1 planetary coaxial at the elbow, its back end inside the upper link. The upper link has a 20×20 aluminium spine under a printed cover. |
+| J4 | NEMA17-40 + 15:1 in a pod 72 mm behind the elbow, where it also counterweights. A 30T/30T belt runs inside the forearm link to the wrist shaft (2× 6801 bearings). |
+| J5 | NEMA14 + 5:1 coaxial in the roll housing, with a 6805 at the flange. |
+| Gantry | X: 2× HGR15 rails on a 10 mm plate, 4 blocks. Z: 4080 column, 1× HGR15 rail (two don't fit the 40 mm face), 2 blocks, T8×2 screw. |
+
+**Not checked yet:** self-collision across the joint ranges (the IK collision model is still the servo arm's), cable routing, and the 24 V power budget.
