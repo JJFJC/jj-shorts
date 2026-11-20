@@ -146,7 +146,7 @@ PRELOAD_NM = 0.15  # anti-backlash: the two servos of a pair push against each o
 # an on-axis AS5600 cannot share the axis with the hollow wiring shaft, so the vernier does the same job)
 JOINT_ENCODERS = ("shoulder_lift", "elbow_flex")
 BEARINGS = {  # joint: list of (designation, bore, OD, width) in mm
-    "base_yaw": [("61812-2RS", 60, 78, 10), ("61812-2RS", 60, 78, 10)],  # on a fixed spigot, 26 mm apart: carry the arm moment; Oldham coupling -> servo sees torque only
+    "base_yaw": [("61812-2RS", 60, 78, 10), ("61812-2RS", 60, 78, 10)],  # on a fixed spigot, 23 mm apart: carry the arm moment; Oldham coupling -> servo sees torque only
     "shoulder_lift": [("6804-2RS", 20, 32, 7), ("6804-2RS", 20, 32, 7)],  # hollow shaft 20/15 (aluminium tube)
     "elbow_flex": [("6803-2RS", 17, 26, 5), ("6803-2RS", 17, 26, 5)],  # hollow shaft 17/13
     "wrist_flex": [("6806-2RS", 30, 42, 7)],  # around the J4 horn in the -Y wall: carries the wrist moment

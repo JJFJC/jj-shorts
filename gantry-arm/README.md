@@ -8,7 +8,8 @@ A 3D-printed 5-DOF + gripper robot arm on an X/Z V-slot gantry. **Design and sim
 | 1 Simulation | `params.py`, `sim/`, `urdf/`, `mjcf/`, `docs/SIM_REPORT.md` |
 | 2 CAD + renders | `cad/`, `cad/out/` (STEP + STL), `docs/PRINT_LIST.md`, `docs/DESIGN.md`, `render/out/` |
 | 3 Software + skills | `firmware/` (ESP32), `software/lerobot_robot_gantry_arm/` (LeRobot plugin `gantry_arm`, skills, `gantry-arm` CLI), `docs/SOFTWARE.md`, `docs/PROTOCOL.md`, `docs/img/demo_*.png` |
-| 4 BOM | `docs/BOM.md` |
+| 2b Inside mechanics | `cad/internals.py`, `cad/servo_pack.py`, `render/render_mechanics.py`, `docs/MECHANICS.md`, `docs/ASSEMBLY.md`, `render/out/mech_*.png` |
+| 4 BOM | `docs/BOM.md` (not written yet) |
 
 ```bash
 pip install -r requirements.txt
@@ -30,4 +31,6 @@ pip install -e "software/lerobot_robot_gantry_arm[dev]"
 pytest software/lerobot_robot_gantry_arm/tests                # 42 plugin + skill tests (MuJoCo sim)
 gantry-arm --sim plot drawing.svg                             # try a skill on the simulated robot
 python software/demos/sim_demos.py                            # regenerate docs/img/demo_*.png
+python cad/servo_pack.py && python cad/internals.py            # inside mechanics (servo packing ~2 min, parts + section halves)
+python render/render_mechanics.py --view overview             # also: gears, shoulder, wrist, exploded
 ```

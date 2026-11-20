@@ -1,7 +1,8 @@
 """Inside the arm: servos, gears, bearings, shafts, couplings, mounts and the cable path.
 
     python cad/internals.py   -> cad/out/internals/*.stl + manifest.json   (needs cad/out/servo_layout.json)
-                                 cad/out/cutaway/*.stl  (printed shells cut on the x = 0 plane)
+                                 cad/out/cut_x, cut_y  (shells [+ internals] split into kept / ghost halves
+                                 on the body x = 0 plane and on y = 31, for the section renders)
 
 Every part is placed in the MuJoCo body frame it moves with (same convention as cad/parts.py):
   z_carriage  J1 fixed spigot + bearings + lower Oldham hub

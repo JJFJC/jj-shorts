@@ -38,10 +38,13 @@ The sequence is in `skills/tool_changer.py`, and `docs/img/demo_tool_change.png`
 
 ## Enclosed servos and internal wiring
 
-- Every servo sits inside a puck or housing. No servo body is visible.
-- All wiring goes through the hollow links and Ø14 mm bores at each joint centre. The links have a 2.4 mm wall with ~20 mm of clear inside, room for the 3-wire TTL bus, 12 V and the LED data line.
-- STS servos are not hollow-shaft, so the cable passes beside the horn on the idler side of each puck, with a ±150° service loop coiled inside the puck. No slip ring is needed, because every joint has limited travel (`params.JOINT_LIMITS`). J5 roll is limited to ±180° for this reason.
-- 12 V and the bus continue through the coupler's 4 pogo pins: 12 V, GND, DATA, TOOL_ID.
+Every servo sits inside a puck or housing; no servo body is visible. The full inside design is in **`docs/MECHANICS.md`** (geared twin-servo pairs on J2/J3, J1 bearing spigot with an Oldham coupling, the wrist stack with the STS3032 roll servo).
+
+- **J2/J3:** the harness runs through the **hollow joint shafts** (Ø20/15 and Ø17/13) from the puck into the link, with a coiled service loop inside each puck.
+- **J1:** the harness passes off-axis through the fixed spigot, with a ±150° loop around the Oldham coupling.
+- **J4:** the servo sits on the pitch axis, so the wrist harness needs an external loop (open item).
+- No slip rings: every joint has limited travel (`params.JOINT_LIMITS`), and J5 roll is limited to ±180°.
+- 12 V and the bus continue through the coupler's pogo pins: 12 V, GND, DATA, TOOL_ID, plus 2 high-current contacts.
 
 ## Shell splitting and fasteners
 
