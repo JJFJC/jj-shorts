@@ -1,0 +1,1202 @@
+[
+ {
+  "name": "base",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   720.0,
+   740.0,
+   18.0
+  ],
+  "volume_cm3": 9588.9,
+  "fits_bed": false
+ },
+ {
+  "name": "column",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   56.0,
+   56.0,
+   282.0
+  ],
+  "volume_cm3": 694.6,
+  "fits_bed": true
+ },
+ {
+  "name": "carousel_disc",
+  "role": "disc",
+  "valid": true,
+  "dims": [
+   600.0,
+   600.0,
+   12.0
+  ],
+  "volume_cm3": 3327.2,
+  "fits_bed": false
+ },
+ {
+  "name": "drive_motor",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   42.0,
+   42.0,
+   48.0
+  ],
+  "volume_cm3": 84.7,
+  "fits_bed": true
+ },
+ {
+  "name": "drive_belt_ring",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   592.0,
+   592.0,
+   6.0
+  ],
+  "volume_cm3": 88.1,
+  "fits_bed": false
+ },
+ {
+  "name": "mold0_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold0_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston0",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar0",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   76.9,
+   12.0,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick0",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   95.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold1_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold1_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston1",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax1",
+  "role": "wax_liquid",
+  "valid": true,
+  "dims": [
+   61.5,
+   61.5,
+   44.0
+  ],
+  "volume_cm3": 127.6,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar1",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   71.2,
+   47.4,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick1",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold2_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold2_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston2",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax2",
+  "role": "wax_liquid",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar2",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   47.4,
+   71.2,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick2",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold3_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   76.9,
+   52.5,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold3_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   76.9,
+   52.5,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston3",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax3",
+  "role": "wax_liquid",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar3",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   12.0,
+   76.9,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick3",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold4_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold4_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston4",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax4",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar4",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   47.4,
+   71.2,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick4",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold5_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold5_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston5",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax5",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar5",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   71.2,
+   47.4,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick5",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold6_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold6_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston6",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax6",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar6",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   76.9,
+   12.0,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick6",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold7_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold7_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston7",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax7",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar7",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   71.2,
+   47.4,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick7",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold8_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold8_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston8",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax8",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar8",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   47.4,
+   71.2,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick8",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold9_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   76.9,
+   52.5,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold9_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   76.9,
+   52.5,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston9",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax9",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.7,
+   62.7,
+   77.6
+  ],
+  "volume_cm3": 229.5,
+  "fits_bed": true
+ },
+ {
+  "name": "wickbar9",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   12.0,
+   76.9,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ },
+ {
+  "name": "wick9",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   1.8,
+   1.8,
+   94.0
+  ],
+  "volume_cm3": 0.2,
+  "fits_bed": true
+ },
+ {
+  "name": "mold10_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold10_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   82.9,
+   70.6,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston10",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "mold11_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold11_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   70.6,
+   82.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston11",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wax_pot",
+  "role": "steel",
+  "valid": true,
+  "dims": [
+   170.0,
+   170.0,
+   150.0
+  ],
+  "volume_cm3": 3396.6,
+  "fits_bed": true
+ },
+ {
+  "name": "pot_lid",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   178.0,
+   178.0,
+   12.0
+  ],
+  "volume_cm3": 294.8,
+  "fits_bed": true
+ },
+ {
+  "name": "spout1",
+  "role": "steel",
+  "valid": true,
+  "dims": [
+   92.2,
+   149.5,
+   105.7
+  ],
+  "volume_cm3": 28.3,
+  "fits_bed": true
+ },
+ {
+  "name": "valve1",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   24.0,
+   20.0,
+   20.0
+  ],
+  "volume_cm3": 9.6,
+  "fits_bed": true
+ },
+ {
+  "name": "spout7",
+  "role": "steel",
+  "valid": true,
+  "dims": [
+   92.2,
+   149.5,
+   105.7
+  ],
+  "volume_cm3": 28.3,
+  "fits_bed": true
+ },
+ {
+  "name": "valve7",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   24.0,
+   20.0,
+   20.0
+  ],
+  "volume_cm3": 9.6,
+  "fits_bed": true
+ },
+ {
+  "name": "tunnel_roof_2",
+  "role": "cover",
+  "valid": true,
+  "dims": [
+   394.7,
+   540.2,
+   4.0
+  ],
+  "volume_cm3": 408.9,
+  "fits_bed": false
+ },
+ {
+  "name": "fan_2",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   120.0,
+   120.0,
+   25.0
+  ],
+  "volume_cm3": 360.0,
+  "fits_bed": true
+ },
+ {
+  "name": "fan_4",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   120.0,
+   120.0,
+   25.0
+  ],
+  "volume_cm3": 360.0,
+  "fits_bed": true
+ },
+ {
+  "name": "fan_6",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   120.0,
+   120.0,
+   25.0
+  ],
+  "volume_cm3": 360.0,
+  "fits_bed": true
+ },
+ {
+  "name": "tunnel_roof_8",
+  "role": "cover",
+  "valid": true,
+  "dims": [
+   211.2,
+   295.0,
+   4.0
+  ],
+  "volume_cm3": 158.9,
+  "fits_bed": true
+ },
+ {
+  "name": "fan_8",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   120.0,
+   120.0,
+   25.0
+  ],
+  "volume_cm3": 360.0,
+  "fits_bed": true
+ },
+ {
+  "name": "ejector_motor",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   42.0,
+   42.0,
+   48.0
+  ],
+  "volume_cm3": 84.7,
+  "fits_bed": true
+ },
+ {
+  "name": "ejector_screw",
+  "role": "steel",
+  "valid": true,
+  "dims": [
+   8.0,
+   8.0,
+   40.0
+  ],
+  "volume_cm3": 2.0,
+  "fits_bed": true
+ },
+ {
+  "name": "sweeper_servo",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   24.0,
+   40.0,
+   40.0
+  ],
+  "volume_cm3": 38.4,
+  "fits_bed": true
+ },
+ {
+  "name": "sweeper_arm",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   62.7,
+   83.6,
+   8.0
+  ],
+  "volume_cm3": 7.6,
+  "fits_bed": true
+ },
+ {
+  "name": "chute",
+  "role": "cover",
+  "valid": true,
+  "dims": [
+   137.6,
+   123.3,
+   39.9
+  ],
+  "volume_cm3": 27.4,
+  "fits_bed": true
+ },
+ {
+  "name": "finish_turntable",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   90.0,
+   90.0,
+   52.0
+  ],
+  "volume_cm3": 330.8,
+  "fits_bed": true
+ },
+ {
+  "name": "finished_candle",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "heatgun",
+  "role": "accent",
+  "valid": true,
+  "dims": [
+   137.6,
+   50.0,
+   108.3
+  ],
+  "volume_cm3": 325.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wick_trimmer",
+  "role": "dark",
+  "valid": true,
+  "dims": [
+   20.0,
+   20.0,
+   50.0
+  ],
+  "volume_cm3": 20.0,
+  "fits_bed": true
+ },
+ {
+  "name": "output_tray",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   180.0,
+   280.0,
+   8.0
+  ],
+  "volume_cm3": 403.0,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_00",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_01",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_02",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_10",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_11",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "out_candle_12",
+  "role": "wax",
+  "valid": true,
+  "dims": [
+   62.8,
+   62.8,
+   80.0
+  ],
+  "volume_cm3": 236.9,
+  "fits_bed": true
+ },
+ {
+  "name": "controller",
+  "role": "frame",
+  "valid": true,
+  "dims": [
+   100.0,
+   80.0,
+   102.0
+  ],
+  "volume_cm3": 801.2,
+  "fits_bed": true
+ },
+ {
+  "name": "estop",
+  "role": "estop_red",
+  "valid": true,
+  "dims": [
+   32.0,
+   32.0,
+   16.0
+  ],
+  "volume_cm3": 12.9,
+  "fits_bed": true
+ }
+]
