@@ -1,6 +1,6 @@
 """Render the wall workshop: Gantry Arm on a 1.8 x 0.6 m bench, pegboard wall, hot-work cart.
 
-    python render/render_workshop.py --view overview|robot|wall|hot [--samples 96] [--res 2400x1500]
+    python render/render_workshop.py --view overview|robot|wall|hot|seat [--samples 96] [--res 2400x1500]
 """
 
 from __future__ import annotations
@@ -75,7 +75,7 @@ def pegboard_material():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--view", default="overview", choices=["overview", "robot", "wall", "hot"])
+    ap.add_argument("--view", default="overview", choices=["overview", "robot", "wall", "hot", "seat"])
     ap.add_argument("--samples", type=int, default=96)
     ap.add_argument("--res", default="2400x1500")
     ap.add_argument("--suffix", default="")
@@ -120,6 +120,8 @@ def main():
         "bottle_white": P("bot_w", (0.9, 0.9, 0.88), 0.35),
         "bottle_amber": P("bot_a", (0.45, 0.20, 0.03), 0.1, transmission=0.6),
         "bottle_blue": P("bot_b", (0.1, 0.25, 0.65), 0.35),
+        "enamel_white": P("en_white", (0.82, 0.82, 0.80), 0.35, coat=0.3),
+        "leather": P("leather", (0.30, 0.17, 0.08), 0.65),
         "led": P("ledbar", (1, 1, 1), 0.3, emission=(1.0, 0.96, 0.9), strength=8.0),
     })
 
@@ -153,6 +155,7 @@ def main():
         "robot": (Vector((-0.12, 0.22, 0.12)), Vector((0.42, 0.95, 0.48)), 30),
         "wall": (Vector((0.0, -0.15, 0.80)), Vector((0.35, 2.05, 0.05)), 30),
         "hot": (Vector((-1.25, 0.05, 0.10)), Vector((0.55, 1.40, 0.55)), 30),
+        "seat": (Vector((-0.74, 0.30, -0.06)), Vector((0.30, 0.78, 0.42)), 32),
     }
     tgt, off, lens = views[a.view]
     loc = tgt + off

@@ -17,7 +17,7 @@
  "ultrasonic": {
   "ok": true,
   "gantry_x": 0,
-  "gantry_z": 10
+  "gantry_z": 20
  },
  "tumbler": {
   "ok": true,

@@ -10,13 +10,73 @@
   "valid": true
  },
  {
-  "name": "bench_frame",
+  "name": "bench_legs",
   "role": "frame",
   "valid": true
  },
  {
-  "name": "bench_shelf_bins",
-  "role": "bin_blue",
+  "name": "drawer_unit",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_0",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_0",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_1",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_1",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_2",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_2",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_3",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_3",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_4",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_4",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_5",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_5",
+  "role": "dark",
   "valid": true
  },
  {
@@ -420,8 +480,23 @@
   "valid": true
  },
  {
-  "name": "bench_pin_clamp",
+  "name": "bench_pin_holder",
   "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "sweeps_tray",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "sweeps_runners",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "leather_skin",
+  "role": "leather",
   "valid": true
  },
  {
@@ -440,8 +515,18 @@
   "valid": true
  },
  {
-  "name": "project_print",
-  "role": "part_orange",
+  "name": "bench_block",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "work_ring",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "ring_mandrel",
+  "role": "steel",
   "valid": true
  },
  {

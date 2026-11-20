@@ -1,11 +1,11 @@
 # Wall workshop around the Gantry Arm
 
-A general-purpose workshop on a **1.8 × 0.6 m bench against a wall**, with **pegboard** above it and the hot gear on a **separate steel rolling cart**. No laser engraver. It covers 3D printing, small-part finishing, repairs and jewelry. **Design concept only: nothing is bought or approved.**
+A general-purpose workshop on an **IKEA KARLBY-size countertop (1860 × 635 × 38 mm) against a wall**, with a **classic jeweler's half-moon arc** cut into the front edge at your seat, with **pegboard** above it and the hot gear on a **separate steel rolling cart**. No laser engraver. It covers 3D printing, small-part finishing, repairs and jewelry. **Design concept only: nothing is bought or approved.**
 
 | File | What |
 |---|---|
 | `cad/workshop.py` | All geometry → `cad/out/*.stl`, `manifest.json`, `layout.json`. Also runs the arm **IK reach check** for every robot station → `reach.json` |
-| `render/render_workshop.py` | `--view overview / robot / wall / hot` (reuses the Gantry Arm renderer and its detail materials) |
+| `render/render_workshop.py` | `--view overview / seat / robot / wall / hot` (reuses the Gantry Arm renderer and its detail materials) |
 | `render/plan.py` | Top view + wall elevation → `render/out/workshop_plan.png` |
 
 ## Layout (you stand at the front edge)
@@ -14,13 +14,28 @@ A general-purpose workshop on a **1.8 × 0.6 m bench against a wall**, with **pe
 WALL ─ steel heat panel ─┬──────────────── pegboard (1.8 x 0.9 m) ─────────────────┐
   [cart: kiln | torch]   │ ctrl   ════ X rail + Z gantry ════            [ P1S   ] │
   extinguisher (far end) │ mat  ultrasonic tumbler cam scale VISE pickle  rack     │
-                         │ bench vise / bench pin (your end)                       │
+                         │  (  half-moon arc + pin = your seat  )                    │
 ```
 
 - **Right end:** the Bambu P1S, turned so its door faces the arm. The arm pulls the build plate by its tab.
 - **Middle:** the robot stations, all inside the arm's reach.
-- **Left end:** your hand-work area (cutting mat, small bench vise, bench pin). This end is outside the arm's reach on purpose, so the arm never works where your hands are.
-- **Under the bench:** a shelf with two storage bins.
+- **Left end, your seat:** the half-moon arc (see below), with a small bench vise, cutting mat and steel bench block behind it. This end is outside the arm's reach on purpose, so the arm never works where your hands are.
+- **Legs:** two round steel legs hold the left end, and a 6-drawer unit (ALEX-style) carries the right end under the P1S.
+
+## The half-moon jeweler's seat
+
+| Part | Detail |
+|---|---|
+| Arc | 300 mm wide × 150 mm deep, jigsawed into the KARLBY front edge, centred 230 mm from the left end |
+| Bench pin | Classic V-slot pin in a steel holder under the top, at the back of the arc, sticking out toward you |
+| Sweeps tray | Steel tray on runners under the arc. It catches filings and dropped stones, and slides out to empty |
+| Leather skin | Inside the tray, for a soft landing |
+
+Tips for the cut:
+- Mark the arc with a string compass.
+- Cut with a fine-tooth jigsaw blade from the underside (less veneer chipping), then sand.
+- Seal the cut edge with oil or varnish: the core is exposed there and must not take up water.
+- A jeweler's bench pin usually sits at about armpit height when seated, higher than a desk. Adjustable legs, or a raised seat pad on your chair, get you closer to that.
 
 ## What the robot does (IK reach checked for each station)
 
@@ -69,7 +84,7 @@ The tools stick out at most about 110 mm from the board, keeping them clear of t
 
 ## Changes from the jewelry studio
 
-The heat-shield wall and the laser engraver are gone. The bench polisher is gone too: the robot polishes with the felt spindle in the vise instead. The kiln and torch moved onto the cart. The pegboard replaced the back half of the old bench.
+The heat-shield wall and the laser engraver are gone. The bench is now an IKEA top with a half-moon arc. The bench polisher is gone too: the robot polishes with the felt spindle in the vise instead. The kiln and torch moved onto the cart. The pegboard replaced the back half of the old bench.
 
 ## Not done yet
 

@@ -21,7 +21,8 @@ from studio import box, cbox, cone, cyl, fil, torus  # noqa: E402
 
 OUT = HERE / "out"
 
-BENCH = dict(x0=-900.0, x1=900.0, y0=-190.0, y1=410.0, top=40.0, h=760.0)  # 1.8 x 0.6 m, top z=0
+BENCH = dict(x0=-930.0, x1=930.0, y0=-190.0, y1=445.0, top=38.0, h=760.0)  # IKEA KARLBY-size top 1860 x 635 x 38, top z=0
+ARC = dict(cx=-700.0, r=150.0)  # jeweler's half-moon cut into the front edge at your seat (left end, outside arm reach)
 WALL_Y = BENCH["y0"]
 PEG = dict(x0=-900.0, x1=900.0, z0=300.0, z1=1200.0, standoff=20.0, t=6.0)  # pegboard on furring strips
 PEG_FACE = WALL_Y + PEG["standoff"] + PEG["t"]
@@ -32,7 +33,7 @@ STATIONS = {
     "vise": dict(xy=(0.0, 205.0), z=70.0, what="Servo vise: sand / polish / drill / deburr any small part"),
     "tool_rack": dict(xy=(250.0, 275.0), z=110.0, what="Tool rack: 3 compliant spindles (240, 600, polish); tool change"),
     "p1s_plate": dict(xy=(535.0, 220.0), z=69.0, what="P1S build-plate tab: unload prints"),
-    "ultrasonic": dict(xy=(-600.0, 250.0), z=150.0, what="Ultrasonic cleaner: parts, jewelry, nozzles"),
+    "ultrasonic": dict(xy=(-600.0, 225.0), z=150.0, what="Ultrasonic cleaner: parts, jewelry, nozzles"),
     "tumbler": dict(xy=(-400.0, 300.0), z=170.0, what="Vibratory tumbler: deburr / polish batches"),
     "inspection": dict(xy=(-220.0, 330.0), z=45.0, what="Camera + turntable: QC photos, measuring"),
     "scale": dict(xy=(-80.0, 330.0), z=60.0, what="Scale: weigh parts, count screws, filament left"),
@@ -49,15 +50,21 @@ def build():
     b = BENCH
     # ------------------------------------------------------------------ room + bench
     add("wall", "wall_paint", box(-1800, 1300, WALL_Y - 40, WALL_Y, -800, 1500))
-    add("bench_top", "wood", box(b["x0"], b["x1"], b["y0"], b["y1"], -b["top"], 0))
-    legs = None
-    for x in (b["x0"] + 30, b["x1"] - 30):
-        for y in (b["y0"] + 30, b["y1"] - 30):
-            l = cbox(x, y, 50, 50, -b["h"], b["h"] - b["top"], 4)
-            legs = l if legs is None else legs.union(l)
-    legs = legs.union(box(b["x0"] + 10, b["x1"] - 10, b["y0"] + 40, b["y1"] - 40, -620, -600))  # lower shelf
-    add("bench_frame", "frame", legs)
-    add("bench_shelf_bins", "bin_blue", cbox(-300, 110, 300, 400, -600, 180, 6).union(cbox(250, 110, 300, 400, -600, 180, 6)))
+    top = box(b["x0"], b["x1"], b["y0"], b["y1"], -b["top"], 0)
+    top = top.cut(cyl(ARC["r"], (ARC["cx"], b["y1"], -60), (ARC["cx"], b["y1"], 10)))
+    top = fil(top, 3.0, "|Z")
+    add("bench_top", "wood", top)
+    legs = None  # round steel legs at the left end; an ALEX-style drawer unit carries the right end
+    for y in (b["y0"] + 50, b["y1"] - 50):
+        l = cyl(25, (b["x0"] + 27, y, -b["h"]), (b["x0"] + 27, y, -b["top"]))
+        legs = l if legs is None else legs.union(l)
+    add("bench_legs", "frame", legs)
+    dx0, dx1 = 520.0, 880.0
+    add("drawer_unit", "enamel_white", cbox((dx0 + dx1) / 2, 120, dx1 - dx0, 580, -b["h"], b["h"] - b["top"] - 2, 4))
+    for i in range(6):  # drawer fronts with finger-pull gaps
+        z0 = -b["h"] + 30 + i * 112
+        add(f"drawer_front_{i}", "enamel_white", box(dx0 + 4, dx1 - 4, 410, 414, z0, z0 + 106))
+        add(f"drawer_pull_{i}", "dark", box(dx0 + 120, dx1 - 120, 414, 416, z0 + 92, z0 + 100))
 
     # ------------------------------------------------------------------ pegboard + furring
     pg = PEG
@@ -101,13 +108,27 @@ def build():
     add("pickle_liquid", "liquid", cyl(61, (x, y, 18), (x, y, 85)))
     add("pickle_basket", "plastic_pp", cyl(38, (x, y, 55), (x, y, 102)).cut(cyl(36, (x, y, 57), (x, y, 103))).union(box(x - 3, x + 3, y - 2, y + 2, 102, 140)))
 
-    # ------------------------------------------------------------------ hand-work end (left, outside arm reach)
-    add("bench_pin", "wood_light", box(-830, -730, 380, 520, -22, -6).cut(box(-795, -765, 470, 521, -30, 0)))
-    add("bench_pin_clamp", "steel_dark", box(-840, -720, 380, 420, -60, -40))
-    add("bench_vise", "enamel_blue", cbox(-800, 300, 120, 90, 0, 60, 6).union(box(-850, -750, 345, 365, 60, 110)).union(box(-850, -750, 255, 275, 60, 110)))
-    add("bench_vise_handle", "steel", cyl(5, (-800, 410, 85), (-800, 470, 85)).union(cyl(4, (-830, 470, 85), (-770, 470, 85))))
-    add("cutting_mat", "mat_green", box(-880, -700, 40, 200, 0, 2))
-    add("project_print", "part_orange", cbox(-780, 110, 70, 50, 2, 30, 6))
+    # ------------------------------------------------------------------ jeweler's seat (left end, outside arm reach)
+    cx, r, fy = ARC["cx"], ARC["r"], b["y1"]
+    apex = fy - r
+    # classic V-slot bench pin: sits in the arc apex, top just under the bench top, tapered underneath
+    pin = box(cx - 30, cx + 30, apex - 40, apex + 150, -20, -2)
+    pin = pin.cut(box(cx - 9, cx + 9, apex + 85, apex + 151, -30, 5))  # V slot (sawing)
+    pin = pin.cut(box(cx - 31, cx + 31, apex + 60, apex + 151, -21, -14))  # thinner nose underneath
+    add("bench_pin", "wood_light", pin)
+    add("bench_pin_holder", "steel_dark", box(cx - 45, cx + 45, apex - 60, apex + 10, -80, -38).cut(box(cx - 31, cx + 31, apex - 61, apex + 11, -60, -38)))
+    # sweeps tray under the arc: catches filings and dropped stones
+    tray = box(cx - 170, cx + 180, apex - 60, fy + 60, -170, -110).cut(box(cx - 162, cx + 172, apex - 52, fy + 52, -162, -100))
+    add("sweeps_tray", "steel", tray)
+    add("sweeps_runners", "steel_dark", box(cx - 182, cx - 170, apex - 70, fy - 10, -120, -38).union(box(cx + 180, cx + 192, apex - 70, fy - 10, -120, -38)))
+    add("leather_skin", "leather", box(cx - 160, cx + 170, apex - 50, fy + 50, -158, -156))
+    # small bench vise + block on the left rear, cutting mat behind the arc
+    add("bench_vise", "enamel_blue", cbox(-865, 60, 90, 120, 0, 55, 6).union(box(-905, -825, 0, 15, 55, 100)).union(box(-905, -825, 105, 120, 55, 100)))
+    add("bench_vise_handle", "steel", cyl(5, (-820, 60, 75), (-770, 60, 75)))
+    add("cutting_mat", "mat_green", box(-830, -700, 60, 160, 0, 2))
+    add("bench_block", "steel", cbox(-765, 110, 90, 80, 2, 25, 2))
+    add("work_ring", "silver", torus(10, 2.2, (cx + 2, apex + 115, 9), (0, 1, 0)))
+    add("ring_mandrel", "steel", cone(7, 16, (-900, 330, 14), (-900, 140, 14)))
 
     # ------------------------------------------------------------------ hot cart (person only, parks at the left end)
     c = CART
