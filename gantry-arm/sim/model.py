@@ -244,8 +244,9 @@ def to_mjcf(spring_k_N_per_mm: float = 0.0) -> str:
     for name, (servo, n) in P.JOINT_SERVOS.items():
         if name == "gripper":
             continue
-        f = servo.stall_Nm * n
-        act.append(f'    <position name="{name}" joint="{name}" kp="{17.8 * n * servo.stall_Nm / P.STS3215.stall_Nm:.3g}" forcerange="{-f:.3f} {f:.3f}"/>')
+        f = P.joint_capacity(name)[0]
+        kp = 17.8 * P.joint_kp_scale(name) * servo.stall_Nm / P.STS3215.stall_Nm
+        act.append(f'    <position name="{name}" joint="{name}" kp="{kp:.3g}" forcerange="{-f:.3f} {f:.3f}"/>')
     # gripper: rack and pinion -> finger force = torque / pinion radius
     fg = P.STS3215.stall_Nm / (P.GRIPPER["pinion_r"] * MM)
     act.append(f'    <position name="gripper" joint="gripper_left" kp="400" forcerange="{-fg:.1f} {fg:.1f}"/>')
@@ -335,8 +336,7 @@ def to_urdf() -> str:
         if name == "gripper_right":
             mimic = '<mimic joint="gripper_left" multiplier="1" offset="0"/>'
         if name in P.JOINT_SERVOS:
-            s, n = P.JOINT_SERVOS[name]
-            eff = s.stall_Nm * n
+            eff = P.joint_capacity(name)[0]
         out.append(
             f'  <joint name="{name}" type="{jt}"><parent link="{parent}"/><child link="{b.name}"/>{origin}'
             f'<axis xyz="{_f(b.axis)}"/><limit lower="{lo:.4f}" upper="{hi:.4f}" effort="{eff:.3f}" velocity="{vel}"/>{mimic}</joint>'

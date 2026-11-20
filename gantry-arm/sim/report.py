@@ -60,13 +60,14 @@ w("| Joint | Servo | No spring N·m | % stall | With spring N·m | % stall | % r
 w("|---|---|---|---|---|---|---|---|---|---|")
 for j, label in JOINTS:
     s, n = cap(j)
-    st, ra = s.stall_Nm * n, s.rated_Nm * n
+    st, ra, _ = P.joint_capacity(j)
     a = abs(r["no_spring"]["full_reach"][j])
     b = abs(r["spring"]["full_reach"][j])
     wc = abs(r["spring"]["worst"][j][0])
     worst = max(b, wc) / st
     flag = "**FLAG**" if max(a if j != "shoulder_lift" else b, wc) / st > FLAG else ("**FLAG without spring**, ok with" if a / st > FLAG else "ok")
-    name = f"{n}× {s.model.upper()}"
+    ratio = P.JOINT_GEAR.get(j, (1.0, 1.0))[0]
+    name = f"{n}× {s.model.upper()}" + (f" geared {ratio:g}:1" if ratio > 1 else "")
     note = ""
     if j == "base_yaw":
         note = " †"
@@ -78,11 +79,12 @@ w("† J1 has a vertical axis, so gravity puts no torque on it. The number shown
   f"**{S['j1_moment_Nm']:.1f} N·m bending moment**, and that has to go into a bearing, not the servo shaft.")
 w(f"\nThe gripper needs {r['gripper_F']:.0f} N per finger (μ = {P.GRIPPER['mu_finger']}, safety factor {P.GRIPPER['safety']}) through a {P.GRIPPER['pinion_r']:.0f} mm pinion.")
 w("")
-sh_ns = abs(r["no_spring"]["full_reach"]["shoulder_lift"]) / (2 * P.STS3250.stall_Nm)
-one = abs(r["no_spring"]["full_reach"]["shoulder_lift"]) / (2 * P.DUAL_SHARE) / P.STS3250.stall_Nm
-w(f"Twin shoulder servos: with no spring and equal load sharing, J2 is at {pct(sh_ns)} of combined stall ({'over' if sh_ns > FLAG else 'under'} the 40% flag). "
+J2_ST = P.joint_capacity("shoulder_lift")[0]
+sh_ns = abs(r["no_spring"]["full_reach"]["shoulder_lift"]) / J2_ST
+one = sh_ns / P.DUAL_SHARE
+w(f"Twin shoulder servos (geared {P.JOINT_GEAR['shoulder_lift'][0]:g}:1, see `docs/MECHANICS.md`): with no spring and equal load sharing, J2 is at {pct(sh_ns)} of combined stall ({'over' if sh_ns > FLAG else 'under'} the 40% flag). "
   f"If the split is uneven (the worse servo carries 1/(2×{P.DUAL_SHARE}) = {1 / (2 * P.DUAL_SHARE):.0%} of the load), that servo is at {pct(one)} of its stall. "
-  "The spring is what makes J2 safe.")
+  "The spring keeps the servos cool when holding.")
 w("")
 w("### Elbow fix options (what-if, spring on, full reach)")
 w("")
@@ -93,7 +95,7 @@ for label, j2, j3, fs, fr in r["elbow_options"]:
 w("")
 w("## Servo compliance (forward sim, holding the full-reach pose for 3 s)")
 w("")
-w("MuJoCo position actuators use the SO-101 measured STS3215 stiffness (kp = 17.8 N·m/rad, scaled by each servo's stall torque). That kp is the bus default P gain.")
+w("MuJoCo position actuators use the SO-101 measured STS3215 stiffness (kp = 17.8 N·m/rad, scaled by each servo's stall torque). That kp is the bus default P gain. Geared joints get count × ratio² of it at the joint, so the 2:1 pairs are 8× one direct servo.")
 w("")
 w("| Case | J2 err ° | J3 err ° | J4 err ° | TCP drop mm |")
 w("|---|---|---|---|---|")
@@ -141,12 +143,12 @@ n3 = P.ELBOW_SERVOS
 sag = r["spring"]["sag"]["tcp_drop_mm"]
 rows = [
     ("HIGH", "Servo position compliance", f"{sag:.0f} mm TCP drop at full reach with the default P gain (the spring already helps). This is 10× all the structural flex.", "Step 3: raise P_Coefficient on J2–J4 (lekiwi_pincopen heavy-joint pattern) **and** add gravity feed-forward to the goal positions."),
-    (("HIGH" if n3 == 1 else "MED"), f"J3 elbow ({n3}× STS3250)",
-     f"{pct(j3_now / (s50.stall_Nm * n3))} of stall, {pct(j3_now / (s50.rated_Nm * n3))} of rated (a single servo would be at {pct(e3[3])} / {pct(e3[4])})",
-     "Twin ganged servos. Watch Present_Load on both servos for imbalance." if n3 == 2 else "Needs a design decision (see the elbow fix table)."),
-    ("MED", "J2 shoulder without spring", f"{pct(sh_ns)} of combined stall; one servo goes over 40% if the two share load unevenly.", f"Keep the spring (k {r['k_opt']:.1f} N/mm): drops to {pct(abs(r['spring']['full_reach']['shoulder_lift']) / (2 * P.STS3250.stall_Nm))}. Monitor both servos' Present_Load."),
+    (("HIGH" if n3 == 1 else "LOW"), f"J3 elbow ({n3}× STS3250 geared {P.JOINT_GEAR['elbow_flex'][0]:g}:1)",
+     f"{pct(j3_now / P.joint_capacity('elbow_flex')[0])} of stall, {pct(j3_now / P.joint_capacity('elbow_flex')[1])} of rated (a single direct servo would be at {pct(e3[3])} / {pct(e3[4])})",
+     "Twin servos on a 2:1 steel gear pair with anti-backlash preload and a hub encoder (docs/MECHANICS.md)."),
+    ("MED", "J2 shoulder without spring", f"{pct(sh_ns)} of combined stall; one servo goes over 40% if the two share load unevenly.", f"Keep the spring (k {r['k_opt']:.1f} N/mm): drops to {pct(abs(r['spring']['full_reach']['shoulder_lift']) / J2_ST)}. Monitor both servos' Present_Load."),
     ("MED", "J4 wrist pitch (STS3215)", f"{pct(abs(r['spring']['full_reach']['wrist_flex']) / s15.stall_Nm)} stall but {pct(abs(r['spring']['full_reach']['wrist_flex']) / s15.rated_Nm)} of rated", "OK for intermittent holds. Keep the tools light; the gripper tool is the heaviest."),
-    ("MED", "J1 bending moment", f"{S['j1_moment_Nm']:.1f} N·m on the base", "Crossed-roller or lazy-susan bearing + a flex-free coupling to the STS3215 horn."),
+    ("MED", "J1 bending moment", f"{S['j1_moment_Nm']:.1f} N·m on the base", "Two 61808 thin-section bearings 30 mm apart carry it; an Oldham coupling gives the STS3215 torque only (docs/MECHANICS.md)."),
     ("MED", "Gantry wobble", f"{min(fl['fx'], fl['fy']):.0f}–{max(fh['fx'], fh['fy']):.0f} Hz first mode", "Jerk-limited X moves, column brace, preloaded wheels."),
     ("MED", "Shoulder spring anchors", f"{r['spring_Fmax_N']:.0f} N max spring force", "Steel pin + bearing pulley; no plastic hook."),
     ("LOW", "Z carriage V-wheels", f"{S['zc_wheel_load_N']:.0f} N max per wheel", "Well inside typical V-wheel ratings (verify on datasheet); use double-row wheels as specified."),

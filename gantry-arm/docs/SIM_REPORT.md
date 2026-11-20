@@ -22,8 +22,8 @@ Flag rule: > 40% of stall torque. The **% rated** column matters for holding a p
 | Joint | Servo | No spring N·m | % stall | With spring N·m | % stall | % rated | Worst-case (spring) N·m | % stall | Flag |
 |---|---|---|---|---|---|---|---|---|---|
 | J1 base yaw † | 1× STS3215 | 0.68 | 23% | 0.68 | 23% | 69% | 0.00 | 0% | ok |
-| J2 shoulder | 2× STS3250 | 4.58 | 47% | 2.42 | 25% | 77% | 2.42 | 25% | **FLAG without spring**, ok with |
-| J3 elbow | 2× STS3250 | 2.35 | 24% | 2.35 | 24% | 75% | 2.35 | 24% | ok |
+| J2 shoulder | 2× STS3250 geared 2:1 | 4.58 | 25% | 2.42 | 13% | 41% | 2.42 | 13% | ok |
+| J3 elbow | 2× STS3250 geared 2:1 | 2.35 | 13% | 2.35 | 13% | 39% | 2.35 | 13% | ok |
 | J4 wrist pitch | 1× STS3215 | 0.90 | 31% | 0.90 | 31% | 92% | 0.90 | 31% | ok |
 | J5 wrist roll | 1× STS3215 | 0.07 | 3% | 0.07 | 3% | 8% | 0.07 | 3% | ok |
 | Gripper | 1× STS3215 | 0.098 | 3% | — | — | 10% | — | — | ok |
@@ -32,28 +32,28 @@ Flag rule: > 40% of stall torque. The **% rated** column matters for holding a p
 
 The gripper needs 10 N per finger (μ = 0.5, safety factor 2.0) through a 10 mm pinion.
 
-Twin shoulder servos: with no spring and equal load sharing, J2 is at 47% of combined stall (over the 40% flag). If the split is uneven (the worse servo carries 1/(2×0.85) = 59% of the load), that servo is at 55% of its stall. The spring is what makes J2 safe.
+Twin shoulder servos (geared 2:1, see `docs/MECHANICS.md`): with no spring and equal load sharing, J2 is at 25% of combined stall (under the 40% flag). If the split is uneven (the worse servo carries 1/(2×0.85) = 59% of the load), that servo is at 29% of its stall. The spring keeps the servos cool when holding.
 
 ### Elbow fix options (what-if, spring on, full reach)
 
 | Option | J2 N·m | J3 N·m | J3 % stall | J3 % rated |
 |---|---|---|---|---|
-| 1x STS3250, 500 g, 450 mm | 2.30 | 2.35 | 48% | 150% |
-| 1x STS3250, payload 400 g | 1.86 | 2.07 | 42% | 132% |
-| 1x STS3250, payload 300 g | 1.42 | 1.79 | 37% | 114% |
-| 1x STS3250, forearm 150 -> 110 mm (reach 410) | 1.94 | 1.99 | 41% | 127% |
-| 2x STS3250 ganged (current design) | 2.42 | 2.35 | 24% | 75% |
+| 1x STS3250 direct, 500 g, 450 mm | 2.30 | 2.35 | 48% | 150% |
+| 1x STS3250 direct, payload 400 g | 1.86 | 2.07 | 42% | 132% |
+| 1x STS3250 direct, forearm 150 -> 110 mm (reach 410) | 1.94 | 1.99 | 41% | 127% |
+| 2x STS3250 direct (previous design) | 2.42 | 2.35 | 24% | 75% |
+| 2x STS3250 geared 2:1 (current design) | 2.42 | 2.35 | 13% | 39% |
 
 ## Servo compliance (forward sim, holding the full-reach pose for 3 s)
 
-MuJoCo position actuators use the SO-101 measured STS3215 stiffness (kp = 17.8 N·m/rad, scaled by each servo's stall torque). That kp is the bus default P gain.
+MuJoCo position actuators use the SO-101 measured STS3215 stiffness (kp = 17.8 N·m/rad, scaled by each servo's stall torque). That kp is the bus default P gain. Geared joints get count × ratio² of it at the joint, so the 2:1 pairs are 8× one direct servo.
 
 | Case | J2 err ° | J3 err ° | J4 err ° | TCP drop mm |
 |---|---|---|---|---|
-| Default P gain, no spring | 4.40 | 2.25 | 2.84 | 52.9 |
-| Default P gain, spring | 2.32 | 2.26 | 2.91 | 36.9 |
-| 2× P gain (P_Coefficient 16→32), spring | 1.17 | 1.13 | 1.45 | 18.5 |
-| Gravity feed-forward on goal, spring | -0.00 | -0.00 | -0.00 | 0.6 |
+| Default P gain, no spring | 1.11 | 0.57 | 2.88 | 18.9 |
+| Default P gain, spring | 0.58 | 0.57 | 2.88 | 14.8 |
+| 2× P gain (P_Coefficient 16→32), spring | 0.29 | 0.28 | 1.45 | 7.5 |
+| Gravity feed-forward on goal, spring | -0.00 | -0.00 | 0.00 | 0.6 |
 
 Feed-forward means: add τ_gravity / kp to each goal position, using this same model. It is near-perfect in sim because the model is exact. On real hardware, expect a few mm, limited by mass errors and the servo deadband (±1 count = 0.09°).
 
@@ -85,11 +85,11 @@ Hanging mass on the Z carriage: 2.61 kg, CoM 294 mm in front of the column. Mome
 
 | Rank | Severity | Item | Number | Mitigation |
 |---|---|---|---|---|
-| 1 | HIGH | Servo position compliance | 37 mm TCP drop at full reach with the default P gain (the spring already helps). This is 10× all the structural flex. | Step 3: raise P_Coefficient on J2–J4 (lekiwi_pincopen heavy-joint pattern) **and** add gravity feed-forward to the goal positions. |
-| 2 | MED | J3 elbow (2× STS3250) | 24% of stall, 75% of rated (a single servo would be at 48% / 150%) | Twin ganged servos. Watch Present_Load on both servos for imbalance. |
-| 3 | MED | J2 shoulder without spring | 47% of combined stall; one servo goes over 40% if the two share load unevenly. | Keep the spring (k 0.9 N/mm): drops to 25%. Monitor both servos' Present_Load. |
+| 1 | HIGH | Servo position compliance | 15 mm TCP drop at full reach with the default P gain (the spring already helps). This is 10× all the structural flex. | Step 3: raise P_Coefficient on J2–J4 (lekiwi_pincopen heavy-joint pattern) **and** add gravity feed-forward to the goal positions. |
+| 2 | LOW | J3 elbow (2× STS3250 geared 2:1) | 13% of stall, 39% of rated (a single direct servo would be at 48% / 150%) | Twin servos on a 2:1 steel gear pair with anti-backlash preload and a hub encoder (docs/MECHANICS.md). |
+| 3 | MED | J2 shoulder without spring | 25% of combined stall; one servo goes over 40% if the two share load unevenly. | Keep the spring (k 0.9 N/mm): drops to 13%. Monitor both servos' Present_Load. |
 | 4 | MED | J4 wrist pitch (STS3215) | 31% stall but 92% of rated | OK for intermittent holds. Keep the tools light; the gripper tool is the heaviest. |
-| 5 | MED | J1 bending moment | 4.6 N·m on the base | Crossed-roller or lazy-susan bearing + a flex-free coupling to the STS3215 horn. |
+| 5 | MED | J1 bending moment | 4.6 N·m on the base | Two 61808 thin-section bearings 30 mm apart carry it; an Oldham coupling gives the STS3215 torque only (docs/MECHANICS.md). |
 | 6 | MED | Gantry wobble | 6–11 Hz first mode | Jerk-limited X moves, column brace, preloaded wheels. |
 | 7 | MED | Shoulder spring anchors | 83 N max spring force | Steel pin + bearing pulley; no plastic hook. |
 | 8 | LOW | Z carriage V-wheels | 24 N max per wheel | Well inside typical V-wheel ratings (verify on datasheet); use double-row wheels as specified. |

@@ -23,9 +23,10 @@ ARM_JOINTS = ["base_yaw", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_ro
 KP_STS3215_P16_NM_PER_RAD = 17.8
 
 
-def servo_kp_nm_per_deg(stall_nm: float, count: int, p_coefficient: int) -> float:
-    """Position-loop stiffness of a (possibly ganged) joint, scaled from the SO-101 measurement."""
-    k_rad = KP_STS3215_P16_NM_PER_RAD * (p_coefficient / 16.0) * (stall_nm / 2.942) * count
+def servo_kp_nm_per_deg(stall_nm: float, count: int, p_coefficient: int, ratio: float = 1.0) -> float:
+    """Joint-side position-loop stiffness of a (possibly ganged, possibly geared) joint, scaled from the
+    SO-101 measurement. A gear ratio n multiplies the stiffness seen at the joint by n^2."""
+    k_rad = KP_STS3215_P16_NM_PER_RAD * (p_coefficient / 16.0) * (stall_nm / 2.942) * count * ratio * ratio
     return k_rad * math.pi / 180.0
 
 

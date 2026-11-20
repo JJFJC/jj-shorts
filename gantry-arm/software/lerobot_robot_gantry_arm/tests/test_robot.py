@@ -56,7 +56,7 @@ def test_gravity_feedforward_removes_sag_at_full_reach(sim_robot):
     off = drive(sim_robot(payload_g=500, gravity_feedforward=False), FULL_REACH)
     for j in ("shoulder_lift", "elbow_flex", "wrist_flex"):
         assert abs(on[f"{j}.pos"] - FULL_REACH[f"{j}.pos"]) < 0.2
-    assert abs(off["elbow_flex.pos"]) > 0.8  # without it the servo sags measurably
+    assert abs(off["elbow_flex.pos"] - FULL_REACH["elbow_flex.pos"]) > 0.2  # without it the (geared, 4x stiffer) joint still sags measurably
 
 
 def test_action_is_clipped_to_limits_and_step_size(sim_robot):

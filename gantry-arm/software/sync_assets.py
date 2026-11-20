@@ -29,7 +29,10 @@ def geometry() -> dict:
         "lateral": -M.wrist_center_y(),  # roll axis offset along -turret_y (world +x at yaw 0)
         "limits_deg": P.JOINT_LIMITS,
         "spring_k_N_per_mm": k,
-        "servos": {j: {"model": s.model, "count": n, "stall_Nm": s.stall_Nm, "rated_Nm": s.rated_Nm} for j, (s, n) in P.JOINT_SERVOS.items()},
+        "servos": {j: {"model": s.model, "count": n, "stall_Nm": s.stall_Nm, "rated_Nm": s.rated_Nm,
+                       "ratio": P.JOINT_GEAR.get(j, (1.0, 1.0))[0], "efficiency": P.JOINT_GEAR.get(j, (1.0, 1.0))[1],
+                       "encoder": j in P.JOINT_ENCODERS} for j, (s, n) in P.JOINT_SERVOS.items()},
+        "preload_Nm": P.PRELOAD_NM,
         "rack": {**{k: v for k, v in P.RACK.items() if k != "slots"}, "slots": {str(k): v for k, v in P.RACK["slots"].items()}, "roll_deg": dock_roll()},
     }
 

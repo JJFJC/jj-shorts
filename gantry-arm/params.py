@@ -92,7 +92,7 @@ STYLE = dict(
     fillet=7.0,  # outer edge radius on links
     gap=2.0,  # running gap between a puck face and the next link
     shoulder_puck=(48.0, 96.0),  # radius, width
-    elbow_puck_r=40.0,
+    elbow_puck_r=44.0,  # 40 -> 44: room for the twin-servo gear pair (see JOINT_GEAR)
     wrist_puck=(32.0, 64.0),
     roll_r=28.0,
     link_r=dict(upper=(46.0, 40.0), fore=(38.0, 32.0)),  # hub radii at each end
@@ -122,6 +122,42 @@ JOINT_SERVOS = {
     "wrist_roll": (STS3215, 1),
     "gripper": (STS3215, 1),
 }
+# twin-servo geared pairs (owner choice 2026-11-20): both servos of a joint drive one steel hub gear
+# through their own pinion. Ratio 2:1 -> the servos turn > 1 rev over the joint range, so they run in
+# Feetech multi-turn mode and an AS5600 magnetic encoder on the hub gives the true joint angle.
+JOINT_GEAR = {  # joint: (ratio, mesh efficiency)
+    "shoulder_lift": (2.0, 0.95),
+    "elbow_flex": (2.0, 0.95),
+}
+GEARS = {  # steel spur gears, module 1, 20 deg pressure angle (stock parts; pinion bolted to the servo horn)
+    "shoulder_lift": dict(module=1.0, z_pinion=18, z_hub=36, face=10.0),  # centre distance 27 mm
+    "elbow_flex": dict(module=1.0, z_pinion=15, z_hub=30, face=10.0),  # 22.5 mm; 15T: use +0.15 profile shift
+}
+PRELOAD_NM = 0.15  # anti-backlash: the two servos of a pair push against each other with this torque (joint side)
+JOINT_ENCODERS = ("shoulder_lift", "elbow_flex")  # AS5600 on the hub, read by the encoder node (bus ID 30)
+BEARINGS = {  # joint: list of (designation, bore, OD, width) in mm
+    "base_yaw": [("61808-2RS", 40, 52, 7), ("61808-2RS", 40, 52, 7)],  # 30 mm apart: carries the arm moment, servo sees torque only
+    "shoulder_lift": [("6804-2RS", 20, 32, 7), ("6804-2RS", 20, 32, 7)],  # hollow shaft 20/15 (aluminium tube)
+    "elbow_flex": [("6803-2RS", 17, 26, 5), ("6803-2RS", 17, 26, 5)],  # hollow shaft 17/13
+    "wrist_flex": [("6803-2RS", 17, 26, 5)],  # idler side, opposite the servo horn
+    "wrist_roll": [("6806-2RS", 30, 42, 7)],  # carries the tool moment around the roll servo
+}
+
+
+def joint_capacity(joint: str) -> tuple[float, float, int]:
+    """(stall N·m, rated N·m, servo count) at the joint, incl. gear ratio and mesh efficiency."""
+    s, n = JOINT_SERVOS[joint]
+    ratio, eff = JOINT_GEAR.get(joint, (1.0, 1.0))
+    return s.stall_Nm * n * ratio * eff, s.rated_Nm * n * ratio * eff, n
+
+
+def joint_kp_scale(joint: str) -> float:
+    """Joint-side position stiffness relative to ONE direct-drive servo: count x ratio^2."""
+    _, n = JOINT_SERVOS[joint]
+    ratio, _ = JOINT_GEAR.get(joint, (1.0, 1.0))
+    return n * ratio * ratio
+
+
 DUAL_SHARE = 0.85  # worst-case load split for the twin shoulder servos (one carries 1/(2*0.85))
 
 JOINT_LIMITS = {  # degrees

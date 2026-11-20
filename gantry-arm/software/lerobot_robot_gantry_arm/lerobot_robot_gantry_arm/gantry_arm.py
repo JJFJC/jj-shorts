@@ -59,7 +59,7 @@ class GantryArm(Robot):
         for j in ARM_JOINTS:
             s = self.geo_servo(j)
             p = config.heavy_p_coefficient if j in config.heavy_joints else config.light_p_coefficient
-            self.kp[j] = servo_kp_nm_per_deg(s["stall_Nm"], s["count"], p)
+            self.kp[j] = servo_kp_nm_per_deg(s["stall_Nm"], s["count"], p, s.get("ratio", 1.0))
         self.cameras = make_cameras_from_configs(config.cameras)
         self.gravity: GravityModel | None = None
         self.bus = None
@@ -291,8 +291,9 @@ class GantryArm(Robot):
         return float(self.sim.d.time) if self.sim is not None else time.monotonic()
 
     def _stall(self, j: str) -> float:
+        """Joint-side stall torque: the servo Present_Load % refers to this (count x ratio x efficiency)."""
         s = self.geo_servo(j)
-        return s["stall_Nm"] * s["count"]
+        return s["stall_Nm"] * s["count"] * s.get("ratio", 1.0) * s.get("efficiency", 1.0)
 
     def hold(self) -> None:
         """Freeze at the measured pose (used on faults and by rollout hold)."""

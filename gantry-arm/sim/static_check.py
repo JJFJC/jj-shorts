@@ -312,22 +312,21 @@ def _is_descendant(m, b, root) -> bool:
 
 
 def capacity(joint: str) -> tuple[float, float, int]:
-    s, n = P.JOINT_SERVOS[joint]
-    return s.stall_Nm * n, s.rated_Nm * n, n
+    return P.joint_capacity(joint)
 
 
 def elbow_options(k: float) -> list:
     """What-if study for the elbow: rows (label, J2 Nm, J3 Nm, J3 stall frac, J3 rated frac)."""
     cases = [
-        ("1x STS3250, 500 g, 450 mm", {}, 1),
-        ("1x STS3250, payload 400 g", {("MASS", "payload"): 400.0}, 1),
-        ("1x STS3250, payload 300 g", {("MASS", "payload"): 300.0}, 1),
-        ("1x STS3250, forearm 150 -> 110 mm (reach 410)", {("ARM", "fore"): 110.0}, 1),
-        ("2x STS3250 ganged (current design)", {}, 2),
+        ("1x STS3250 direct, 500 g, 450 mm", {}, 1, 1.0),
+        ("1x STS3250 direct, payload 400 g", {("MASS", "payload"): 400.0}, 1, 1.0),
+        ("1x STS3250 direct, forearm 150 -> 110 mm (reach 410)", {("ARM", "fore"): 110.0}, 1, 1.0),
+        ("2x STS3250 direct (previous design)", {}, 2, 1.0),
+        ("2x STS3250 geared 2:1 (current design)", {}, 2, P.JOINT_GEAR.get("elbow_flex", (1.0, 1.0))[0]),
     ]
     rows = []
     n0 = P.ELBOW_SERVOS
-    for label, ch, n in cases:
+    for label, ch, n, ratio in cases:
         saved_m, saved_a = dict(P.MASS), dict(P.ARM)
         for (table, key), v in ch.items():
             getattr(P, table)[key] = v
@@ -339,7 +338,8 @@ def elbow_options(k: float) -> list:
         P.MASS.clear(); P.MASS.update(saved_m)
         P.ARM.clear(); P.ARM.update(saved_a)
         j3 = abs(t["elbow_flex"])
-        rows.append((label, abs(t["shoulder_lift"]), j3, j3 / (P.STS3250.stall_Nm * n), j3 / (P.STS3250.rated_Nm * n)))
+        g = n * ratio * (P.JOINT_GEAR.get("elbow_flex", (1.0, 1.0))[1] if ratio > 1 else 1.0)
+        rows.append((label, abs(t["shoulder_lift"]), j3, j3 / (P.STS3250.stall_Nm * g), j3 / (P.STS3250.rated_Nm * g)))
     P.ELBOW_SERVOS = n0
     P.JOINT_SERVOS["elbow_flex"] = (P.STS3250, n0)
     return rows

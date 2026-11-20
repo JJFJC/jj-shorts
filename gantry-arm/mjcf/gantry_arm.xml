@@ -79,8 +79,8 @@
   </tendon>
   <actuator>
     <position name="base_yaw" joint="base_yaw" kp="17.8" forcerange="-2.942 2.942"/>
-    <position name="shoulder_lift" joint="shoulder_lift" kp="59.3" forcerange="-9.807 9.807"/>
-    <position name="elbow_flex" joint="elbow_flex" kp="59.3" forcerange="-9.807 9.807"/>
+    <position name="shoulder_lift" joint="shoulder_lift" kp="237" forcerange="-18.633 18.633"/>
+    <position name="elbow_flex" joint="elbow_flex" kp="237" forcerange="-18.633 18.633"/>
     <position name="wrist_flex" joint="wrist_flex" kp="17.8" forcerange="-2.942 2.942"/>
     <position name="wrist_roll" joint="wrist_roll" kp="17.8" forcerange="-2.942 2.942"/>
     <position name="gripper" joint="gripper_left" kp="400" forcerange="-294.2 294.2"/>
