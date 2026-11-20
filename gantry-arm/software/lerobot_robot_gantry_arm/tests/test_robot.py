@@ -188,3 +188,49 @@ def test_ganged_mismatch_faults_and_lights_red(hw_robot, fw):
         for _ in range(10):
             hw_robot.get_observation()
     assert any(l.startswith("LED FAULT") for l in fw.sent)
+
+
+# ------------------------------------------------------------------ arm v2: stepper joints on CAN behind the ESP32
+
+
+@pytest.fixture
+def can_robot(tmp_path, monkeypatch, fw):
+    import lerobot.motors.feetech as feetech
+
+    from lerobot_robot_gantry_arm import gantry_driver
+
+    monkeypatch.setattr(feetech, "FeetechMotorsBus", FakeBus)
+    monkeypatch.setattr(gantry_driver.GantryDriver, "open", classmethod(lambda cls, port, **kw: cls(fw, timeout_s=5)))
+    r = GantryArm(GantryArmConfig(backend="hardware", arm_drive="stepper_can", id="can", calibration_dir=tmp_path, max_relative_target=None))
+    r.connect()
+    yield r
+    r.disconnect()
+
+
+def test_stepper_arm_homes_on_connect_and_only_the_gripper_is_on_the_servo_bus(can_robot, fw):
+    assert list(can_robot.bus.motors) == ["gripper"]
+    assert any(line.startswith("JHOME") for line in fw.sent)
+    obs = can_robot.get_observation()
+    assert obs["shoulder_lift.pos"] == pytest.approx(-100.0, abs=0.01)  # homed on the switch end
+
+
+def test_stepper_arm_send_action_goes_out_as_jmove(can_robot, fw):
+    can_robot.send_action({"shoulder_lift.pos": 30.0, "elbow_flex.pos": 45.0, "gripper.pos": 40.0})
+    assert any(line.startswith("JMOVE") and "J230" in line and "J345" in line for line in fw.sent)
+    fw.tick(8.0)
+    obs = can_robot.get_observation()
+    assert obs["shoulder_lift.pos"] == pytest.approx(30.0, abs=0.01)
+    assert obs["elbow_flex.pos"] == pytest.approx(45.0, abs=0.01)
+    assert obs["gripper.pos"] == 40.0
+    n = len(fw.sent)
+    can_robot.send_action({"shoulder_lift.pos": 30.005})  # below the deadband: not resent
+    assert not any(line.startswith("JMOVE") for line in fw.sent[n:])
+
+
+def test_stepper_arm_stall_raises_collision_and_names_the_joint(can_robot, fw):
+    fw.arm_block(2, -60.0)
+    can_robot.send_action({"elbow_flex.pos": 0.0})
+    fw.tick(5.0)
+    with pytest.raises(CollisionError):
+        can_robot.get_observation()
+    assert can_robot.collided_joint == "elbow_flex"

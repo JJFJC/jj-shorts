@@ -311,7 +311,17 @@ def report(r):
     w("| J5 | NEMA14 + 5:1 coaxial in the roll housing, with a 6805 at the flange. |")
     w("| Gantry | X: 2× HGR15 rails on a 10 mm plate, 4 blocks. Z: 4080 column, 1× HGR15 rail (two don't fit the 40 mm face), 2 blocks, T8×2 screw. |")
     w("")
-    w("**Not checked yet:** self-collision across the joint ranges (the IK collision model is still the servo arm's), cable routing, and the 24 V power budget.")
+    w("")
+    w("## Control (owner's choice, 2026-11-20: CAN bus drivers)")
+    w("")
+    w("- **Drivers:** each joint motor has an MKS SERVO42D (NEMA17/14) or SERVO57D (NEMA23) closed-loop driver with a 14-bit encoder.")
+    w("- **Bus:** one CAN bus from the ESP32, 4 wires through the arm: CAN H/L + 24 V/GND.")
+    w("- **Firmware:** commands `JHOME`, `JMOVE`, `JPOS` (`docs/PROTOCOL.md`).")
+    w("- **LeRobot plugin:** `arm_drive=\"stepper_can\"` sends the arm through the ESP32. Only the gripper stays on the Feetech bus.")
+    w("- **Collision detection:** done by the drivers' locked-rotor (stall) protection, reported as a fault that names the joint.")
+    w("- **Protocol source:** written from the official MKS CAN manual. The CC BY-NC library whickmott/MKSServoCAN was only used to cross-check the protocol facts.")
+    w("")
+    w("**Not checked yet:** self-collision across the joint ranges (the IK collision model is still the servo arm's), cable routing, the 24 V power budget, and the firmware build for the ESP32 (the PlatformIO registry is blocked here).")
     return "\n".join(L) + "\n"
 
 

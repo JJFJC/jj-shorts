@@ -18,6 +18,12 @@ class GantryArmConfig(RobotConfig):
 
     # "hardware" or "sim" (MuJoCo model of the same robot; no hardware needed)
     backend: str = "hardware"
+    # arm drive on hardware: "servo_bus" (Feetech arm, v1) or "stepper_can" (arm v2: MKS closed-loop
+    # steppers on the ESP32's CAN bus; only the gripper stays on the Feetech bus). docs/ARM_V2.md
+    arm_drive: str = "servo_bus"
+    home_arm_on_connect: bool = True
+    arm_speed: float = 0.5  # stepper arm: fraction (0, 1] of the slowest joint's max speed
+    arm_deadband_deg: float = 0.02  # don't resend a JMOVE for smaller changes
     port: str = "/dev/ttyUSB0"  # Waveshare bus servo adapter (arm)
     gantry_port: str = "/dev/ttyACM0"  # ESP32 USB serial (gantry)
 

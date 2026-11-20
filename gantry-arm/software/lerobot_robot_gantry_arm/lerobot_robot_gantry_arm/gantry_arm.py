@@ -53,8 +53,13 @@ class GantryArm(Robot):
         super().__init__(config)
         self.config = config
         self.geo = Geometry.load()
+        self.stepper = config.arm_drive == "stepper_can"
+        if config.arm_drive not in ("servo_bus", "stepper_can"):
+            raise ValueError(f"arm_drive must be 'servo_bus' or 'stepper_can', got {config.arm_drive!r}")
         ratios = {j: tuple(self.geo_servo(j)["motor_ratios"]) for j in ("shoulder_lift", "elbow_flex") if self.geo_servo(j).get("motor_ratios")}
-        if ratios:  # geared twin pairs (docs/MECHANICS.md)
+        if self.stepper:  # arm v2: the joints are CAN steppers behind the ESP32; no servo pairs
+            self.ganged = Ganged(pairs={}, tolerance_deg=config.ganged_tolerance_deg)
+        elif ratios:  # geared twin pairs (docs/MECHANICS.md)
             self.ganged = GearedPair(ratios=ratios, preload_deg={j: config.geared_preload_deg for j in ratios},
                                      tolerance_deg=config.ganged_tolerance_deg)
         else:
@@ -82,6 +87,7 @@ class GantryArm(Robot):
             motors = {
                 n: Motor(i, model, MotorNormMode.RANGE_0_100 if n == "gripper" else MotorNormMode.DEGREES)
                 for n, i, model in MOTORS
+                if not self.stepper or n == "gripper"
             }
             self.bus = FeetechMotorsBus(port=config.port, motors=motors, calibration=self.calibration)
         elif config.backend != "sim":
@@ -139,6 +145,8 @@ class GantryArm(Robot):
             logger.info("gantry firmware %s", self.gantry.ping())
             if self.config.home_gantry_on_connect:
                 self.gantry.home()
+            if self.stepper and self.config.home_arm_on_connect:
+                self.gantry.jhome()
         for cam in self.cameras.values():
             cam.connect()
         self._connected = True
@@ -151,7 +159,7 @@ class GantryArm(Robot):
         if self._keep_calibration_file(self.bus):
             return
         input("Put the arm STRAIGHT UP (calibration pose = joint zero), gripper half open, then press Enter")
-        self.calibration = self.bus.record_calibration("position", full_turn_motors=["wrist_roll"])
+        self.calibration = self.bus.record_calibration("position", full_turn_motors=[m for m in ("wrist_roll",) if m in self.bus.motors])
         for secondary in self.ganged.pairs.values():  # mirrored twin servo reads the same angle
             self.calibration[secondary].drive_mode = 1 - self.calibration[secondary].drive_mode
         self.bus.write_calibration(self.calibration)
@@ -201,6 +209,15 @@ class GantryArm(Robot):
     def _read_arm(self) -> dict:
         if self.sim is not None:
             return self.sim.read_arm()
+        if self.stepper:
+            pos = self.gantry.jpos()
+            if pos.faults:
+                j, kind = next(iter(pos.faults.items()))
+                self.collided_joint = j if kind == "S" else None
+                self._fault({"S": f"collision detected at {j} (driver stall)", "C": f"{j} driver not answering on CAN"}.get(kind, f"{j} homing failed"))
+            out = dict(pos.deg)
+            out.update(self.bus.sync_read("Present_Position"))  # gripper
+            return out
         raw = self.bus.sync_read("Present_Position")
         if isinstance(self.ganged, GearedPair):
             raw = self.ganged.unwrap(raw)
@@ -277,7 +294,7 @@ class GantryArm(Robot):
             dt = now - self._last_read[0]
             speed = {j: (present_arm[j] - self._last_read[1].get(j, present_arm[j])) / dt for j in ARM_JOINTS}
         self._last_read = (now, present_arm)
-        if c.collision_detection and self.gravity is not None and self._last_cmd and speed:
+        if c.collision_detection and not self.stepper and self.gravity is not None and self._last_cmd and speed:
             tau = self.gravity.torques(present_arm)
             expected = {j: 100.0 * tau[j] / self._stall(j) for j in ARM_JOINTS}
             err = {j: self._last_cmd[j] - present_arm[j] - (expected[j] * self._stall(j) / 100.0) / self.kp[j]
@@ -304,7 +321,14 @@ class GantryArm(Robot):
         if c.gravity_feedforward and self.gravity is not None:
             full = {**present_arm, **arm_goal}
             cmd = feedforward(arm_goal, self.gravity.torques(full), self.kp, c.feedforward_gain)
-        if self.sim is not None:
+        if self.stepper:  # closed-loop steppers hold their position: no gravity feed-forward needed
+            joints = {k: v for k, v in arm_goal.items() if k in ARM_JOINTS}
+            if joints and (not self._last_cmd or any(abs(v - self._last_cmd.get(k, 1e9)) > c.arm_deadband_deg for k, v in joints.items())):
+                self.gantry.jmove(joints, speed=c.arm_speed)
+            if "gripper" in arm_goal:
+                self.bus.sync_write("Goal_Position", {"gripper": arm_goal["gripper"]})
+            cmd = dict(arm_goal)
+        elif self.sim is not None:
             self.sim.write_arm(cmd)
         elif cmd:
             self.bus.sync_write("Goal_Position", self.ganged.expand(cmd))
@@ -327,7 +351,14 @@ class GantryArm(Robot):
             p = self.sim.gantry_pos()
             self.sim.gantry_move(p["gantry_x"], p["gantry_z"])
             return
-        if self.bus is not None:
+        if self.stepper and self.gantry is not None:  # stop the joints where they are
+            try:
+                pos = self.gantry.jpos()
+                if all(pos.homed) and not pos.faults:
+                    self.gantry.jmove(pos.deg, speed=1.0)
+            except Exception as e:  # already faulted: the drivers stopped themselves
+                logger.debug("hold: %s", e)
+        elif self.bus is not None:
             present = self.bus.sync_read("Present_Position")
             present.pop("gripper", None)
             self.bus.sync_write("Goal_Position", present)
