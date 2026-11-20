@@ -5,33 +5,33 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 
 | # | Part | Qty | Material | Mass each (g) | Est. time each (h) | Size (mm) | Bed | Orientation | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | `coupler_lock_sleeve` | 1 | PETG | 5 | 0.5 | 70 × 61 × 10 | ✅ flat | flat, no supports | quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock) |
-| 2 | `coupler_robot_half` | 1 | PETG | 16 | 1.1 | 56 × 56 × 8 | ✅ flat | flat, magnet face up | 3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket |
-| 3 | `coupler_tool_half` | 4 | PETG | 17 | 1.1 | 59 × 56 × 13 | ✅ flat | flat, cone up, no supports | one per tool; 3 steel discs face the magnets, 4 brass contact pads |
+| 1 | `coupler_lock_sleeve` | 1 | PETG | 6 | 0.5 | 74 × 65 × 10 | ✅ flat | flat, no supports | quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock) |
+| 2 | `coupler_robot_half` | 1 | PETG | 18 | 1.2 | 60 × 60 × 8 | ✅ flat | flat, magnet face up | 3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket |
+| 3 | `coupler_tool_half` | 4 | PETG | 19 | 1.2 | 63 × 60 × 13 | ✅ flat | flat, cone up, no supports | one per tool; 3 steel discs face the magnets, 4 brass contact pads |
 | 4 | `forearm_body` | 1 | PETG | 66 | 3.9 | 220 × 76 × 19 | ✅ flat | inner face down, supports in hub bores only |  |
 | 5 | `forearm_cover` | 1 | PETG | 46 | 2.7 | 220 × 76 × 13 | ✅ flat | outer face down on smooth PEI |  |
-| 6 | `gripper_housing` | 1 | PETG | 26 | 1.6 | 58 × 58 × 38 | ✅ flat | open end up, no supports | STS3215 lies across the housing; pinion drives a twin rack |
-| 7 | `gripper_smoke_cap` | 1 | PETG translucent grey (or smoked PETG) | 4 | 0.4 | 54 × 54 × 8 | ✅ flat | dome down, 100% infill, slow outer wall |  |
-| 8 | `j1_base_housing` | 1 | PETG | 89 | 5.1 | 120 × 120 × 34 | ✅ flat | top face down, no supports | holds STS3215 (J1) + 6 mm-thick lazy-susan / thrust bearing ring |
-| 9 | `j1_turret_collar` | 1 | PETG | 55 | 3.2 | 112 × 112 × 8 | ✅ flat | flat, no supports |  |
+| 6 | `gripper_housing` | 1 | PETG | 29 | 1.8 | 62 × 62 × 38 | ✅ flat | open end up, no supports | STS3215 lies across the housing; pinion drives a twin rack |
+| 7 | `gripper_smoke_cap` | 1 | PETG translucent grey (or smoked PETG) | 5 | 0.5 | 58 × 58 × 8 | ✅ flat | dome down, 100% infill, slow outer wall |  |
+| 8 | `j1_base_housing` | 1 | PETG | 77 | 4.5 | 120 × 120 × 34 | ✅ flat | top face down, no supports | drum around the fixed J1 bearing spigot (cad/internals.py) |
+| 9 | `j1_turret_collar` | 1 | PETG | 29 | 1.8 | 112 × 112 × 8 | ✅ flat | flat, no supports |  |
 | 10 | `j2_cap_inner` | 1 | PETG | 12 | 0.8 | 80 × 80 × 2 | ✅ flat | flat, face down on textured plate |  |
 | 11 | `j2_cap_outer` | 1 | PETG | 12 | 0.8 | 80 × 80 × 2 | ✅ flat | flat, face down on textured plate |  |
 | 12 | `j2_shoulder_puck` | 1 | PETG | 110 | 6.3 | 126 × 96 × 96 | ✅ flat | axis vertical (Y up), tree supports inside puck only | houses 2x STS3250 (J2) facing outward; split vertically at the column/puck seam if printing is hard |
-| 13 | `j3_cap_a` | 1 | PETG | 8 | 0.6 | 66 × 66 × 2 | ✅ flat | flat, face down |  |
-| 14 | `j3_cap_b` | 1 | PETG | 8 | 0.6 | 66 × 66 × 2 | ✅ flat | flat, face down |  |
-| 15 | `j3_elbow_puck` | 1 | PETG | 67 | 3.9 | 82 × 80 × 80 | ✅ flat | axis vertical, supports inside only | houses 2x STS3250 (J3) |
+| 13 | `j3_cap_a` | 1 | PETG | 10 | 0.7 | 74 × 74 × 2 | ✅ flat | flat, face down |  |
+| 14 | `j3_cap_b` | 1 | PETG | 10 | 0.8 | 74 × 74 × 2 | ✅ flat | flat, face down |  |
+| 15 | `j3_elbow_puck` | 1 | PETG | 74 | 4.3 | 88 × 88 × 82 | ✅ flat | axis vertical, supports inside only | houses 2x STS3250 (J3) |
 | 16 | `j4_cap_a` | 1 | PETG | 5 | 0.4 | 50 × 50 × 2 | ✅ flat | flat, face down |  |
-| 17 | `j4_cap_b` | 1 | PETG | 5 | 0.4 | 50 × 50 × 2 | ✅ flat | flat, face down |  |
-| 18 | `j5_roll_flange` | 1 | PETG | 10 | 0.7 | 56 × 56 × 4 | ✅ flat | flat |  |
+| 17 | `j4_cap_b` | 1 | PETG | 1 | 0.2 | 50 × 50 × 2 | ✅ flat | flat, face down |  |
+| 18 | `j5_roll_flange` | 1 | PETG | 11 | 0.8 | 60 × 60 × 4 | ✅ flat | flat |  |
 | 19 | `tool_pen_holder` | 1 | PETG | 21 | 1.4 | 52 × 36 × 28 | ✅ flat | flat end down | spring-loaded sleeve, side thumb screw; fits 8-12 mm pens |
 | 20 | `tool_phone_mount` | 1 | PETG | 27 | 1.7 | 96 × 60 × 24 | ✅ flat | clamp face down | spring jaw clamps phones 60-90 mm wide |
 | 21 | `tool_suction_body` | 1 | PETG | 42 | 2.5 | 58 × 48 × 48 | ✅ flat | flat end down | holds a 370-size 12 V mini vacuum pump + solenoid; power via pogo 12 V |
-| 22 | `upper_arm_body` | 1 | PETG | 87 | 5.0 | 251 × 92 × 19 | ✅ rotated 19° on bed | inner face down (flat), supports in hub bores only |  |
+| 22 | `upper_arm_body` | 1 | PETG | 86 | 4.9 | 251 × 92 × 19 | ✅ rotated 19° on bed | inner face down (flat), supports in hub bores only |  |
 | 23 | `upper_arm_cover` | 1 | PETG | 62 | 3.6 | 251 × 92 × 13 | ✅ rotated 17° on bed | outer face down on smooth PEI (best surface) | LED channel for WS2812 strip (60/m, 6 LEDs) under a diffuser |
 | 24 | `upper_arm_led_diffuser` | 1 | PETG natural (translucent) | 1 | 0.2 | 99 × 5 × 1 | ✅ flat | on edge |  |
 | 25 | `wrist_camera_pod` | 1 | PETG | 3 | 0.3 | 20 × 18 × 12 | ✅ flat | back face down | fits a 32x32 mm USB UVC board |
-| 26 | `wrist_shell_back` | 1 | PETG | 27 | 1.7 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
-| 27 | `wrist_shell_front` | 1 | PETG | 27 | 1.7 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
+| 26 | `wrist_shell_back` | 1 | PETG | 26 | 1.6 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
+| 27 | `wrist_shell_front` | 1 | PETG | 26 | 1.6 | 83 × 64 × 32 | ✅ flat | split face down (flat), no supports | halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5 |
 | 28 | `controller_enclosure` | 1 | PETG | 104 | 6.0 | 120 × 86 × 78 | ✅ flat | open bottom down | ESP32 + 2x TMC2209 + Waveshare bus adapter + 12/24 V distribution |
 | 29 | `head_eye_bezels` | 1 | PETG | 0 | 0.2 | 92 × 26 × 21 | ✅ flat | flat |  |
 | 30 | `head_neck` | 1 | PETG | 24 | 1.5 | 50 × 22 × 22 | ✅ flat | upright |  |
@@ -50,10 +50,10 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | 43 | `z_rear_cover_1` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
 | 44 | `z_rear_cover_2` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
 | 45 | `z_rear_cover_3` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
-| 46 | `tool_rack_1` | 1 | PETG | 341 | 19.1 | 190 × 124 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 1+2; two modules screw to the table side by side |
-| 47 | `tool_rack_2` | 1 | PETG | 355 | 19.9 | 190 × 134 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 3+4; two modules screw to the table side by side |
+| 46 | `tool_rack_1` | 1 | PETG | 339 | 19.0 | 190 × 126 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 1+2; two modules screw to the table side by side |
+| 47 | `tool_rack_2` | 1 | PETG | 354 | 19.8 | 190 × 136 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 3+4; two modules screw to the table side by side |
 
-**Total printed: 3.48 kg PETG, ≈ 202 h of printing** (+15% for supports, brims and failed prints → buy 5 kg + 1 kg of white or graphite for the finish you pick).
+**Total printed: 3.46 kg PETG, ≈ 201 h of printing** (+15% for supports, brims and failed prints → buy 4 kg + 1 kg of white or graphite for the finish you pick).
 
 ## Bought / non-printed parts shown in CAD
 
@@ -84,12 +84,12 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 
 | Body | Printed g | Hardware g | Total g | CoM (mm, body frame) |
 |---|---|---|---|---|
-| z_carriage | 409 | 260 | 669 | [0.0, 49.15, -17.78] |
-| turret | 190 | 80 | 270 | [-0.01, 0.0, 89.91] |
-| upper_arm | 150 | 25 | 174 | [-0.0, 63.08, 77.15] |
-| forearm | 196 | 25 | 221 | [0.0, -25.18, 39.9] |
-| wrist | 64 | 15 | 79 | [0.0, -2.0, 8.92] |
-| tool | 160 | 20 | 180 | [0.82, 0.06, 40.54] |
+| z_carriage | 397 | 260 | 657 | [0.0, 47.77, -20.68] |
+| turret | 163 | 80 | 243 | [-0.01, -0.19, 98.18] |
+| upper_arm | 149 | 25 | 174 | [-0.0, 63.16, 77.26] |
+| forearm | 207 | 25 | 232 | [-0.0, -23.46, 37.68] |
+| wrist | 58 | 15 | 73 | [0.0, 0.23, 8.6] |
+| tool | 171 | 20 | 191 | [0.82, 0.05, 39.06] |
 
 Servos are not in these numbers; the sim adds them at their real positions.
 

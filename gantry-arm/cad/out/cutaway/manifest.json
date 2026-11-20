@@ -1,0 +1,177 @@
+[
+ {
+  "name": "j1_base_housing",
+  "body": "z_carriage",
+  "role": "shell"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap"
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell"
+ },
+ {
+  "name": "j2_cap_outer",
+  "body": "turret",
+  "role": "cap"
+ },
+ {
+  "name": "j2_cap_inner",
+  "body": "turret",
+  "role": "cap"
+ },
+ {
+  "name": "upper_arm_body",
+  "body": "upper_arm",
+  "role": "shell"
+ },
+ {
+  "name": "upper_arm_cover",
+  "body": "upper_arm",
+  "role": "shell"
+ },
+ {
+  "name": "upper_arm_led_diffuser",
+  "body": "upper_arm",
+  "role": "accent"
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell"
+ },
+ {
+  "name": "j3_cap_a",
+  "body": "forearm",
+  "role": "cap"
+ },
+ {
+  "name": "j3_cap_b",
+  "body": "forearm",
+  "role": "cap"
+ },
+ {
+  "name": "forearm_body",
+  "body": "forearm",
+  "role": "shell"
+ },
+ {
+  "name": "forearm_cover",
+  "body": "forearm",
+  "role": "shell"
+ },
+ {
+  "name": "wrist_shell_back",
+  "body": "wrist",
+  "role": "shell"
+ },
+ {
+  "name": "j4_cap_a",
+  "body": "wrist",
+  "role": "cap"
+ },
+ {
+  "name": "j4_cap_b",
+  "body": "wrist",
+  "role": "cap"
+ },
+ {
+  "name": "j5_roll_flange",
+  "body": "tool",
+  "role": "cap"
+ },
+ {
+  "name": "coupler_robot_half",
+  "body": "tool",
+  "role": "shell"
+ },
+ {
+  "name": "coupler_magnets",
+  "body": "tool",
+  "role": "metal"
+ },
+ {
+  "name": "coupler_pogo_pins",
+  "body": "tool",
+  "role": "brass"
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap"
+ },
+ {
+  "name": "coupler_tool_half",
+  "body": "tool",
+  "role": "shell"
+ },
+ {
+  "name": "coupler_contact_pads",
+  "body": "tool",
+  "role": "brass"
+ },
+ {
+  "name": "gripper_housing",
+  "body": "tool",
+  "role": "shell"
+ },
+ {
+  "name": "gripper_smoke_cap",
+  "body": "tool",
+  "role": "smoke"
+ },
+ {
+  "name": "gripper_pinion_rack",
+  "body": "tool",
+  "role": "metal"
+ },
+ {
+  "name": "gripper_fingers_vlink",
+  "body": "tool",
+  "role": "metal"
+ },
+ {
+  "name": "gripper_pivot_pins",
+  "body": "tool",
+  "role": "metal"
+ },
+ {
+  "name": "gripper_pads",
+  "body": "tool",
+  "role": "rubber"
+ },
+ {
+  "name": "tool_suction_body",
+  "body": "tool_suction",
+  "role": "shell"
+ },
+ {
+  "name": "tool_suction_cup",
+  "body": "tool_suction",
+  "role": "rubber"
+ },
+ {
+  "name": "tool_pen_holder",
+  "body": "tool_pen",
+  "role": "shell"
+ },
+ {
+  "name": "tool_pen_marker",
+  "body": "tool_pen",
+  "role": "accent"
+ },
+ {
+  "name": "tool_phone_mount",
+  "body": "tool_phone",
+  "role": "shell"
+ },
+ {
+  "name": "tool_phone_pads",
+  "body": "tool_phone",
+  "role": "rubber"
+ }
+]

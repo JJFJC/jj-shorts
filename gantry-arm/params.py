@@ -37,6 +37,10 @@ class Servo:
 KGCM = 0.0980665  # N·m per kg·cm
 STS3215 = Servo("sts3215", 30 * KGCM, 10 * KGCM, 55.0, (45.2, 24.7, 35.0), 2.7)
 STS3250 = Servo("sts3250", 50 * KGCM, 16 * KGCM, 74.5, (45.2, 24.7, 35.0), 4.2)
+# J5 roll micro servo (owner choice 2026-11-20). 6 V part: fed by a small buck in the wrist; same TTL bus.
+# Vendors disagree on its size (23.2x12.1x28.5 vs 32x12x27.5): designed for the first, VERIFY on the real part.
+STS3032 = Servo("sts3032", 4.5 * KGCM, 1.5 * KGCM, 20.0, (23.2, 12.1, 28.5), 1.2)
+SERVO_SHAFT_FROM_END = 11.5  # STS3215/3250 output shaft distance from the near short end (verify on the drawing)
 
 UTILISATION_FLAG = 0.40  # flag any joint above 40 % of stall (user rule)
 
@@ -94,7 +98,7 @@ STYLE = dict(
     shoulder_puck=(48.0, 96.0),  # radius, width
     elbow_puck_r=44.0,  # 40 -> 44: room for the twin-servo gear pair (see JOINT_GEAR)
     wrist_puck=(32.0, 64.0),
-    roll_r=28.0,
+    roll_r=30.0,  # 28 -> 30: room for the off-axis J5 micro servo
     link_r=dict(upper=(46.0, 40.0), fore=(38.0, 32.0)),  # hub radii at each end
     led=dict(width=5.0, depth=1.6, z0=30.0, z1=130.0),
 )
@@ -119,7 +123,7 @@ JOINT_SERVOS = {
     "shoulder_lift": (STS3250, 2),
     "elbow_flex": (STS3250, ELBOW_SERVOS),
     "wrist_flex": (STS3215, 1),
-    "wrist_roll": (STS3215, 1),
+    "wrist_roll": (STS3032, 1),  # off-axis, 1:1 m0.5 36T/36T gear pair to the roll shaft
     "gripper": (STS3215, 1),
 }
 # twin-servo geared pairs (owner choice 2026-11-20): both servos of a joint drive one steel hub gear
@@ -130,17 +134,23 @@ JOINT_GEAR = {  # joint: (ratio, mesh efficiency)
     "elbow_flex": (2.0, 0.95),
 }
 GEARS = {  # steel spur gears, module 1, 20 deg pressure angle (stock parts; pinion bolted to the servo horn)
-    "shoulder_lift": dict(module=1.0, z_pinion=18, z_hub=36, face=10.0),  # centre distance 27 mm
-    "elbow_flex": dict(module=1.0, z_pinion=15, z_hub=30, face=10.0),  # 22.5 mm; 15T: use +0.15 profile shift
+    # two DIFFERENT pinions per pair (vernier): servo A turns 2.000x the joint, servo B z_hub/z_pinion_b x.
+    # Their two absolute single-turn encoders then give the absolute joint angle at power-up
+    # (no extra sensor; the axis stays free for the hollow wiring shaft). See docs/MECHANICS.md.
+    "shoulder_lift": dict(module=1.0, z_pinion=(18, 17), z_hub=36, face=10.0),  # centre distances 27.0 / 26.5 mm
+    "elbow_flex": dict(module=1.0, z_pinion=(15, 14), z_hub=30, face=10.0),  # 22.5 / 22.0 mm; 14T/15T undercut: profile shift +0.2 or accept
+    "wrist_roll": dict(module=0.5, z_pinion=(36,), z_hub=36, face=5.0),  # 1:1 offset drive, centre distance 18 mm
 }
 PRELOAD_NM = 0.15  # anti-backlash: the two servos of a pair push against each other with this torque (joint side)
-JOINT_ENCODERS = ("shoulder_lift", "elbow_flex")  # AS5600 on the hub, read by the encoder node (bus ID 30)
+# absolute joint angle on the geared pairs comes from the vernier pinions (owner asked for joint encoders;
+# an on-axis AS5600 cannot share the axis with the hollow wiring shaft, so the vernier does the same job)
+JOINT_ENCODERS = ("shoulder_lift", "elbow_flex")
 BEARINGS = {  # joint: list of (designation, bore, OD, width) in mm
-    "base_yaw": [("61808-2RS", 40, 52, 7), ("61808-2RS", 40, 52, 7)],  # 30 mm apart: carries the arm moment, servo sees torque only
+    "base_yaw": [("61812-2RS", 60, 78, 10), ("61812-2RS", 60, 78, 10)],  # on a fixed spigot, 26 mm apart: carry the arm moment; Oldham coupling -> servo sees torque only
     "shoulder_lift": [("6804-2RS", 20, 32, 7), ("6804-2RS", 20, 32, 7)],  # hollow shaft 20/15 (aluminium tube)
     "elbow_flex": [("6803-2RS", 17, 26, 5), ("6803-2RS", 17, 26, 5)],  # hollow shaft 17/13
-    "wrist_flex": [("6803-2RS", 17, 26, 5)],  # idler side, opposite the servo horn
-    "wrist_roll": [("6806-2RS", 30, 42, 7)],  # carries the tool moment around the roll servo
+    "wrist_flex": [("6806-2RS", 30, 42, 7)],  # around the J4 horn in the -Y wall: carries the wrist moment
+    "wrist_roll": [("6805-2RS", 25, 37, 7)],  # roll shaft at the flange; carries the tool moment, servo sees torque only
 }
 
 

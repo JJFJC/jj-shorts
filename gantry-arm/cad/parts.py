@@ -216,13 +216,14 @@ def build_arm():
     # ---- J1 fixed base on the platform (z_carriage frame, J1 axis at y = platform offset)
     off = P.PLATFORM["offset"]
     base = fil(cyl(60, (0, off, 0), (0, off, 34)), 8, ">Z")
-    base = base.cut(cyl(7, (0, off, -1), (0, off, 35)))  # wiring bore through the J1 centre
-    base = base.cut(cyl(60 - WALL, (0, off, -1), (0, off, 34 - WALL)).cut(cyl(16, (0, off, -2), (0, off, 40))))  # hollow, keep a centre boss
+    base = base.cut(cyl(60 - WALL, (0, off, WALL), (0, off, 34 - WALL)))  # hollow drum
+    base = base.cut(cyl(43, (0, off, 30), (0, off, 35)))  # opening for the turret skirt (J1 bearings, docs/MECHANICS.md)
+    base = base.cut(cyl(6, (0, off, -1), (0, off, WALL + 1)))  # cable entry from the platform
     reg("j1_base_housing", "z_carriage", "shell", base, orient="top face down, no supports", fill=1.0,
-        extra=dict(note="holds STS3215 (J1) + 6 mm-thick lazy-susan / thrust bearing ring"))
+        extra=dict(note="drum around the fixed J1 bearing spigot (cad/internals.py)"))
 
     # ---- turret: collar + column + shoulder puck (rotates with J1)
-    collar = fil(cyl(56, (0, 0, 34.5), (0, 0, 42)), 1.5, "%CIRCLE").cut(cyl(7, (0, 0, 34), (0, 0, 43)))
+    collar = fil(cyl(56, (0, 0, 34.5), (0, 0, 42)), 1.5, "%CIRCLE").cut(cyl(39, (0, 0, 34), (0, 0, 43)))  # bore = J1 bearing seat
     reg("j1_turret_collar", "turret", "cap", collar, orient="flat, no supports", fill=0.6)
     zj2 = A["base_h"]
     col = cyl(46, (0, 0, 42), (0, 0, zj2))
@@ -233,11 +234,12 @@ def build_arm():
     # recess for the two end caps
     for sgn in (1, -1):
         turret = turret.cut(cyl(rs - 7.8, (0, sgn * (ws / 2 - 2.0), zj2), (0, sgn * (ws / 2 + 1), zj2)))
+    turret = turret.cut(cyl(10.5, (0, ws / 2 - 6, zj2), (0, ws / 2 + 1, zj2)))  # J2 hollow shaft through the +Y wall
     reg("j2_shoulder_puck", "turret", "shell", turret, orient="axis vertical (Y up), tree supports inside puck only", fill=1.0,
         extra=dict(note="houses 2x STS3250 (J2) facing outward; split vertically at the column/puck seam if printing is hard"))
     for sgn, nm in ((1, "j2_cap_outer"), (-1, "j2_cap_inner")):
         c = fil(cyl(rs - 8.0, (0, sgn * (ws / 2 - 2.0), zj2), (0, sgn * ws / 2, zj2)), 0.8, "%CIRCLE")
-        c = c.cut(cyl(7, (0, sgn * (ws / 2 - 3), zj2), (0, sgn * (ws / 2 + 1), zj2)))
+        c = c.cut(cyl(10.5 if sgn > 0 else 7, (0, sgn * (ws / 2 - 3), zj2), (0, sgn * (ws / 2 + 1), zj2)))  # +Y: J2 hollow shaft
         reg(nm, "turret", "cap", c, orient="flat, face down on textured plate", fill=1.0)
 
     # ---- upper arm: offset capsule side-link on +Y, beside the shoulder and elbow pucks
@@ -250,8 +252,8 @@ def build_arm():
     led = S["led"]
     body, cover = split_shell(outer, inner, y1 - fr, "+", hub_bosses(L, rs, S["elbow_puck_r"]), y0 + WALL, y1 - WALL)
     body, cover = add_snap_clips(body, cover, L, (r1 + r2) / 2, y1 - fr, "+")
-    for z in (0, L):  # wiring bores at joint centres on the inner face
-        body = body.cut(cyl(7, (0, y0 - 1, z), (0, y0 + WALL + 1, z)))
+    for z, r_b in ((0, 10.5), (L, 9.0)):  # J2 / J3 hollow shafts end in the upper-arm hubs (harness inside)
+        body = body.cut(cyl(r_b, (0, y0 - 1, z), (0, y0 + WALL + 1, z)))
     cover = cover.cut(box(-led["width"] / 2, led["width"] / 2, y1 - led["depth"], y1 + 1, led["z0"], led["z1"]))
     reg("upper_arm_body", "upper_arm", "shell", body, orient="inner face down (flat), supports in hub bores only", fill=1.0)
     reg("upper_arm_cover", "upper_arm", "shell", cover, orient="outer face down on smooth PEI (best surface)", fill=1.0,
@@ -266,10 +268,11 @@ def build_arm():
     ep = puck(re_, ey0, ey1, 5).cut(cyl(re_ - WALL, (0, ey0 + WALL, 0), (0, ey1 - WALL, 0)))
     for yy, sgn in ((ey1, 1), (ey0, -1)):
         ep = ep.cut(cyl(re_ - 6.8, (0, yy - sgn * 2.0, 0), (0, yy + sgn * 1, 0)))
+    ep = ep.cut(cyl(9.0, (0, ey1 - 6, 0), (0, ey1 + 1, 0)))  # J3 hollow shaft through the +Y wall
     reg("j3_elbow_puck", "forearm", "shell", ep, orient="axis vertical, supports inside only", fill=1.0,
         extra=dict(note=f"houses {P.ELBOW_SERVOS}x STS3250 (J3)"))
     for yy, sgn, nm in ((ey1, 1, "j3_cap_a"), (ey0, -1, "j3_cap_b")):
-        c = fil(cyl(re_ - 7.0, (0, yy - sgn * 2.0, 0), (0, yy, 0)), 0.8, "%CIRCLE").cut(cyl(7, (0, yy - sgn * 3, 0), (0, yy + sgn, 0)))
+        c = fil(cyl(re_ - 7.0, (0, yy - sgn * 2.0, 0), (0, yy, 0)), 0.8, "%CIRCLE").cut(cyl(9.0 if sgn > 0 else 7, (0, yy - sgn * 3, 0), (0, yy + sgn, 0)))
         reg(nm, "forearm", "cap", c, orient="flat, face down", fill=1.0)
     r1, r2 = S["link_r"]["fore"]
     L = A["fore"]
@@ -292,9 +295,10 @@ def build_arm():
     roll = fil(cyl(rr, (0, yc, 0), (0, yc, A["wrist"] - 4)), 3, ">Z")
     wr = wp.union(roll)
     wr_in = cyl(rw - WALL, (0, yc - ww / 2 + WALL, 0), (0, yc + ww / 2 - WALL, 0)).union(cyl(rr - WALL, (0, yc, 0), (0, yc, A["wrist"] - 4 - WALL)))
-    wr = wr.cut(wr_in).cut(cyl(7, (0, yc, A["wrist"] - 10), (0, yc, A["wrist"])))
+    wr = wr.cut(wr_in).cut(cyl(18.5, (0, yc, A["wrist"] - 11), (0, yc, A["wrist"])))  # 6805 roll bearing seat
     for sgn in (1, -1):
         wr = wr.cut(cyl(rw - 6.8, (0, yc + sgn * (ww / 2 - 2.0), 0), (0, yc + sgn * (ww / 2 + 1), 0)))
+    wr = wr.cut(cyl(21.0, (0, yc - ww / 2 - 1, 0), (0, yc - ww / 2 + 8.5, 0)))  # J4 6806 bearing seat in the -Y wall
     big = 500
     front = wr.intersect(box(0, big, -big, big, -big, big))
     back = wr.intersect(box(-big, 0, -big, big, -big, big))
@@ -303,6 +307,8 @@ def build_arm():
             extra=dict(note="halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5"))
     for sgn, nm in ((1, "j4_cap_a"), (-1, "j4_cap_b")):
         c = fil(cyl(rw - 7.0, (0, yc + sgn * (ww / 2 - 2.0), 0), (0, yc + sgn * ww / 2, 0)), 0.8, "%CIRCLE")
+        if sgn < 0:  # the -Y cap is a ring around the J4 bearing
+            c = c.cut(cyl(21.0, (0, yc - ww / 2 - 1, 0), (0, yc - ww / 2 + 3, 0)))
         reg(nm, "wrist", "cap", c, orient="flat, face down", fill=1.0)
     return yc
 

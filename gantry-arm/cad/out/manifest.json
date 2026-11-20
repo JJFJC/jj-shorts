@@ -7,7 +7,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "top face down, no supports",
-  "mass_g": 89.3,
+  "mass_g": 77.4,
   "dims_mm": [
    120.0,
    120.0,
@@ -15,9 +15,9 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 5.13,
+  "print_h": 4.47,
   "group": "arm",
-  "note": "holds STS3215 (J1) + 6 mm-thick lazy-susan / thrust bearing ring"
+  "note": "drum around the fixed J1 bearing spigot (cad/internals.py)"
  },
  {
   "name": "j1_turret_collar",
@@ -27,7 +27,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, no supports",
-  "mass_g": 55.2,
+  "mass_g": 28.7,
   "dims_mm": [
    112.0,
    112.0,
@@ -35,7 +35,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 3.23,
+  "print_h": 1.77,
   "group": "arm",
   "note": ""
  },
@@ -47,7 +47,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "axis vertical (Y up), tree supports inside puck only",
-  "mass_g": 110.2,
+  "mass_g": 110.0,
   "dims_mm": [
    126.0,
    96.0,
@@ -55,7 +55,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 6.29,
+  "print_h": 6.28,
   "group": "arm",
   "note": "houses 2x STS3250 (J2) facing outward; split vertically at the column/puck seam if printing is hard"
  },
@@ -67,7 +67,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, face down on textured plate",
-  "mass_g": 12.3,
+  "mass_g": 11.8,
   "dims_mm": [
    80.0,
    80.0,
@@ -75,7 +75,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.85,
+  "print_h": 0.83,
   "group": "arm",
   "note": ""
  },
@@ -107,7 +107,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "inner face down (flat), supports in hub bores only",
-  "mass_g": 86.6,
+  "mass_g": 85.8,
   "dims_mm": [
    251.0,
    92.0,
@@ -115,7 +115,7 @@
   ],
   "fits_bed": true,
   "bed_note": "rotated 19\u00b0 on bed",
-  "print_h": 4.98,
+  "print_h": 4.93,
   "group": "arm",
   "note": ""
  },
@@ -167,15 +167,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "axis vertical, supports inside only",
-  "mass_g": 67.1,
+  "mass_g": 74.5,
   "dims_mm": [
-   82.0,
-   80.0,
-   80.0
+   88.0,
+   88.0,
+   82.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 3.9,
+  "print_h": 4.31,
   "group": "arm",
   "note": "houses 2x STS3250 (J3)"
  },
@@ -187,15 +187,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, face down",
-  "mass_g": 8.2,
+  "mass_g": 10.2,
   "dims_mm": [
-   66.0,
-   66.0,
+   74.0,
+   74.0,
    2.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.63,
+  "print_h": 0.74,
   "group": "arm",
   "note": ""
  },
@@ -207,15 +207,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, face down",
-  "mass_g": 8.2,
+  "mass_g": 10.5,
   "dims_mm": [
-   66.0,
-   66.0,
+   74.0,
+   74.0,
    2.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.63,
+  "print_h": 0.75,
   "group": "arm",
   "note": ""
  },
@@ -267,7 +267,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "split face down (flat), no supports",
-  "mass_g": 27.1,
+  "mass_g": 26.0,
   "dims_mm": [
    83.0,
    64.0,
@@ -275,7 +275,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.68,
+  "print_h": 1.62,
   "group": "arm",
   "note": "halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5"
  },
@@ -287,7 +287,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "split face down (flat), no supports",
-  "mass_g": 27.1,
+  "mass_g": 26.0,
   "dims_mm": [
    83.0,
    64.0,
@@ -295,7 +295,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.68,
+  "print_h": 1.62,
   "group": "arm",
   "note": "halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5"
  },
@@ -327,7 +327,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, face down",
-  "mass_g": 4.9,
+  "mass_g": 1.4,
   "dims_mm": [
    50.0,
    50.0,
@@ -335,7 +335,7 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.44,
+  "print_h": 0.25,
   "group": "arm",
   "note": ""
  },
@@ -347,15 +347,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat",
-  "mass_g": 10.0,
+  "mass_g": 11.4,
   "dims_mm": [
-   56.0,
-   56.0,
+   60.0,
+   60.0,
    4.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.72,
+  "print_h": 0.81,
   "group": "arm",
   "note": ""
  },
@@ -367,15 +367,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, magnet face up",
-  "mass_g": 15.9,
+  "mass_g": 18.5,
   "dims_mm": [
-   56.0,
-   56.0,
+   60.0,
+   60.0,
    8.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.05,
+  "print_h": 1.2,
   "group": "arm",
   "note": "3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket"
  },
@@ -427,15 +427,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, no supports",
-  "mass_g": 5.4,
+  "mass_g": 5.7,
   "dims_mm": [
-   69.6,
-   61.2,
+   73.6,
+   65.2,
    10.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.47,
+  "print_h": 0.49,
   "group": "arm",
   "note": "quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock)"
  },
@@ -487,15 +487,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, cone up, no supports",
-  "mass_g": 16.6,
+  "mass_g": 19.1,
   "dims_mm": [
-   59.0,
-   56.0,
+   63.0,
+   60.0,
    12.6
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.09,
+  "print_h": 1.23,
   "group": "arm",
   "note": "one per tool; 3 steel discs face the magnets, 4 brass contact pads"
  },
@@ -527,15 +527,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "open end up, no supports",
-  "mass_g": 26.1,
+  "mass_g": 28.6,
   "dims_mm": [
-   58.0,
-   58.0,
+   62.0,
+   62.0,
    37.9
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.62,
+  "print_h": 1.76,
   "group": "arm",
   "note": "STS3215 lies across the housing; pinion drives a twin rack"
  },
@@ -547,15 +547,15 @@
   "printed": true,
   "material": "PETG translucent grey (or smoked PETG)",
   "orient": "dome down, 100% infill, slow outer wall",
-  "mass_g": 4.4,
+  "mass_g": 5.4,
   "dims_mm": [
-   54.0,
-   54.0,
+   58.0,
+   58.0,
    8.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 0.41,
+  "print_h": 0.47,
   "group": "arm",
   "note": ""
  },
@@ -1307,15 +1307,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "back wall down (face on bed), supports under forks",
-  "mass_g": 340.9,
+  "mass_g": 339.3,
   "dims_mm": [
    189.8,
-   124.0,
+   125.5,
    73.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 19.11,
+  "print_h": 19.02,
   "group": "workcell",
   "note": "slots for tools 1+2; two modules screw to the table side by side"
  },
@@ -1327,15 +1327,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "back wall down (face on bed), supports under forks",
-  "mass_g": 355.3,
+  "mass_g": 353.8,
   "dims_mm": [
    189.8,
-   134.0,
+   135.5,
    73.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 19.91,
+  "print_h": 19.82,
   "group": "workcell",
   "note": "slots for tools 3+4; two modules screw to the table side by side"
  }

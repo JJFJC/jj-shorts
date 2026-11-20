@@ -95,10 +95,10 @@
    "count": 1,
    "efficiency": 1.0,
    "encoder": false,
-   "model": "sts3215",
-   "rated_Nm": 0.980665,
+   "model": "sts3032",
+   "rated_Nm": 0.14709975,
    "ratio": 1.0,
-   "stall_Nm": 2.941995
+   "stall_Nm": 0.44129925000000003
   }
  },
  "spring_k_N_per_mm": 0.9,
