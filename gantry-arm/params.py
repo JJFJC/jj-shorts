@@ -170,7 +170,8 @@ DENSITY = dict(PETG=1.27e-3, steel=7.9e-3, brass=8.5e-3, rubber=1.2e-3, magnet=7
 RACK = dict(
     slots={1: 250.0, 2: 315.0, 3: 375.0, 4: 450.0},  # spaced for the 96 mm phone mount; tool id -> world x of the slot centre (1 gripper, 2 suction, 3 pen, 4 phone)
     y=275.0,  # world y of the slot centre (fork opening faces -Y, toward the robot)
-    tcp_z=30.0,  # gripper-TCP-equivalent height while docked
+    tcp_z=110.0,  # gripper-TCP-equivalent height while docked (raised so 150 mm spindle tools clear the table)
+    riser=80.0,  # rack modules stand on this riser block
     insert_mm=45.0,  # horizontal travel into the fork
     lift_mm=20.0,  # Z-gantry lift that breaks the magnets
     groove=(10.0, 14.0, 2.6),  # groove on the tool coupler half: tool-frame z from..to, depth (mm)

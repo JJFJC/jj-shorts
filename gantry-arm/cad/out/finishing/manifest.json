@@ -1,0 +1,270 @@
+[
+ {
+  "name": "spindle_sand_coupler",
+  "role": "shell",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_housing",
+  "role": "shell",
+  "body": "tool",
+  "tool": "sand",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_carriage",
+  "role": "cap",
+  "body": "tool",
+  "tool": "sand",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_rods",
+  "role": "metal",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_motor",
+  "role": "motor",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_nose",
+  "role": "metal",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_shank",
+  "role": "metal",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_bit",
+  "role": "abrasive",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true,
+  "tcp_mm": 150.35
+ },
+ {
+  "name": "spindle_fine_coupler",
+  "role": "shell",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_housing",
+  "role": "shell",
+  "body": "tool",
+  "tool": "fine",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_carriage",
+  "role": "cap",
+  "body": "tool",
+  "tool": "fine",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_rods",
+  "role": "metal",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_motor",
+  "role": "motor",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_nose",
+  "role": "metal",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_shank",
+  "role": "metal",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_bit",
+  "role": "abrasive_fine",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true,
+  "tcp_mm": 150.35
+ },
+ {
+  "name": "spindle_polish_coupler",
+  "role": "shell",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_housing",
+  "role": "shell",
+  "body": "tool",
+  "tool": "polish",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_carriage",
+  "role": "cap",
+  "body": "tool",
+  "tool": "polish",
+  "printed": true,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_rods",
+  "role": "metal",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_motor",
+  "role": "motor",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_nose",
+  "role": "metal",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_shank",
+  "role": "metal",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_bit",
+  "role": "felt",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true,
+  "tcp_mm": 152.0
+ },
+ {
+  "name": "vise_base",
+  "role": "shell",
+  "body": "world",
+  "printed": true,
+  "valid": true
+ },
+ {
+  "name": "vise_fixed",
+  "role": "cap",
+  "body": "world",
+  "printed": true,
+  "valid": true
+ },
+ {
+  "name": "vise_moving",
+  "role": "cap",
+  "body": "world",
+  "printed": true,
+  "valid": true
+ },
+ {
+  "name": "vise_screw",
+  "role": "metal",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ },
+ {
+  "name": "vise_servo",
+  "role": "motor",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ },
+ {
+  "name": "vise_pads",
+  "role": "rubber",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ },
+ {
+  "name": "vise_part",
+  "role": "part",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ }
+]

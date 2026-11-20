@@ -367,7 +367,7 @@
   "printed": true,
   "material": "PETG",
   "orient": "flat, magnet face up",
-  "mass_g": 16.0,
+  "mass_g": 15.9,
   "dims_mm": [
    56.0,
    56.0,
@@ -375,9 +375,9 @@
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 1.06,
+  "print_h": 1.05,
   "group": "arm",
-  "note": "3x 8x3 mm N52 magnets, 4x pogo pins (12V, GND, DATA, TOOL_ID), cone socket"
+  "note": "3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket"
  },
  {
   "name": "coupler_magnets",
@@ -405,13 +405,13 @@
   "role": "brass",
   "qty": 1,
   "printed": false,
-  "material": "pogo pin 2 mm, 4 per robot half",
+  "material": "4x pogo pin 2 mm (signal) + 2x pogo pin 3.5 mm >= 5 A (power) per robot half",
   "orient": "",
-  "mass_g": 0.4,
+  "mass_g": 1.4,
   "dims_mm": [
-   10.8,
-   5.0,
-   1.8
+   28.6,
+   15.5,
+   6.2
   ],
   "fits_bed": true,
   "bed_note": "bought",
@@ -505,12 +505,12 @@
   "role": "brass",
   "qty": 4,
   "printed": false,
-  "material": "brass pads / PCB, 4 per tool",
+  "material": "brass pads / PCB: 4 signal + 2 power per tool",
   "orient": "",
-  "mass_g": 0.1,
+  "mass_g": 0.3,
   "dims_mm": [
-   11.4,
-   2.4,
+   30.2,
+   18.0,
    0.5
   ],
   "fits_bed": true,
@@ -1307,15 +1307,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "back wall down (face on bed), supports under forks",
-  "mass_g": 201.4,
+  "mass_g": 340.9,
   "dims_mm": [
+   189.8,
    124.0,
-   109.8,
    73.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 11.36,
+  "print_h": 19.11,
   "group": "workcell",
   "note": "slots for tools 1+2; two modules screw to the table side by side"
  },
@@ -1327,15 +1327,15 @@
   "printed": true,
   "material": "PETG",
   "orient": "back wall down (face on bed), supports under forks",
-  "mass_g": 211.0,
+  "mass_g": 355.3,
   "dims_mm": [
+   189.8,
    134.0,
-   109.8,
    73.0
   ],
   "fits_bed": true,
   "bed_note": "flat",
-  "print_h": 11.89,
+  "print_h": 19.91,
   "group": "workcell",
   "note": "slots for tools 3+4; two modules screw to the table side by side"
  }

@@ -32,7 +32,7 @@ def pose_for(view: str) -> dict:
     STATIONS, TOOL_TCP = lay["stations"], lay["tool_tcp"]
 
     g = Geometry.load()
-    k = Kinematics(Geometry(**{**g.__dict__, "tool": g.tool - 64.0 + TOOL_TCP}))  # candle gripper is longer
+    k = Kinematics(Geometry(**{**g.__dict__, "tool": g.tool - 80.0 + TOOL_TCP}))  # candle gripper is longer
     if view == "printer":
         x, y, z = STATIONS["flex_lip"]
         target = Pose(x - 70, y, z + 30, 135.0, 90.0)

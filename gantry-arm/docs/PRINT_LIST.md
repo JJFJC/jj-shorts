@@ -6,7 +6,7 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | # | Part | Qty | Material | Mass each (g) | Est. time each (h) | Size (mm) | Bed | Orientation | Notes |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | `coupler_lock_sleeve` | 1 | PETG | 5 | 0.5 | 70 × 61 × 10 | ✅ flat | flat, no supports | quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock) |
-| 2 | `coupler_robot_half` | 1 | PETG | 16 | 1.1 | 56 × 56 × 8 | ✅ flat | flat, magnet face up | 3x 8x3 mm N52 magnets, 4x pogo pins (12V, GND, DATA, TOOL_ID), cone socket |
+| 2 | `coupler_robot_half` | 1 | PETG | 16 | 1.1 | 56 × 56 × 8 | ✅ flat | flat, magnet face up | 3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket |
 | 3 | `coupler_tool_half` | 4 | PETG | 17 | 1.1 | 59 × 56 × 13 | ✅ flat | flat, cone up, no supports | one per tool; 3 steel discs face the magnets, 4 brass contact pads |
 | 4 | `forearm_body` | 1 | PETG | 66 | 3.9 | 220 × 76 × 19 | ✅ flat | inner face down, supports in hub bores only |  |
 | 5 | `forearm_cover` | 1 | PETG | 46 | 2.7 | 220 × 76 × 13 | ✅ flat | outer face down on smooth PEI |  |
@@ -50,19 +50,19 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | 43 | `z_rear_cover_1` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
 | 44 | `z_rear_cover_2` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
 | 45 | `z_rear_cover_3` | 1 | PETG | 78 | 4.5 | 214 × 48 × 42 | ✅ flat | on its back (outer face down) | hides T8x2 lead screw + Z cable chain; 3 segments |
-| 46 | `tool_rack_1` | 1 | PETG | 201 | 11.4 | 124 × 110 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 1+2; two modules screw to the table side by side |
-| 47 | `tool_rack_2` | 1 | PETG | 211 | 11.9 | 134 × 110 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 3+4; two modules screw to the table side by side |
+| 46 | `tool_rack_1` | 1 | PETG | 341 | 19.1 | 190 × 124 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 1+2; two modules screw to the table side by side |
+| 47 | `tool_rack_2` | 1 | PETG | 355 | 19.9 | 190 × 134 × 73 | ✅ flat | back wall down (face on bed), supports under forks | slots for tools 3+4; two modules screw to the table side by side |
 
-**Total printed: 3.20 kg PETG, ≈ 186 h of printing** (+15% for supports, brims and failed prints → buy 4 kg + 1 kg of white or graphite for the finish you pick).
+**Total printed: 3.48 kg PETG, ≈ 202 h of printing** (+15% for supports, brims and failed prints → buy 5 kg + 1 kg of white or graphite for the finish you pick).
 
 ## Bought / non-printed parts shown in CAD
 
 | Part | Material |
 |---|---|
 | `coupler_magnets` | N52 8x3 mm |
-| `coupler_pogo_pins` | pogo pin 2 mm, 4 per robot half |
+| `coupler_pogo_pins` | 4x pogo pin 2 mm (signal) + 2x pogo pin 3.5 mm >= 5 A (power) per robot half |
 | `wrist_camera_lens` | camera lens |
-| `coupler_contact_pads` | brass pads / PCB, 4 per tool |
+| `coupler_contact_pads` | brass pads / PCB: 4 signal + 2 power per tool |
 | `gripper_pinion_rack` | M0.5 pinion + rack (or printed PETG) |
 | `gripper_fingers_vlink` | 2 mm stainless laser-cut links (or PETG + metallic paint) |
 | `gripper_pivot_pins` | 3 mm steel dowel pins |
@@ -89,7 +89,7 @@ Times are rough (≈18 g/h PETG, 0.20 mm layers, 6 walls). Re-slice in Bambu Stu
 | upper_arm | 150 | 25 | 174 | [-0.0, 63.08, 77.15] |
 | forearm | 196 | 25 | 221 | [0.0, -25.18, 39.9] |
 | wrist | 64 | 15 | 79 | [0.0, -2.0, 8.92] |
-| tool | 159 | 20 | 179 | [0.83, -0.03, 40.77] |
+| tool | 160 | 20 | 180 | [0.82, 0.06, 40.54] |
 
 Servos are not in these numbers; the sim adds them at their real positions.
 

@@ -324,9 +324,13 @@ def coupler_robot(yc):
     for dx in (-4.5, -1.5, 1.5, 4.5):
         pins.append(cyl(0.9, (dx, yc - 13, 4), (dx, yc - 13, 9.0)))
         h = h.cut(cyl(1.25, (dx, yc - 13, 2), (dx, yc - 13, 8.1)))
+    # 2 high-current contacts for powered tools (spindles, pump): 3.5 mm pogo pins rated >= 5 A each
+    for dx in (-6.0, 6.0):
+        pins.append(cyl(1.75, (dx, yc + 13, 3), (dx, yc + 13, 9.2)))
+        h = h.cut(cyl(1.9, (dx, yc + 13, 1), (dx, yc + 13, 8.1)))
     h = h.cut(cyl(5, (0, yc, -1), (0, yc, 3.5)))  # wiring bore into the roll housing
     reg("coupler_robot_half", "tool", "shell", h, orient="flat, magnet face up", fill=0.7,
-        extra=dict(note="3x 8x3 mm N52 magnets, 4x pogo pins (12V, GND, DATA, TOOL_ID), cone socket"))
+        extra=dict(note="3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket"))
     m = mag[0]
     for x in mag[1:]:
         m = m.union(x)
@@ -334,7 +338,7 @@ def coupler_robot(yc):
     pn = pins[0]
     for x in pins[1:]:
         pn = pn.union(x)
-    reg("coupler_pogo_pins", "tool", "brass", pn, printed=False, material="pogo pin 2 mm, 4 per robot half")
+    reg("coupler_pogo_pins", "tool", "brass", pn, printed=False, material="4x pogo pin 2 mm (signal) + 2x pogo pin 3.5 mm >= 5 A (power) per robot half")
     # locking sleeve: quarter-turn bayonet collar with a lever tab
     sl = cyl(rr + 2.6, (0, yc, 1), (0, yc, 11)).cut(cyl(rr + 0.25, (0, yc, 0), (0, yc, 12)))
     tab = rbox(rr, rr + 11, yc - 5, yc + 5, 3, 9, 2.4)
@@ -357,6 +361,8 @@ def coupler_tool_half(yc, z0=8.0):
         h = h.union(box(-3, 3, -2, 2, z0 + 0.5, z0 + 4).rotate((0, 0, 0), (0, 0, 1), ang).translate((rr * math.cos(a), yc + rr * math.sin(a), 0)))
     for dx in (-4.5, -1.5, 1.5, 4.5):
         h = h.cut(cyl(1.3, (dx, yc - 13, z0 - 0.1), (dx, yc - 13, z0 + 0.6)))
+    for dx in (-6.0, 6.0):  # power pads (6 mm brass discs)
+        h = h.cut(cyl(3.1, (dx, yc + 13, z0 - 0.1), (dx, yc + 13, z0 + 0.6)))
     # parking groove for the tool rack fork (tool-frame z from..to, depth)
     gz0, gz1, gd = P.RACK["groove"]
     h = h.cut(cyl(rr + 1, (0, yc, gz0), (0, yc, gz1)).cut(cyl(rr - gd, (0, yc, gz0 - 1), (0, yc, gz1 + 1))))
@@ -369,8 +375,9 @@ def build_tools(yc):
         extra=dict(note="one per tool; 3 steel discs face the magnets, 4 brass contact pads"))
     reg("coupler_contact_pads", "tool", "brass",
         cyl(1.2, (-4.5, yc - 13, 8.0), (-4.5, yc - 13, 8.5)).union(cyl(1.2, (-1.5, yc - 13, 8.0), (-1.5, yc - 13, 8.5)))
-        .union(cyl(1.2, (1.5, yc - 13, 8.0), (1.5, yc - 13, 8.5))).union(cyl(1.2, (4.5, yc - 13, 8.0), (4.5, yc - 13, 8.5))),
-        printed=False, material="brass pads / PCB, 4 per tool", qty=4)
+        .union(cyl(1.2, (1.5, yc - 13, 8.0), (1.5, yc - 13, 8.5))).union(cyl(1.2, (4.5, yc - 13, 8.0), (4.5, yc - 13, 8.5)))
+        .union(cyl(3.0, (-6.0, yc + 13, 8.0), (-6.0, yc + 13, 8.5))).union(cyl(3.0, (6.0, yc + 13, 8.0), (6.0, yc + 13, 8.5))),
+        printed=False, material="brass pads / PCB: 4 signal + 2 power per tool", qty=4)
 
     # ---- parallel gripper: cylindrical housing, smoked cap, V-linkage steel fingers, rubber pads
     z0 = 16.0
@@ -567,17 +574,21 @@ def build_rack():
     for mod, pair in enumerate((items[:2], items[2:]), start=1):  # two printable 2-slot modules
         xs = [x for _, x in pair]
         x0, x1 = min(xs) - 29.5, max(xs) + 29.5
+        zr = R["riser"]
         rack = rbox(x0, x1, y - 30, y + 43, 0, 6, 2.5)
         rack = rack.union(rbox(x0, x1, y + 35, y + 43, 0, z_fork_top + 10, 2.5))
+        # riser: two side walls + back so long tools hang free below the forks
+        for xw in (x0, x1 - 8):
+            rack = rack.union(box(xw, xw + 8, y - 30, y + 43, 0, z_fork_top - 4))
         for tid, x in pair:
             fork = box(x - 29, x + 29, y - 30, y + 36, z_fork_bot, z_fork_top)
             fork = fork.cut(cyl(rr - gd + 0.4, (x, y, z_fork_bot - 1), (x, y, z_fork_top + 1)))
             fork = fork.cut(box(x - (rr - gd + 0.4), x + (rr - gd + 0.4), y - 31, y, z_fork_bot - 1, z_fork_top + 1))
             fork = fil(fork, 1.0, "|Z")
             # cam post on -X: vertical channel the sleeve lever tab drops into (holds the bayonet open)
-            post = rbox(x - rr - 1, x - rr + 11, y + 4, y + 36, 0, z_fork_top + 10, 2)
+            post = rbox(x - rr - 1, x - rr + 11, y + 4, y + 36, z_fork_bot - 30, z_fork_top + 10, 2)
             post = post.cut(box(x - rr + 2, x - rr + 8, y + 3, y + 12, z_fork_top - 6, z_fork_top + 11))
-            rib = box(x - 3, x + 3, y + 10, y + 36, 6, z_fork_bot)  # gusset under the fork
+            rib = box(x - 3, x + 3, y + 22, y + 36, z_fork_bot - 30, z_fork_bot)  # gusset under the fork (clear of hanging tools)
             rack = rack.union(fork).union(post).union(rib)
         names = "+".join(str(t) for t, _ in pair)
         reg(f"tool_rack_{mod}", "world", "shell", rack, orient="back wall down (face on bed), supports under forks", fill=0.6, group="workcell",
