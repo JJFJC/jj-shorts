@@ -45,6 +45,9 @@ class GantryArmConfig(RobotConfig):
 
     # ganged servo pairs (J2, J3)
     ganged_tolerance_deg: float = 3.0
+    # geared pairs: motor-side offset that makes the two servos push against each other (backlash/2 + preload).
+    # Measure on the real joint: jog the pair apart until Present_Load rises on both, then add ~0.15 deg.
+    geared_preload_deg: float = 0.4
 
     # collision detection from servo load
     collision_detection: bool = True

@@ -302,29 +302,50 @@ def build_wrist():
 # ----------------------------------------------------------------------------- cutaway shells
 
 
-def build_cutaway(parts_mod):
-    """Printed arm shells, cut on x = 0 (keep x < 0) so the joints show in section."""
+Y_CUT = 31.0  # just past the gear layer (gears y 20..30): the face-on view of both gear trains
+
+
+def halves(shape, axis):
+    """(kept, removed) halves: axis 'x' keeps x <= 0, axis 'y' keeps y <= Y_CUT."""
+    big = 500
+    if axis == "x":
+        keep, rem = box(-big, 0, -big, big, -big, big), box(0, big, -big, big, -big, big)
+    else:
+        keep, rem = box(-big, big, -big, Y_CUT, -big, big), box(-big, big, Y_CUT, big, -big, big)
+    out = []
+    for h in (keep, rem):
+        try:
+            sh = shape.intersect(h)
+            out.append(sh if sh.val().Volume() > 1 else None)
+        except Exception:
+            out.append(None)
+    return out
+
+
+def arm_shells():
     import parts as PM
 
     PM.build_all()
-    out = []
-    half = box(-500, 0, -500, 500, -500, 500)
-    for p in PM.PARTS:
-        if p.group != "arm" and not p.name.startswith(("j5_roll_flange", "coupler_robot")):
-            continue
-        try:
-            sh = p.shape.intersect(half)
-            if sh.val().Volume() < 1:
-                continue
-        except Exception:
-            continue
-        out.append((p.name, p.body, p.role, sh))
-    return out
+    return [(p.name, p.body, p.role, p.shape) for p in PM.PARTS
+            if (p.group == "arm" or p.name.startswith(("j5_roll_flange", "coupler_robot"))) and not p.name.startswith(("tool_", "coupler_tool", "coupler_contact"))]
+
+
+def export_cuts(items, axis, tag):
+    d = HERE / "out" / f"cut_{axis}"
+    for sub in ("keep", "ghost"):
+        (d / sub).mkdir(parents=True, exist_ok=True)
+    man = []
+    for name, body, role, shape in items:
+        k, r = halves(shape, axis)
+        for sub, sh in (("keep", k), ("ghost", r)):
+            if sh is not None:
+                cq.exporters.export(sh, str(d / sub / f"{name}.stl"), tolerance=0.05, angularTolerance=0.12)
+                man.append(dict(name=name, body=body, role=role, part=sub, src=tag))
+    return man
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    CUT.mkdir(parents=True, exist_ok=True)
     build_j1()
     build_j2_j3()
     build_wrist()
@@ -332,15 +353,14 @@ def main():
     for p in PARTS:
         cq.exporters.export(p["shape"], str(OUT / f"{p['name']}.stl"), tolerance=0.03, angularTolerance=0.1)
         v = p["shape"].val()
-        man.append(dict(name=p["name"], body=p["body"], role=p["role"], joint=p["joint"], note=p["note"], bom=p["bom"],
-                        valid=v.isValid(), mass_g=None))
+        man.append(dict(name=p["name"], body=p["body"], role=p["role"], joint=p["joint"], note=p["note"], bom=p["bom"], valid=v.isValid()))
     (OUT / "manifest.json").write_text(json.dumps(man, indent=1))
-    cman = []
-    for name, body, role, sh in build_cutaway(None):
-        cq.exporters.export(sh, str(CUT / f"{name}.stl"), tolerance=0.05, angularTolerance=0.12)
-        cman.append(dict(name=name, body=body, role=role))
-    (CUT / "manifest.json").write_text(json.dumps(cman, indent=1))
-    print(len(man), "internal parts; invalid:", [m["name"] for m in man if not m["valid"]], ";", len(cman), "cut shells")
+    shells = arm_shells()
+    cx = export_cuts(shells, "x", "shell")  # internals stay whole in the x-section views
+    cy = export_cuts(shells, "y", "shell") + export_cuts([(p["name"], p["body"], p["role"], p["shape"]) for p in PARTS], "y", "internal")
+    (HERE / "out" / "cut_x" / "manifest.json").write_text(json.dumps(cx, indent=1))
+    (HERE / "out" / "cut_y" / "manifest.json").write_text(json.dumps(cy, indent=1))
+    print(len(man), "internal parts; invalid:", [m["name"] for m in man if not m["valid"]], f"; cut_x {len(cx)} / cut_y {len(cy)} pieces")
 
 
 if __name__ == "__main__":

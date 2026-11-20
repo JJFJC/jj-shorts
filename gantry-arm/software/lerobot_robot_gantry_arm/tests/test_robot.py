@@ -150,16 +150,23 @@ def test_configure_writes_heavy_gains_to_both_twin_servos(hw_robot):
     assert w[("Max_Torque_Limit", "gripper")] == 500
 
 
-def test_send_action_drives_twin_pairs_together_with_feedforward(hw_robot):
+def test_send_action_drives_geared_pairs_with_preload_and_feedforward(hw_robot):
     hw_robot.send_action({"shoulder_lift.pos": 10.0, "elbow_flex.pos": 10.0, "gripper.pos": 50.0})
     reg, goals = [w for w in hw_robot.bus.writes if w[0] == "Goal_Position"][-1]
-    assert goals["shoulder_lift"] == goals["shoulder_lift_2"]
-    assert goals["elbow_flex"] == goals["elbow_flex_2"]
-    # the goal is offset in the direction of the static torque the model predicts
+    g = hw_robot.ganged  # geared pairs: each servo gets ratio x joint goal, +/- the anti-backlash preload
+    joint = {}
+    for j in ("shoulder_lift", "elbow_flex"):
+        ra, rb = g.ratios[j]
+        d = g.preload_deg[j]
+        qa, qb = (goals[j] - d) / ra, (goals[f"{j}_2"] + d) / rb
+        assert qa == pytest.approx(qb, abs=1e-9)  # both servos aim at the same joint angle
+        assert goals[j] - ra * qa == pytest.approx(d) and goals[f"{j}_2"] - rb * qb == pytest.approx(-d)  # pushing apart
+        joint[j] = qa
+    # the joint goal is offset in the direction of the static torque the model predicts
     # (at small angles the shoulder spring over-balances, so J2 is pulled back)
     tau = hw_robot.gravity.torques({"shoulder_lift": 10.0, "elbow_flex": 10.0, "base_yaw": 0, "wrist_flex": 0, "wrist_roll": 0})
     for j in ("shoulder_lift", "elbow_flex"):
-        assert (goals[j] - 10.0) * tau[j] > 0
+        assert (joint[j] - 10.0) * tau[j] > 0
     assert goals["gripper"] == 50.0
 
 

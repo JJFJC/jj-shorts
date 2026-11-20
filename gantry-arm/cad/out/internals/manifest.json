@@ -9,8 +9,7 @@
    "printed PETG",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_bearing_lo_races",
@@ -22,8 +21,7 @@
    "61812-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_bearing_lo_seal",
@@ -32,8 +30,7 @@
   "joint": "J1",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_bearing_hi_races",
@@ -45,8 +42,7 @@
    "61812-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_bearing_hi_seal",
@@ -55,8 +51,7 @@
   "joint": "J1",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_oldham_lower",
@@ -68,8 +63,7 @@
    "Oldham coupling 3-part, \u00d825",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_turret_skirt",
@@ -81,8 +75,7 @@
    "printed PETG",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_oldham_slider",
@@ -91,8 +84,7 @@
   "joint": "J1",
   "note": "POM disc",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_oldham_upper",
@@ -101,8 +93,7 @@
   "joint": "J1",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_horn",
@@ -111,8 +102,7 @@
   "joint": "J1",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_servo",
@@ -124,8 +114,7 @@
    "Feetech STS3215 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_servo_spline",
@@ -134,8 +123,7 @@
   "joint": "J1",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_servo_cradle",
@@ -147,8 +135,7 @@
    "printed PETG",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_hub_gear",
@@ -160,8 +147,7 @@
    "steel spur gear m1 36T bore 20",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_shaft",
@@ -173,8 +159,7 @@
    "aluminium tube \u00d820 x 15, 45 mm",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_bearing_1_races",
@@ -186,8 +171,7 @@
    "6804-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_bearing_1_seal",
@@ -196,8 +180,7 @@
   "joint": "J2",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_bearing_2_races",
@@ -209,8 +192,7 @@
    "6804-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_bearing_2_seal",
@@ -219,8 +201,7 @@
   "joint": "J2",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_bearing_boss",
@@ -232,8 +213,7 @@
    "printed PETG (glued into the puck)",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_pinion_A",
@@ -245,8 +225,7 @@
    "steel spur gear m1 18T, bolted to the servo horn",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_horn_A",
@@ -258,8 +237,7 @@
    "STS aluminium horn (with the servo)",
    0
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_servo_A",
@@ -271,8 +249,7 @@
    "Feetech STS3250 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_servo_spline_A",
@@ -281,8 +258,7 @@
   "joint": "J2",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_pinion_B",
@@ -294,8 +270,7 @@
    "steel spur gear m1 17T, bolted to the servo horn",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_horn_B",
@@ -307,8 +282,7 @@
    "STS aluminium horn (with the servo)",
    0
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_servo_B",
@@ -320,8 +294,7 @@
    "Feetech STS3250 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_servo_spline_B",
@@ -330,8 +303,7 @@
   "joint": "J2",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_mount_plate",
@@ -343,8 +315,7 @@
    "printed PETG",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j2_cable_loop",
@@ -353,8 +324,7 @@
   "joint": "J2",
   "note": "\u00b1range/2 coiled loop; no slip ring",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_hub_gear",
@@ -366,8 +336,7 @@
    "steel spur gear m1 30T bore 17",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_shaft",
@@ -379,8 +348,7 @@
    "aluminium tube \u00d817 x 13, 45 mm",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_bearing_1_races",
@@ -392,8 +360,7 @@
    "6803-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_bearing_1_seal",
@@ -402,8 +369,7 @@
   "joint": "J3",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_bearing_2_races",
@@ -415,8 +381,7 @@
    "6803-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_bearing_2_seal",
@@ -425,8 +390,7 @@
   "joint": "J3",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_bearing_boss",
@@ -438,8 +402,7 @@
    "printed PETG (glued into the puck)",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_pinion_A",
@@ -451,8 +414,7 @@
    "steel spur gear m1 15T, bolted to the servo horn",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_horn_A",
@@ -464,8 +426,7 @@
    "STS aluminium horn (with the servo)",
    0
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_servo_A",
@@ -477,8 +438,7 @@
    "Feetech STS3250 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_servo_spline_A",
@@ -487,8 +447,7 @@
   "joint": "J3",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_pinion_B",
@@ -500,8 +459,7 @@
    "steel spur gear m1 14T, bolted to the servo horn",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_horn_B",
@@ -513,8 +471,7 @@
    "STS aluminium horn (with the servo)",
    0
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_servo_B",
@@ -526,8 +483,7 @@
    "Feetech STS3250 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_servo_spline_B",
@@ -536,8 +492,7 @@
   "joint": "J3",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_mount_plate",
@@ -549,8 +504,7 @@
    "printed PETG",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j3_cable_loop",
@@ -559,8 +513,7 @@
   "joint": "J3",
   "note": "\u00b1range/2 coiled loop; no slip ring",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j1_j2_harness",
@@ -569,8 +522,7 @@
   "joint": "J1",
   "note": "3-wire bus + 12 V + LED data, ~6 mm bundle",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_servo",
@@ -582,8 +534,7 @@
    "Feetech STS3215 12 V",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_servo_spline",
@@ -592,8 +543,7 @@
   "joint": "J4",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_horn",
@@ -602,8 +552,7 @@
   "joint": "J4",
   "note": "bolts to the forearm hub ring's inner flange",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_bearing_races",
@@ -615,8 +564,7 @@
    "6806-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_bearing_seal",
@@ -625,8 +573,7 @@
   "joint": "J4",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j4_forearm_hub",
@@ -638,8 +585,7 @@
    "turned aluminium hub ring (on the forearm)",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_servo",
@@ -651,8 +597,7 @@
    "Feetech STS3032 6 V micro bus servo",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_servo_spline",
@@ -661,8 +606,7 @@
   "joint": "J5",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_pinion",
@@ -674,8 +618,7 @@
    "brass/steel gear m0.5 36T",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_roll_gear",
@@ -687,8 +630,7 @@
    "brass/steel gear m0.5 36T",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_roll_shaft",
@@ -700,8 +642,7 @@
    "turned aluminium roll shaft",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_bearing_races",
@@ -713,8 +654,7 @@
    "6805-2RS",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_bearing_seal",
@@ -723,8 +663,7 @@
   "joint": "J5",
   "note": "",
   "bom": null,
-  "valid": true,
-  "mass_g": null
+  "valid": true
  },
  {
   "name": "j5_buck_6v",
@@ -736,7 +675,6 @@
    "mini buck 12 V -> 6 V, 2 A",
    1
   ],
-  "valid": true,
-  "mass_g": null
+  "valid": true
  }
 ]

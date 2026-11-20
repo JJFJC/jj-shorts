@@ -1,0 +1,394 @@
+[
+ {
+  "name": "j1_base_housing",
+  "body": "z_carriage",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j1_base_housing",
+  "body": "z_carriage",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_outer",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_outer",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_inner",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_inner",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_body",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_body",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_cover",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_cover",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_led_diffuser",
+  "body": "upper_arm",
+  "role": "accent",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_led_diffuser",
+  "body": "upper_arm",
+  "role": "accent",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_a",
+  "body": "forearm",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_a",
+  "body": "forearm",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_b",
+  "body": "forearm",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_b",
+  "body": "forearm",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_body",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_body",
+  "body": "forearm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_cover",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_cover",
+  "body": "forearm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_shell_front",
+  "body": "wrist",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_shell_back",
+  "body": "wrist",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_a",
+  "body": "wrist",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_a",
+  "body": "wrist",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_b",
+  "body": "wrist",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_b",
+  "body": "wrist",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j5_roll_flange",
+  "body": "tool",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j5_roll_flange",
+  "body": "tool",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_robot_half",
+  "body": "tool",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_robot_half",
+  "body": "tool",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_magnets",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_magnets",
+  "body": "tool",
+  "role": "metal",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_pogo_pins",
+  "body": "tool",
+  "role": "brass",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_pogo_pins",
+  "body": "tool",
+  "role": "brass",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_camera_pod",
+  "body": "tool",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_camera_lens",
+  "body": "tool",
+  "role": "lens",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_housing",
+  "body": "tool",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_housing",
+  "body": "tool",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_smoke_cap",
+  "body": "tool",
+  "role": "smoke",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_smoke_cap",
+  "body": "tool",
+  "role": "smoke",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pinion_rack",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pinion_rack",
+  "body": "tool",
+  "role": "metal",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_fingers_vlink",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_fingers_vlink",
+  "body": "tool",
+  "role": "metal",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pivot_pins",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pivot_pins",
+  "body": "tool",
+  "role": "metal",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pads",
+  "body": "tool",
+  "role": "rubber",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pads",
+  "body": "tool",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "shell"
+ }
+]

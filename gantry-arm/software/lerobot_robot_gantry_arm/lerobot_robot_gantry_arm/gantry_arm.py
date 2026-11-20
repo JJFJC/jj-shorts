@@ -21,7 +21,7 @@ from lerobot.robots.robot import Robot
 from lerobot.robots.utils import ensure_safe_goal_position
 
 from .config_gantry_arm import GantryArmConfig
-from .dynamics import ARM_JOINTS, CollisionMonitor, Ganged, GravityModel, decode_load, feedforward, servo_kp_nm_per_deg
+from .dynamics import ARM_JOINTS, CollisionMonitor, Ganged, GearedPair, GravityModel, decode_load, feedforward, servo_kp_nm_per_deg
 from .kinematics import Geometry
 
 logger = logging.getLogger(__name__)
@@ -35,7 +35,7 @@ MOTORS = [  # name, id, model
     ("elbow_flex", 4, "sts3250"),
     ("elbow_flex_2", 5, "sts3250"),
     ("wrist_flex", 6, "sts3215"),
-    ("wrist_roll", 7, "sts3215"),
+    ("wrist_roll", 7, "sts3032"),  # 6 V micro servo (buck in the wrist); check the bus driver knows this model
     ("gripper", 8, "sts3215"),
 ]
 
@@ -53,7 +53,12 @@ class GantryArm(Robot):
         super().__init__(config)
         self.config = config
         self.geo = Geometry.load()
-        self.ganged = Ganged(tolerance_deg=config.ganged_tolerance_deg)
+        ratios = {j: tuple(self.geo_servo(j)["motor_ratios"]) for j in ("shoulder_lift", "elbow_flex") if self.geo_servo(j).get("motor_ratios")}
+        if ratios:  # geared twin pairs (docs/MECHANICS.md)
+            self.ganged = GearedPair(ratios=ratios, preload_deg={j: config.geared_preload_deg for j in ratios},
+                                     tolerance_deg=config.ganged_tolerance_deg)
+        else:
+            self.ganged = Ganged(tolerance_deg=config.ganged_tolerance_deg)
         self.collision = CollisionMonitor(config.collision_threshold_pct, config.collision_cycles)
         self.kp = {}
         for j in ARM_JOINTS:
@@ -129,6 +134,7 @@ class GantryArm(Robot):
             if not self.is_calibrated and calibrate:
                 self.calibrate()
             self.configure()
+            self._seed_geared_pairs()
             self.gantry = GantryDriver.open(self.config.gantry_port)
             logger.info("gantry firmware %s", self.gantry.ping())
             if self.config.home_gantry_on_connect:
@@ -164,6 +170,11 @@ class GantryArm(Robot):
                 self.bus.write("P_Coefficient", motor, p)
                 self.bus.write("I_Coefficient", motor, c.i_coefficient)
                 self.bus.write("D_Coefficient", motor, c.d_coefficient)
+                if isinstance(self.ganged, GearedPair) and joint in self.ganged.pairs:
+                    # Feetech: both position limits 0 = multi-turn position mode (the servo turns > 1 rev over
+                    # the joint range). VERIFY on a real STS3250 before the first powered move.
+                    self.bus.write("Min_Position_Limit", motor, 0)
+                    self.bus.write("Max_Position_Limit", motor, 0)
                 if motor == "gripper":
                     self.bus.write("Max_Torque_Limit", motor, c.gripper_torque_limit)
                     self.bus.write("Protection_Current", motor, 250)
@@ -191,10 +202,23 @@ class GantryArm(Robot):
         if self.sim is not None:
             return self.sim.read_arm()
         raw = self.bus.sync_read("Present_Position")
+        if isinstance(self.ganged, GearedPair):
+            raw = self.ganged.unwrap(raw)
         faults = self.ganged.check(raw)
         if faults:
             self._fault(f"ganged servos disagree on {faults}")
         return self.ganged.merge(raw)
+
+    def _seed_geared_pairs(self) -> None:
+        """Power-up: each servo knows its angle only within one turn; the vernier pinions give the joint angle."""
+        if not isinstance(self.ganged, GearedPair):
+            return
+        raw = self.bus.sync_read("Present_Position")
+        for j, b in self.ganged.pairs.items():
+            lo, hi = self.geo.limits_deg.get(j, (-180.0, 180.0))
+            q = self.ganged.absolute(j, raw[j], raw[b], lo, hi)
+            self.ganged.seed(j, q, raw[j], raw[b])
+            logger.info("%s: absolute joint angle %.2f deg from the vernier pair", j, q)
 
     def _read_loads(self) -> dict:
         if self.sim is not None:

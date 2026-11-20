@@ -107,6 +107,115 @@ class Ganged:
         return faults
 
 
+@dataclass
+class GearedPair:
+    """Two servos driving one joint through their own pinions on a shared hub gear (docs/MECHANICS.md).
+
+    Motor angle = ratio x joint angle, with a DIFFERENT ratio per servo (vernier: e.g. 36/18 and 36/17).
+    - expand():   joint goals -> motor goals, the two servos offset +/-preload so they push against each
+                  other and the gear backlash is taken out.
+    - merge():    motor readings -> one joint angle (mean of the two, each divided by its own ratio).
+    - check():    the two servos disagree on the joint angle (loose pinion, skipped tooth) -> fault.
+    - absolute(): at power-up each servo only knows its angle within one turn; the two different ratios
+                  pick the one joint angle that fits both readings (like the vernier on a caliper).
+    - unwrap():   track motor turns across the +/-180 deg wrap of single-turn readings.
+    Same interface as Ganged, so the robot class can use either.
+    """
+
+    ratios: dict = field(default_factory=lambda: {"shoulder_lift": (2.0, 36 / 17), "elbow_flex": (2.0, 30 / 14)})
+    preload_deg: dict = field(default_factory=lambda: {"shoulder_lift": 0.4, "elbow_flex": 0.4})  # motor-side, per servo
+    pairs: dict = field(default_factory=lambda: {"shoulder_lift": "shoulder_lift_2", "elbow_flex": "elbow_flex_2"})
+    tolerance_deg: float = 3.0  # joint-side disagreement that counts as a fault
+    cycles: int = 5
+    margin_deg: float = 6.0  # vernier: best candidate must beat the next by this much (motor deg)
+    max_error_deg: float = 4.0  # ... and fit servo B to within this (backlash + encoder + calibration)
+    _bad: dict = field(default_factory=dict)
+    _turns: dict = field(default_factory=dict)  # motor -> whole turns added by unwrap()
+    _last: dict = field(default_factory=dict)
+
+    def expand(self, goals: dict) -> dict:
+        out = dict(goals)
+        for a, b in self.pairs.items():
+            if a in goals:
+                ra, rb = self.ratios[a]
+                d = self.preload_deg.get(a, 0.0)
+                out[a] = ra * goals[a] + d
+                out[b] = rb * goals[a] - d
+        return out
+
+    def _joint_pair(self, a, readings):
+        b = self.pairs[a]
+        ra, rb = self.ratios[a]
+        return readings[a] / ra, readings[b] / rb
+
+    def merge(self, readings: dict) -> dict:
+        out = {k: v for k, v in readings.items() if k not in self.pairs.values()}
+        for a, b in self.pairs.items():
+            if a in readings and b in readings:
+                qa, qb = self._joint_pair(a, readings)
+                out[a] = 0.5 * (qa + qb)
+        return out
+
+    def check(self, readings: dict) -> list[str]:
+        faults = []
+        for a, b in self.pairs.items():
+            if a not in readings or b not in readings:
+                continue
+            qa, qb = self._joint_pair(a, readings)
+            self._bad[a] = self._bad.get(a, 0) + 1 if abs(qa - qb) > self.tolerance_deg else 0
+            if self._bad[a] >= self.cycles:
+                faults.append(a)
+        return faults
+
+    def absolute(self, joint: str, a_deg: float, b_deg: float, lo: float, hi: float) -> float:
+        """Joint angle from the two single-turn readings (motor deg in [-180, 180), zero = calibration pose)."""
+        ra, rb = self.ratios[joint]
+        cands = []
+        k = math.floor((ra * lo - a_deg) / 360.0) - 1
+        while True:
+            q = (a_deg + 360.0 * k) / ra
+            k += 1
+            if q < lo - 1.0:
+                continue
+            if q > hi + 1.0:
+                break
+            e = (rb * q - b_deg + 180.0) % 360.0 - 180.0
+            cands.append((abs(e), q))
+        if not cands:
+            raise ValueError(f"{joint}: no joint angle in [{lo}, {hi}] fits the servo readings")
+        cands.sort()
+        if cands[0][0] > self.max_error_deg:
+            raise ValueError(f"{joint}: servo readings disagree by {cands[0][0]:.1f} deg (loose pinion or bad zero calibration)")
+        if len(cands) > 1 and cands[1][0] - cands[0][0] < self.margin_deg:
+            raise ValueError(f"{joint}: vernier ambiguous ({cands[0][0]:.1f} vs {cands[1][0]:.1f} deg); check the zero calibration")
+        return cands[0][1]
+
+    def seed(self, joint: str, q: float, a_deg: float, b_deg: float):
+        """After absolute(): set the turn counters so unwrap() returns ratio x q for each servo."""
+        b = self.pairs[joint]
+        ra, rb = self.ratios[joint]
+        for m, r, raw in ((joint, ra, a_deg), (b, rb, b_deg)):
+            self._turns[m] = round((r * q - raw) / 360.0)
+            self._last[m] = raw
+
+    def unwrap(self, readings: dict) -> dict:
+        """Single-turn readings (deg, wrapping at +/-180) -> multi-turn motor angles for the paired servos."""
+        out = dict(readings)
+        for m in [*self.pairs, *self.pairs.values()]:
+            if m not in readings:
+                continue
+            raw = readings[m]
+            if m in self._last:
+                d = raw - self._last[m]
+                if d > 180.0:
+                    self._turns[m] = self._turns.get(m, 0) - 1
+                elif d < -180.0:
+                    self._turns[m] = self._turns.get(m, 0) + 1
+            self._last[m] = raw
+            out[m] = raw + 360.0 * self._turns.get(m, 0)
+        return out
+
+
 def decode_load(raw: int) -> float:
     """STS Present_Load register -> signed percent of max torque (bit 10 = direction, 0.1 % units)."""
     raw = int(raw)

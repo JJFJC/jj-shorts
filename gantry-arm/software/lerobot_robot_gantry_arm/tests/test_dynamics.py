@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from lerobot_robot_gantry_arm.dynamics import CollisionMonitor, Ganged, decode_load, feedforward, servo_kp_nm_per_deg
+from lerobot_robot_gantry_arm.dynamics import CollisionMonitor, Ganged, GearedPair, decode_load, feedforward, servo_kp_nm_per_deg
 
 DESIGN = Path(__file__).resolve().parents[3]
 
@@ -61,3 +61,64 @@ def test_gravity_model_matches_design_analysis():
     got = GravityModel(payload_g=500).torques({"shoulder_lift": 90, "elbow_flex": 0, "wrist_flex": 0, "wrist_roll": 0, "base_yaw": 0})
     for j in ("shoulder_lift", "elbow_flex", "wrist_flex"):
         assert got[j] == pytest.approx(want[j], abs=1e-6)
+
+
+# ------------------------------------------------------------------ geared vernier pairs (docs/MECHANICS.md)
+
+
+def _wrap(x):
+    return (x + 180.0) % 360.0 - 180.0
+
+
+def test_geared_expand_merge_round_trip_with_preload():
+    g = GearedPair()
+    m = g.expand({"shoulder_lift": 47.5, "elbow_flex": -120.0})
+    assert m["shoulder_lift"] == pytest.approx(2.0 * 47.5 + 0.4)
+    assert m["shoulder_lift_2"] == pytest.approx(36 / 17 * 47.5 - 0.4)
+    back = g.merge(m)  # the +/- preload averages out (to within preload/ratio)
+    assert back["shoulder_lift"] == pytest.approx(47.5, abs=0.2)
+    assert back["elbow_flex"] == pytest.approx(-120.0, abs=0.2)
+
+
+@pytest.mark.parametrize("joint,lo,hi", [("shoulder_lift", -100.0, 135.0), ("elbow_flex", -140.0, 140.0)])
+def test_vernier_recovers_the_absolute_joint_angle_over_the_whole_range(joint, lo, hi):
+    g = GearedPair()
+    ra, rb = g.ratios[joint]
+    import random
+
+    rnd = random.Random(1)
+    q = lo
+    while q <= hi:
+        noise_a, noise_b = rnd.uniform(-0.6, 0.6), rnd.uniform(-0.6, 0.6)  # backlash + encoder, motor deg
+        a, b = _wrap(ra * q + noise_a), _wrap(rb * q + noise_b)
+        assert g.absolute(joint, a, b, lo, hi) == pytest.approx(q, abs=0.5)
+        q += 0.7
+
+
+def test_vernier_refuses_readings_that_fit_no_joint_angle():
+    g = GearedPair()
+    ra, rb = g.ratios["shoulder_lift"]
+    a, b = _wrap(ra * 30.0), _wrap(rb * 30.0 + 10.6)  # B off by half the candidate spacing
+    with pytest.raises(ValueError):
+        g.absolute("shoulder_lift", a, b, -100.0, 135.0)
+
+
+def test_unwrap_counts_turns_after_seeding():
+    g = GearedPair()
+    ra, rb = g.ratios["elbow_flex"]
+    q = 100.0
+    a, b = _wrap(ra * q), _wrap(rb * q)
+    g.seed("elbow_flex", g.absolute("elbow_flex", a, b, -140, 140), a, b)
+    out = {}
+    for q in (100.0, 110.0, 120.0, 130.0, 120.0, 95.0):  # crosses the +/-180 wrap on both servos
+        out = g.unwrap({"elbow_flex": _wrap(ra * q), "elbow_flex_2": _wrap(rb * q)})
+        assert g.merge(out)["elbow_flex"] == pytest.approx(q, abs=1e-6)
+
+
+def test_geared_check_flags_a_slipped_pinion():
+    g = GearedPair(cycles=2)
+    ok = {"shoulder_lift": 2.0 * 20, "shoulder_lift_2": 36 / 17 * 20}
+    bad = {**ok, "shoulder_lift_2": 36 / 17 * 20 + 36 / 17 * 4}  # one servo 4 deg (joint) off
+    assert g.check(ok) == []
+    assert g.check(bad) == []
+    assert g.check(bad) == ["shoulder_lift"]
