@@ -155,7 +155,8 @@ def build_arm():
     hs = hs.cut(cyl(30.0, (0, -20, Z2 - 50), (0, -20, Z2 - 40)))  # opening into the column (cables)
     hs = hs.cut(cyl(31.5, (0, y_gb_in + gb_len - 4, Z2), (0, y_gb_in + gb_len + 1, Z2)))  # gearbox passes the end wall
     add("j2_housing", "turret", "shell", hs, ("printed PETG-CF, split on the XZ mid-plane", 1))
-    add("j2_housing_cap", "turret", "cap", fil(cyl(43.5, (0, y_m_face - m_len - drv - 6, Z2), (0, y_m_face - m_len - drv - 3.4, Z2)), 1.0, "%CIRCLE"))
+    y_end = y_m_face - m_len - drv - 6  # outer end face of the capsule; the grey cap sits on it (not coplanar with the wall)
+    add("j2_housing_cap", "turret", "cap", fil(cyl(39.0, (0, y_end - 1.6, Z2), (0, y_end, Z2)), 0.8, "%CIRCLE"))
     mb, mc = stepper_y(23, m_len, y_m_face, 0, Z2, toward=+1, driver=drv)
     add("j2_motor", "turret", "motor", mb, ("NEMA23-76 closed-loop (57 mm driver on the back)", 1))
     add("j2_motor_caps", "turret", "motor_cap", mc)
