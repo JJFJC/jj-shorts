@@ -44,11 +44,12 @@ def obj(path, pose, material):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--view", default="close", choices=["close", "wide"])
+    ap.add_argument("--view", default="close", choices=["close", "wide", "macro"])
     ap.add_argument("--finish", default="white", choices=["white", "graphite"])
     ap.add_argument("--samples", type=int, default=96)
     ap.add_argument("--res", default="1700x1050")
     ap.add_argument("--suffix", default="")
+    ap.add_argument("--detail", action="store_true", help="procedural materials, bevel highlights, wood bench, sky light")
     a = ap.parse_args()
     man = json.loads((FIN / "manifest.json").read_text())
     tcp = next(m["tcp_mm"] for m in man if "tcp_mm" in m and m["tool"] == "sand")
@@ -68,6 +69,32 @@ def main():
         "part": RB.principled("part", (0.70, 0.12, 0.25), 0.35, coat=0.6),
         "motor": RB.principled("motor2", (0.04, 0.04, 0.045), 0.35, metal=0.6),
     })
+    if a.detail:
+        import detail_materials as DM
+
+        white = a.finish == "white"
+        shell_c = (0.82, 0.82, 0.80) if white else (0.035, 0.037, 0.04)
+        cap_c = (0.20, 0.21, 0.22) if white else (0.09, 0.093, 0.10)
+        for k_, m_ in list(mats.items()):
+            if k_ not in ("accent", "lens", "estop_red", "estop_yellow", "floor"):
+                DM.add_bevel(m_, 0.0006)
+        mats.update({
+            "shell": DM.printed("d_shell", shell_c, 0.5, 0.16, 0.12),
+            "cap": DM.printed("d_cap", cap_c, 0.5, 0.16, 0.12),
+            "abrasive": DM.sandpaper("d_abr", (0.42, 0.26, 0.13), 4.0),
+            "abrasive_fine": DM.sandpaper("d_abrf", (0.62, 0.52, 0.38), 7.0),
+            "felt": DM.rubber("d_felt", (0.86, 0.86, 0.83)),
+            "metal": DM.brushed("d_metal"),
+            "steel": DM.brushed("d_steel"),
+            "screw": DM.brushed("d_screw", (0.06, 0.06, 0.065), 0.35),
+            "motor": DM.brushed("d_motor", (0.05, 0.05, 0.055), 0.3),
+            "rubber": DM.rubber("d_rubber"),
+            "part": DM.printed("d_part", (0.72, 0.12, 0.28), 0.38, 0.20, 0.45),
+            "floor": DM.wood(),
+        })
+        DM.sky_world(0.035)
+        sc.view_settings.exposure = -0.4
+    mats.setdefault("screw", RB.principled("screw", (0.06, 0.06, 0.065), 0.35, metal=1.0))
     # robot
     poses = fk.body_poses(q)
     for m in json.loads((ROOT / "cad" / "out" / "manifest.json").read_text()):
@@ -95,6 +122,10 @@ def main():
         tgt = Vector((0.0, 0.20, 0.10))
         loc = tgt + Vector((0.34, -0.40, 0.20))
         RB.camera(loc, tgt, lens=55, fstop=6.3)
+    elif a.view == "macro":
+        tgt = Vector((0.004, 0.203, 0.078))
+        loc = tgt + Vector((0.16, -0.17, 0.07))
+        RB.camera(loc, tgt, lens=70, fstop=4.0)
     else:
         tgt = Vector((0.16, 0.22, 0.22))
         loc = tgt + Vector((0.55, -1.10, 0.62))

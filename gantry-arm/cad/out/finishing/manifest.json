@@ -54,6 +54,24 @@
   "fits_bed": true
  },
  {
+  "name": "spindle_sand_nut",
+  "role": "metal",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_sand_screws",
+  "role": "screw",
+  "body": "tool",
+  "tool": "sand",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
   "name": "spindle_sand_shank",
   "role": "metal",
   "body": "tool",
@@ -120,6 +138,24 @@
  {
   "name": "spindle_fine_nose",
   "role": "metal",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_nut",
+  "role": "metal",
+  "body": "tool",
+  "tool": "fine",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_fine_screws",
+  "role": "screw",
   "body": "tool",
   "tool": "fine",
   "printed": false,
@@ -200,6 +236,24 @@
   "fits_bed": true
  },
  {
+  "name": "spindle_polish_nut",
+  "role": "metal",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
+  "name": "spindle_polish_screws",
+  "role": "screw",
+  "body": "tool",
+  "tool": "polish",
+  "printed": false,
+  "valid": true,
+  "fits_bed": true
+ },
+ {
   "name": "spindle_polish_shank",
   "role": "metal",
   "body": "tool",
@@ -263,6 +317,20 @@
  {
   "name": "vise_part",
   "role": "part",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ },
+ {
+  "name": "vise_bolts",
+  "role": "screw",
+  "body": "world",
+  "printed": false,
+  "valid": true
+ },
+ {
+  "name": "vise_horn",
+  "role": "metal",
   "body": "world",
   "printed": false,
   "valid": true

@@ -65,7 +65,22 @@ def spindle_tool(bit_key: str):
     else:
         bit = cone(b["d"] / 2, 2.5, (0, 0, z_bit), (0, 0, z_bit + b["h"]))
     tcp = z_bit + b["h"] * 0.5
-    return dict(coupler=coupler_tool_half(0.0), housing=housing, carriage=carriage, rods=rods, motor=motor, nose=nose, shank=shank, bit=bit, tcp=tcp)
+    # --- detail: engraved grit label, 3 cap screws on the shoulder, hex ER11 nut
+    label = {"sand": "240", "fine": "600", "polish": "POLISH"}[bit_key]
+    txt = cq.Workplane("XZ").text(label, 6.5 if bit_key != "polish" else 4.6, -0.6, halign="center", valign="center").translate((0, -r + 0.05, 34))
+    housing = housing.cut(txt)
+    import math as _m
+
+    screws = None
+    for k in range(3):
+        a = _m.radians(90 + k * 120)
+        sx, sy = (r - 5.0) * _m.cos(a), (r - 5.0) * _m.sin(a)
+        head = cyl(2.7, (sx, sy, s["housing_top"] - 0.2), (sx, sy, s["housing_top"] + 1.6)).cut(
+            cq.Workplane("XY").polygon(6, 2.4).extrude(1.5).translate((sx, sy, s["housing_top"] + 0.4)))
+        screws = head if screws is None else screws.union(head)
+    nut = cq.Workplane("XY").polygon(6, s["nose_d"] + 3).extrude(8.0).translate((0, 0, z_shank - 9.0)).edges("not |Z").chamfer(0.8)
+    return dict(coupler=coupler_tool_half(0.0), housing=housing, carriage=carriage, rods=rods, motor=motor, nose=nose, nut=nut,
+                screws=screws, shank=shank, bit=bit, tcp=tcp)
 
 
 def servo_vise():
@@ -79,13 +94,20 @@ def servo_vise():
     pads = box(x - 28, x + 28, y + 2.5, y + 4, bz + 6, bz + VISE["jaw_h"]).union(box(x - 28, x + 28, y - 8, y - 6.5, bz + 6, bz + VISE["jaw_h"]))
     part = fil(box(x - 15, x + 15, y - 6.5, y + 2.5, bz + 6, bz + 6 + 34), 2.5, "|Y")  # a 30 x 34 mm printed pendant
     part = part.cut(cyl(2.0, (x, y - 8, bz + 34), (x, y + 4, bz + 34)))
-    return dict(base=base, fixed=fixed, moving=moving, screw=screw, servo=servo, pads=pads, part=part)
+    bolts = None
+    for sx_ in (-1, 1):
+        for sy_ in (-1, 1):
+            hx, hy = x + sx_ * (bx / 2 - 8), y + sy_ * (by / 2 - 8)
+            b_ = cyl(3.6, (hx, hy, bz - 0.2), (hx, hy, bz + 2.4)).cut(cq.Workplane("XY").polygon(6, 3.0).extrude(2).translate((hx, hy, bz + 0.8)))
+            bolts = b_ if bolts is None else bolts.union(b_)
+    horn = cyl(10.0, (x, y - 37, bz + 10), (x, y - 33, bz + 10))  # servo horn coupling to the screw
+    return dict(base=base, fixed=fixed, moving=moving, screw=screw, servo=servo, pads=pads, part=part, bolts=bolts, horn=horn)
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     man = []
-    roles = dict(coupler="shell", housing="shell", carriage="cap", rods="metal", motor="motor", nose="metal", shank="metal")
+    roles = dict(coupler="shell", housing="shell", carriage="cap", rods="metal", motor="motor", nose="metal", nut="metal", screws="screw", shank="metal")
     printed = {"housing", "carriage"}
     for key in BITS:
         t = spindle_tool(key)
@@ -102,7 +124,7 @@ def main():
             if name in printed and key == "sand":
                 cq.exporters.export(shape, str(OUT / f"spindle_{name}.step"))
         man[-1]["tcp_mm"] = t["tcp"]
-    vroles = dict(base="shell", fixed="cap", moving="cap", screw="metal", servo="motor", pads="rubber", part="part")
+    vroles = dict(base="shell", fixed="cap", moving="cap", screw="metal", servo="motor", pads="rubber", part="part", bolts="screw", horn="metal")
     for name, shape in servo_vise().items():
         cq.exporters.export(shape, str(OUT / f"vise_{name}.stl"), tolerance=0.05, angularTolerance=0.1)
         s = shape.val()
