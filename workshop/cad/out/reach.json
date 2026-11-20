@@ -1,0 +1,42 @@
+{
+ "vise": {
+  "ok": true,
+  "gantry_x": 248,
+  "gantry_z": 0
+ },
+ "tool_rack": {
+  "ok": true,
+  "gantry_x": 648,
+  "gantry_z": 60
+ },
+ "p1s_plate": {
+  "ok": true,
+  "gantry_x": 800,
+  "gantry_z": 10
+ },
+ "ultrasonic": {
+  "ok": true,
+  "gantry_x": 0,
+  "gantry_z": 10
+ },
+ "tumbler": {
+  "ok": true,
+  "gantry_x": 0,
+  "gantry_z": 100
+ },
+ "inspection": {
+  "ok": true,
+  "gantry_x": 178,
+  "gantry_z": 0
+ },
+ "scale": {
+  "ok": true,
+  "gantry_x": 318,
+  "gantry_z": 0
+ },
+ "pickle": {
+  "ok": true,
+  "gantry_x": 518,
+  "gantry_z": 30
+ }
+}

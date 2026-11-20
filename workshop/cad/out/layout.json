@@ -1,0 +1,94 @@
+{
+ "bench": {
+  "x0": -900.0,
+  "x1": 900.0,
+  "y0": -190.0,
+  "y1": 410.0,
+  "top": 40.0,
+  "h": 760.0
+ },
+ "peg": {
+  "x0": -900.0,
+  "x1": 900.0,
+  "z0": 300.0,
+  "z1": 1200.0,
+  "standoff": 20.0,
+  "t": 6.0
+ },
+ "cart": {
+  "x0": -1560.0,
+  "x1": -960.0,
+  "y0": -160.0,
+  "y1": 290.0,
+  "top": -30.0,
+  "shelf": -480.0
+ },
+ "stations": {
+  "vise": {
+   "xy": [
+    0.0,
+    205.0
+   ],
+   "z": 70.0,
+   "what": "Servo vise: sand / polish / drill / deburr any small part"
+  },
+  "tool_rack": {
+   "xy": [
+    250.0,
+    275.0
+   ],
+   "z": 110.0,
+   "what": "Tool rack: 3 compliant spindles (240, 600, polish); tool change"
+  },
+  "p1s_plate": {
+   "xy": [
+    535.0,
+    220.0
+   ],
+   "z": 69.0,
+   "what": "P1S build-plate tab: unload prints"
+  },
+  "ultrasonic": {
+   "xy": [
+    -600.0,
+    250.0
+   ],
+   "z": 150.0,
+   "what": "Ultrasonic cleaner: parts, jewelry, nozzles"
+  },
+  "tumbler": {
+   "xy": [
+    -400.0,
+    300.0
+   ],
+   "z": 170.0,
+   "what": "Vibratory tumbler: deburr / polish batches"
+  },
+  "inspection": {
+   "xy": [
+    -220.0,
+    330.0
+   ],
+   "z": 45.0,
+   "what": "Camera + turntable: QC photos, measuring"
+  },
+  "scale": {
+   "xy": [
+    -80.0,
+    330.0
+   ],
+   "z": 60.0,
+   "what": "Scale: weigh parts, count screws, filament left"
+  },
+  "pickle": {
+   "xy": [
+    120.0,
+    340.0
+   ],
+   "z": 150.0,
+   "what": "Pickle crock (citric): clean metal after soldering"
+  }
+ },
+ "wall_y": -190.0,
+ "peg_face": -164.0
+}
