@@ -1,0 +1,677 @@
+[
+ {
+  "name": "wall",
+  "role": "wall_paint",
+  "valid": true
+ },
+ {
+  "name": "bench_top",
+  "role": "wood",
+  "valid": true
+ },
+ {
+  "name": "bench_legs",
+  "role": "frame",
+  "valid": true
+ },
+ {
+  "name": "drawer_unit",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_0",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_0",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_1",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_1",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_2",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_2",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_3",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_3",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_4",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_4",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "drawer_front_5",
+  "role": "enamel_white",
+  "valid": true
+ },
+ {
+  "name": "drawer_pull_5",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "pegboard",
+  "role": "pegboard",
+  "valid": true
+ },
+ {
+  "name": "pegboard_furring",
+  "role": "wood_light",
+  "valid": true
+ },
+ {
+  "name": "tool_hammer",
+  "role": "wood_light",
+  "valid": true
+ },
+ {
+  "name": "tool_hammer_head",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_0",
+  "role": "handle_red",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_shaft_0",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_1",
+  "role": "handle_yellow",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_shaft_1",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_2",
+  "role": "handle_red",
+  "valid": true
+ },
+ {
+  "name": "tool_driver_shaft_2",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_0",
+  "role": "handle_blue",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_jaw_0",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_1",
+  "role": "handle_blue",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_jaw_1",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_2",
+  "role": "handle_blue",
+  "valid": true
+ },
+ {
+  "name": "tool_pliers_jaw_2",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_hacksaw",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_hacksaw_blade",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_jewelers_saw",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_file_0",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_file_1",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_file_2",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_file_3",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_steel_rule",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_calipers",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_square",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_square_stock",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_tape",
+  "role": "handle_yellow",
+  "valid": true
+ },
+ {
+  "name": "parts_rail",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_0",
+  "role": "bin_blue",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_1",
+  "role": "bin_red",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_2",
+  "role": "bin_yellow",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_3",
+  "role": "bin_blue",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_4",
+  "role": "bin_red",
+  "valid": true
+ },
+ {
+  "name": "parts_bin_5",
+  "role": "bin_yellow",
+  "valid": true
+ },
+ {
+  "name": "shelf",
+  "role": "wood_light",
+  "valid": true
+ },
+ {
+  "name": "shelf_bottle_0",
+  "role": "bottle_white",
+  "valid": true
+ },
+ {
+  "name": "shelf_bottle_1",
+  "role": "bottle_amber",
+  "valid": true
+ },
+ {
+  "name": "shelf_bottle_2",
+  "role": "bottle_white",
+  "valid": true
+ },
+ {
+  "name": "shelf_bottle_3",
+  "role": "bottle_blue",
+  "valid": true
+ },
+ {
+  "name": "shelf_bottle_4",
+  "role": "bottle_amber",
+  "valid": true
+ },
+ {
+  "name": "shelf_filament",
+  "role": "filament_orange",
+  "valid": true
+ },
+ {
+  "name": "shelf_filament_rod",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_fclamp_0",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_fclamp_jaw_0",
+  "role": "handle_red",
+  "valid": true
+ },
+ {
+  "name": "tool_fclamp_1",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "tool_fclamp_jaw_1",
+  "role": "handle_red",
+  "valid": true
+ },
+ {
+  "name": "drill_holster",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "tool_drill",
+  "role": "handle_green",
+  "valid": true
+ },
+ {
+  "name": "tool_drill_chuck",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "safety_glasses",
+  "role": "glass_tint",
+  "valid": true
+ },
+ {
+  "name": "ear_muffs",
+  "role": "handle_red",
+  "valid": true
+ },
+ {
+  "name": "spool_0",
+  "role": "copper",
+  "valid": true
+ },
+ {
+  "name": "spool_1",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "spool_2",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "spool_rod",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "paper_towel",
+  "role": "paper",
+  "valid": true
+ },
+ {
+  "name": "paper_towel_holder",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "pegboard_hooks",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "led_bar",
+  "role": "led",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_body",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_panel",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_basket",
+  "role": "steel_mesh",
+  "valid": true
+ },
+ {
+  "name": "tumbler_base",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "tumbler_bowl",
+  "role": "plastic_green",
+  "valid": true
+ },
+ {
+  "name": "tumbler_media",
+  "role": "media",
+  "valid": true
+ },
+ {
+  "name": "insp_base",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "insp_turntable",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_post",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_arm",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_camera",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "insp_ringlight",
+  "role": "led",
+  "valid": true
+ },
+ {
+  "name": "insp_part",
+  "role": "part_orange",
+  "valid": true
+ },
+ {
+  "name": "scale_body",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "scale_pan",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "scale_display",
+  "role": "lcd",
+  "valid": true
+ },
+ {
+  "name": "pickle_pot",
+  "role": "ceramic_white",
+  "valid": true
+ },
+ {
+  "name": "pickle_liquid",
+  "role": "liquid",
+  "valid": true
+ },
+ {
+  "name": "pickle_basket",
+  "role": "plastic_pp",
+  "valid": true
+ },
+ {
+  "name": "bench_pin",
+  "role": "wood_light",
+  "valid": true
+ },
+ {
+  "name": "bench_pin_holder",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "sweeps_tray",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "sweeps_runners",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "leather_skin",
+  "role": "leather",
+  "valid": true
+ },
+ {
+  "name": "bench_vise",
+  "role": "enamel_blue",
+  "valid": true
+ },
+ {
+  "name": "bench_vise_handle",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "cutting_mat",
+  "role": "mat_green",
+  "valid": true
+ },
+ {
+  "name": "bench_block",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "work_ring",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "ring_mandrel",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "cart_frame",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "cart_top_board",
+  "role": "cement_board",
+  "valid": true
+ },
+ {
+  "name": "cart_wheels",
+  "role": "rubber",
+  "valid": true
+ },
+ {
+  "name": "cart_handle",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "heat_panel",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "kiln_body",
+  "role": "enamel_grey",
+  "valid": true
+ },
+ {
+  "name": "kiln_door",
+  "role": "enamel_dark",
+  "valid": true
+ },
+ {
+  "name": "kiln_handle",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "kiln_controller",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "kiln_display",
+  "role": "lcd_red",
+  "valid": true
+ },
+ {
+  "name": "kiln_vent",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "torch_base",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "torch_turntable",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "firebrick_0",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_1",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "torch_stand",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "torch_clamp",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "torch_body",
+  "role": "brass",
+  "valid": true
+ },
+ {
+  "name": "torch_flame",
+  "role": "flame",
+  "valid": true
+ },
+ {
+  "name": "flame_sensor",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "gas_solenoid",
+  "role": "brass",
+  "valid": true
+ },
+ {
+  "name": "fume_hood",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "furnace_body",
+  "role": "enamel_dark",
+  "valid": true
+ },
+ {
+  "name": "caster_body",
+  "role": "enamel_grey",
+  "valid": true
+ },
+ {
+  "name": "caster_well",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "gas_canister",
+  "role": "enamel_red",
+  "valid": true
+ },
+ {
+  "name": "flasks",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "fire_extinguisher",
+  "role": "enamel_red",
+  "valid": true
+ },
+ {
+  "name": "extinguisher_bracket",
+  "role": "steel_dark",
+  "valid": true
+ }
+]

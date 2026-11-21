@@ -1,0 +1,5 @@
+# design + sim (Python 3.12+)
+numpy>=2.0
+mujoco>=3.2
+cadquery>=2.4
+pytest>=8.0

@@ -1,0 +1,566 @@
+[
+ {
+  "name": "p1s_shell",
+  "role": "printer",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   389,
+   389,
+   458
+  ]
+ },
+ {
+  "name": "p1s_plate",
+  "role": "steel",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   282,
+   256,
+   8
+  ]
+ },
+ {
+  "name": "p1s_molds",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   105,
+   217,
+   90
+  ]
+ },
+ {
+  "name": "flex_lip",
+  "role": "frame",
+  "body": "world",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   160,
+   300,
+   75
+  ]
+ },
+ {
+  "name": "mold_catch_tray",
+  "role": "frame",
+  "body": "world",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   150,
+   300,
+   25
+  ]
+ },
+ {
+  "name": "cool_rack",
+  "role": "frame",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   340,
+   120,
+   138
+  ]
+ },
+ {
+  "name": "rack_mold_00",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_01",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_0",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "rack_mold_10",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_11",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_1",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "rack_mold_20",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_21",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_2",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "rack_mold_30",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_31",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_3",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "rack_mold_40",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_41",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_4",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "rack_mold_50",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_mold_51",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "rack_wax_5",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   78
+  ]
+ },
+ {
+  "name": "pour_base",
+  "role": "frame",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   140,
+   140,
+   60
+  ]
+ },
+ {
+  "name": "pour_post",
+  "role": "frame",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   28,
+   28,
+   330
+  ]
+ },
+ {
+  "name": "wax_pot",
+  "role": "steel",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   160,
+   160,
+   140
+  ]
+ },
+ {
+  "name": "pour_spout",
+  "role": "steel",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   12,
+   84,
+   195
+  ]
+ },
+ {
+  "name": "pour_valve",
+  "role": "dark",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   24,
+   24,
+   25
+  ]
+ },
+ {
+  "name": "pour_mold_0",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "pour_mold_1",
+  "role": "mold",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   53,
+   77,
+   90
+  ]
+ },
+ {
+  "name": "pour_piston",
+  "role": "mold2",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   59,
+   59,
+   6
+  ]
+ },
+ {
+  "name": "pour_wax",
+  "role": "wax_liquid",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   62,
+   62,
+   48
+  ]
+ },
+ {
+  "name": "demold_base",
+  "role": "frame",
+  "body": "world",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   110,
+   110,
+   40
+  ]
+ },
+ {
+  "name": "demold_pin",
+  "role": "steel",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   10,
+   10,
+   92
+  ]
+ },
+ {
+  "name": "sander_frame",
+  "role": "frame",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   140,
+   220,
+   125
+  ]
+ },
+ {
+  "name": "sander_springs",
+  "role": "steel",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   122,
+   12,
+   25
+  ]
+ },
+ {
+  "name": "sander_drum",
+  "role": "abrasive",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   50,
+   170,
+   50
+  ]
+ },
+ {
+  "name": "sander_motor",
+  "role": "dark",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   36,
+   55,
+   36
+  ]
+ },
+ {
+  "name": "output_tray",
+  "role": "frame",
+  "body": "world",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   160,
+   220,
+   20
+  ]
+ },
+ {
+  "name": "out_candle_0",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   80
+  ]
+ },
+ {
+  "name": "out_candle_1",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   80
+  ]
+ },
+ {
+  "name": "out_candle_2",
+  "role": "wax",
+  "body": "world",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   80
+  ]
+ },
+ {
+  "name": "candle_gripper_body",
+  "role": "shell",
+  "body": "tool",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   140,
+   56,
+   47
+  ]
+ },
+ {
+  "name": "candle_gripper_jaws",
+  "role": "cap",
+  "body": "tool",
+  "printed": true,
+  "valid": true,
+  "dims": [
+   90,
+   40,
+   80
+  ]
+ },
+ {
+  "name": "candle_gripper_pads",
+  "role": "rubber",
+  "body": "tool",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   68,
+   36,
+   64
+  ]
+ },
+ {
+  "name": "held_candle",
+  "role": "wax",
+  "body": "tool",
+  "printed": false,
+  "valid": true,
+  "dims": [
+   63,
+   63,
+   80
+  ]
+ }
+]

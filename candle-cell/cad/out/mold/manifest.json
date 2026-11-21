@@ -1,0 +1,50 @@
+[
+ {
+  "name": "mold_half_a",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "mold_half_b",
+  "role": "mold",
+  "valid": true,
+  "dims": [
+   52.5,
+   76.9,
+   90.0
+  ],
+  "volume_cm3": 130.4,
+  "fits_bed": true
+ },
+ {
+  "name": "piston",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   59.4,
+   59.4,
+   6.0
+  ],
+  "volume_cm3": 16.0,
+  "fits_bed": true
+ },
+ {
+  "name": "wick_bar",
+  "role": "mold2",
+  "valid": true,
+  "dims": [
+   76.9,
+   12.0,
+   8.0
+  ],
+  "volume_cm3": 4.7,
+  "fits_bed": true
+ }
+]

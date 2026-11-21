@@ -1,0 +1,4 @@
+__pycache__/
+# regenerable concept geometry (python cad/cell.py, cad/arm_cell.py); printable mold STLs stay committed
+cad/out/cell/
+cad/out/arm_cell/*.stl

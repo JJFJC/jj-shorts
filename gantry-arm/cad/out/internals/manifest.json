@@ -1,0 +1,680 @@
+[
+ {
+  "name": "j1_spigot",
+  "body": "z_carriage",
+  "role": "cap",
+  "joint": "J1",
+  "note": "fixed; carries both 61812 bearings",
+  "bom": [
+   "printed PETG",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_bearing_lo_races",
+  "body": "z_carriage",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": [
+   "61812-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_bearing_lo_seal",
+  "body": "z_carriage",
+  "role": "rubber",
+  "joint": "J1",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_bearing_hi_races",
+  "body": "z_carriage",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": [
+   "61812-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_bearing_hi_seal",
+  "body": "z_carriage",
+  "role": "rubber",
+  "joint": "J1",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_oldham_lower",
+  "body": "z_carriage",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": [
+   "Oldham coupling 3-part, \u00d825",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_turret_skirt",
+  "body": "turret",
+  "role": "cap",
+  "joint": "J1",
+  "note": "outer race seat of the lower 61812; the collar bore seats the upper one",
+  "bom": [
+   "printed PETG",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_oldham_slider",
+  "body": "turret",
+  "role": "accent_white",
+  "joint": "J1",
+  "note": "POM disc",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_oldham_upper",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_horn",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_servo",
+  "body": "turret",
+  "role": "servo",
+  "joint": "J1",
+  "note": "",
+  "bom": [
+   "Feetech STS3215 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j1_servo_spline",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J1",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_servo_cradle",
+  "body": "turret",
+  "role": "cap",
+  "joint": "J1",
+  "note": "M2 screws into the case side holes",
+  "bom": [
+   "printed PETG",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_hub_gear",
+  "body": "upper_arm",
+  "role": "steel_gear",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 36T bore 20",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_shaft",
+  "body": "upper_arm",
+  "role": "metal",
+  "joint": "J2",
+  "note": "clamped in the link hub with 2x M3 set screws on a flat; the harness runs inside",
+  "bom": [
+   "aluminium tube \u00d820 x 15, 45 mm",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_bearing_1_races",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "6804-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_bearing_1_seal",
+  "body": "turret",
+  "role": "rubber",
+  "joint": "J2",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j2_bearing_2_races",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "6804-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_bearing_2_seal",
+  "body": "turret",
+  "role": "rubber",
+  "joint": "J2",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j2_bearing_boss",
+  "body": "turret",
+  "role": "cap",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "printed PETG (glued into the puck)",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_pinion_A",
+  "body": "turret",
+  "role": "steel_gear",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 18T, bolted to the servo horn",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_horn_A",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "STS aluminium horn (with the servo)",
+   0
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_servo_A",
+  "body": "turret",
+  "role": "servo",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "Feetech STS3250 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_servo_spline_A",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j2_pinion_B",
+  "body": "turret",
+  "role": "steel_gear",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 17T, bolted to the servo horn",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_horn_B",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "STS aluminium horn (with the servo)",
+   0
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_servo_B",
+  "body": "turret",
+  "role": "servo",
+  "joint": "J2",
+  "note": "",
+  "bom": [
+   "Feetech STS3250 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_servo_spline_B",
+  "body": "turret",
+  "role": "metal",
+  "joint": "J2",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j2_mount_plate",
+  "body": "turret",
+  "role": "cap",
+  "joint": "J2",
+  "note": "4x M2 into each case's back holes",
+  "bom": [
+   "printed PETG",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j2_cable_loop",
+  "body": "turret",
+  "role": "cable",
+  "joint": "J2",
+  "note": "\u00b1range/2 coiled loop; no slip ring",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j3_hub_gear",
+  "body": "forearm",
+  "role": "steel_gear",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 30T bore 17",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_shaft",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "clamped in the link hub with 2x M3 set screws on a flat; the harness runs inside",
+  "bom": [
+   "aluminium tube \u00d817 x 13, 45 mm",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_bearing_1_races",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "6803-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_bearing_1_seal",
+  "body": "forearm",
+  "role": "rubber",
+  "joint": "J3",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j3_bearing_2_races",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "6803-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_bearing_2_seal",
+  "body": "forearm",
+  "role": "rubber",
+  "joint": "J3",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j3_bearing_boss",
+  "body": "forearm",
+  "role": "cap",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "printed PETG (glued into the puck)",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_pinion_A",
+  "body": "forearm",
+  "role": "steel_gear",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 15T, bolted to the servo horn",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_horn_A",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "STS aluminium horn (with the servo)",
+   0
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_servo_A",
+  "body": "forearm",
+  "role": "servo",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "Feetech STS3250 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_servo_spline_A",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j3_pinion_B",
+  "body": "forearm",
+  "role": "steel_gear",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "steel spur gear m1 14T, bolted to the servo horn",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_horn_B",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "STS aluminium horn (with the servo)",
+   0
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_servo_B",
+  "body": "forearm",
+  "role": "servo",
+  "joint": "J3",
+  "note": "",
+  "bom": [
+   "Feetech STS3250 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_servo_spline_B",
+  "body": "forearm",
+  "role": "metal",
+  "joint": "J3",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j3_mount_plate",
+  "body": "forearm",
+  "role": "cap",
+  "joint": "J3",
+  "note": "4x M2 into each case's back holes",
+  "bom": [
+   "printed PETG",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j3_cable_loop",
+  "body": "forearm",
+  "role": "cable",
+  "joint": "J3",
+  "note": "\u00b1range/2 coiled loop; no slip ring",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j1_j2_harness",
+  "body": "turret",
+  "role": "cable",
+  "joint": "J1",
+  "note": "3-wire bus + 12 V + LED data, ~6 mm bundle",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j4_servo",
+  "body": "wrist",
+  "role": "servo",
+  "joint": "J4",
+  "note": "",
+  "bom": [
+   "Feetech STS3215 12 V",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j4_servo_spline",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J4",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j4_horn",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J4",
+  "note": "bolts to the forearm hub ring's inner flange",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j4_bearing_races",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J4",
+  "note": "",
+  "bom": [
+   "6806-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j4_bearing_seal",
+  "body": "wrist",
+  "role": "rubber",
+  "joint": "J4",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j4_forearm_hub",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J4",
+  "note": "part of the forearm: inner race of the 6806, the J4 horn bolts to its flange; the bearing carries the wrist moment",
+  "bom": [
+   "turned aluminium hub ring (on the forearm)",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_servo",
+  "body": "wrist",
+  "role": "servo",
+  "joint": "J5",
+  "note": "size VERIFY: vendors list 23.2x12.1x28.5 and 32x12x27.5",
+  "bom": [
+   "Feetech STS3032 6 V micro bus servo",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_servo_spline",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J5",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j5_pinion",
+  "body": "wrist",
+  "role": "steel_gear",
+  "joint": "J5",
+  "note": "",
+  "bom": [
+   "brass/steel gear m0.5 36T",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_roll_gear",
+  "body": "wrist",
+  "role": "steel_gear",
+  "joint": "J5",
+  "note": "",
+  "bom": [
+   "brass/steel gear m0.5 36T",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_roll_shaft",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J5",
+  "note": "bolts to the j5 roll flange; the bearing carries the tool moment",
+  "bom": [
+   "turned aluminium roll shaft",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_bearing_races",
+  "body": "wrist",
+  "role": "metal",
+  "joint": "J5",
+  "note": "",
+  "bom": [
+   "6805-2RS",
+   1
+  ],
+  "valid": true
+ },
+ {
+  "name": "j5_bearing_seal",
+  "body": "wrist",
+  "role": "rubber",
+  "joint": "J5",
+  "note": "",
+  "bom": null,
+  "valid": true
+ },
+ {
+  "name": "j5_buck_6v",
+  "body": "wrist",
+  "role": "pcb",
+  "joint": "J5",
+  "note": "feeds only the STS3032; data line shared with the 12 V bus (TTL levels)",
+  "bom": [
+   "mini buck 12 V -> 6 V, 2 A",
+   1
+  ],
+  "valid": true
+ }
+]

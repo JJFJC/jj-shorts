@@ -1,0 +1,709 @@
+[
+ {
+  "name": "j1_base_housing",
+  "body": "z_carriage",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_outer",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j2_cap_inner",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_body",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_cover",
+  "body": "upper_arm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "upper_arm_led_diffuser",
+  "body": "upper_arm",
+  "role": "accent",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_a",
+  "body": "forearm",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "j3_cap_b",
+  "body": "forearm",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_body",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "forearm_cover",
+  "body": "forearm",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_shell_front",
+  "body": "wrist",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_shell_back",
+  "body": "wrist",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_a",
+  "body": "wrist",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j4_cap_b",
+  "body": "wrist",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j5_roll_flange",
+  "body": "tool",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_robot_half",
+  "body": "tool",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_magnets",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_pogo_pins",
+  "body": "tool",
+  "role": "brass",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap",
+  "part": "ghost",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_camera_pod",
+  "body": "tool",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "wrist_camera_lens",
+  "body": "tool",
+  "role": "lens",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_housing",
+  "body": "tool",
+  "role": "shell",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_smoke_cap",
+  "body": "tool",
+  "role": "smoke",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pinion_rack",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_fingers_vlink",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pivot_pins",
+  "body": "tool",
+  "role": "metal",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "gripper_pads",
+  "body": "tool",
+  "role": "rubber",
+  "part": "keep",
+  "src": "shell"
+ },
+ {
+  "name": "j1_spigot",
+  "body": "z_carriage",
+  "role": "cap",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_bearing_lo_races",
+  "body": "z_carriage",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_bearing_lo_seal",
+  "body": "z_carriage",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_bearing_hi_races",
+  "body": "z_carriage",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_bearing_hi_seal",
+  "body": "z_carriage",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_oldham_lower",
+  "body": "z_carriage",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_turret_skirt",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_turret_skirt",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j1_oldham_slider",
+  "body": "turret",
+  "role": "accent_white",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_oldham_upper",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_horn",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_servo",
+  "body": "turret",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_servo_spline",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_servo_cradle",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_servo_cradle",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_hub_gear",
+  "body": "upper_arm",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_shaft",
+  "body": "upper_arm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_shaft",
+  "body": "upper_arm",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_1_races",
+  "body": "turret",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_1_seal",
+  "body": "turret",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_2_races",
+  "body": "turret",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_2_seal",
+  "body": "turret",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_boss",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_bearing_boss",
+  "body": "turret",
+  "role": "cap",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j2_pinion_A",
+  "body": "turret",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_horn_A",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_servo_A",
+  "body": "turret",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_servo_spline_A",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_pinion_B",
+  "body": "turret",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_horn_B",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_servo_B",
+  "body": "turret",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_servo_spline_B",
+  "body": "turret",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_mount_plate",
+  "body": "turret",
+  "role": "cap",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j2_cable_loop",
+  "body": "turret",
+  "role": "cable",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_hub_gear",
+  "body": "forearm",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_shaft",
+  "body": "forearm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_shaft",
+  "body": "forearm",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_bearing_1_races",
+  "body": "forearm",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_bearing_1_seal",
+  "body": "forearm",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_bearing_2_races",
+  "body": "forearm",
+  "role": "metal",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_bearing_2_seal",
+  "body": "forearm",
+  "role": "rubber",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_bearing_boss",
+  "body": "forearm",
+  "role": "cap",
+  "part": "ghost",
+  "src": "internal"
+ },
+ {
+  "name": "j3_pinion_A",
+  "body": "forearm",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_horn_A",
+  "body": "forearm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_servo_A",
+  "body": "forearm",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_servo_spline_A",
+  "body": "forearm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_pinion_B",
+  "body": "forearm",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_horn_B",
+  "body": "forearm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_servo_B",
+  "body": "forearm",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_servo_spline_B",
+  "body": "forearm",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_mount_plate",
+  "body": "forearm",
+  "role": "cap",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j3_cable_loop",
+  "body": "forearm",
+  "role": "cable",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j1_j2_harness",
+  "body": "turret",
+  "role": "cable",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_servo",
+  "body": "wrist",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_servo_spline",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_horn",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_bearing_races",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_bearing_seal",
+  "body": "wrist",
+  "role": "rubber",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j4_forearm_hub",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_servo",
+  "body": "wrist",
+  "role": "servo",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_servo_spline",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_pinion",
+  "body": "wrist",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_roll_gear",
+  "body": "wrist",
+  "role": "steel_gear",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_roll_shaft",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_bearing_races",
+  "body": "wrist",
+  "role": "metal",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_bearing_seal",
+  "body": "wrist",
+  "role": "rubber",
+  "part": "keep",
+  "src": "internal"
+ },
+ {
+  "name": "j5_buck_6v",
+  "body": "wrist",
+  "role": "pcb",
+  "part": "keep",
+  "src": "internal"
+ }
+]

@@ -1,0 +1,417 @@
+[
+ {
+  "name": "bench",
+  "role": "wood",
+  "valid": true
+ },
+ {
+  "name": "bench_legs",
+  "role": "frame",
+  "valid": true
+ },
+ {
+  "name": "heat_shield_wall",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "wall_window",
+  "role": "glass",
+  "valid": true
+ },
+ {
+  "name": "pickle_pot",
+  "role": "ceramic_white",
+  "valid": true
+ },
+ {
+  "name": "pickle_liquid",
+  "role": "liquid",
+  "valid": true
+ },
+ {
+  "name": "pickle_basket",
+  "role": "plastic_pp",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_body",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_panel",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "ultrasonic_basket",
+  "role": "steel_mesh",
+  "valid": true
+ },
+ {
+  "name": "tumbler_base",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "tumbler_bowl",
+  "role": "plastic_green",
+  "valid": true
+ },
+ {
+  "name": "tumbler_media",
+  "role": "media",
+  "valid": true
+ },
+ {
+  "name": "insp_base",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "insp_turntable",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_post",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_arm",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "insp_camera",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "insp_ringlight",
+  "role": "led",
+  "valid": true
+ },
+ {
+  "name": "insp_ring_on_table",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "scale_body",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "scale_pan",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "scale_display",
+  "role": "lcd",
+  "valid": true
+ },
+ {
+  "name": "scale_shield",
+  "role": "glass",
+  "valid": true
+ },
+ {
+  "name": "polisher_base",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "polisher_motor",
+  "role": "enamel_blue",
+  "valid": true
+ },
+ {
+  "name": "polisher_shaft",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "polisher_buff_l",
+  "role": "cloth",
+  "valid": true
+ },
+ {
+  "name": "polisher_buff_r",
+  "role": "felt",
+  "valid": true
+ },
+ {
+  "name": "polisher_hood_l",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "polisher_hood_r",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "laser_enclosure",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "laser_window",
+  "role": "acrylic_orange",
+  "valid": true
+ },
+ {
+  "name": "laser_gantry",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "laser_bed",
+  "role": "steel_mesh",
+  "valid": true
+ },
+ {
+  "name": "laser_part",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "invest_base",
+  "role": "enamel_grey",
+  "valid": true
+ },
+ {
+  "name": "invest_bell",
+  "role": "glass",
+  "valid": true
+ },
+ {
+  "name": "invest_gauge",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "wax_tree_base",
+  "role": "rubber_red",
+  "valid": true
+ },
+ {
+  "name": "wax_tree",
+  "role": "wax_green",
+  "valid": true
+ },
+ {
+  "name": "flask",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "kiln_body",
+  "role": "enamel_grey",
+  "valid": true
+ },
+ {
+  "name": "kiln_door",
+  "role": "enamel_dark",
+  "valid": true
+ },
+ {
+  "name": "kiln_handle",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "kiln_controller",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "kiln_display",
+  "role": "lcd_red",
+  "valid": true
+ },
+ {
+  "name": "kiln_vent",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "furnace_body",
+  "role": "enamel_dark",
+  "valid": true
+ },
+ {
+  "name": "furnace_lid",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "furnace_control",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "furnace_display",
+  "role": "lcd_red",
+  "valid": true
+ },
+ {
+  "name": "crucible_tongs",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "caster_body",
+  "role": "enamel_grey",
+  "valid": true
+ },
+ {
+  "name": "caster_well",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "caster_gauge",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "caster_pump",
+  "role": "dark",
+  "valid": true
+ },
+ {
+  "name": "torch_station_base",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "firebrick_00",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_01",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_10",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_11",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_20",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "firebrick_21",
+  "role": "firebrick",
+  "valid": true
+ },
+ {
+  "name": "torch_turntable",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "torch_stand",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "torch_clamp",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "torch_body",
+  "role": "brass",
+  "valid": true
+ },
+ {
+  "name": "torch_flame",
+  "role": "flame",
+  "valid": true
+ },
+ {
+  "name": "gas_canister",
+  "role": "enamel_red",
+  "valid": true
+ },
+ {
+  "name": "gas_solenoid",
+  "role": "brass",
+  "valid": true
+ },
+ {
+  "name": "flame_sensor",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "fume_hood",
+  "role": "steel_dark",
+  "valid": true
+ },
+ {
+  "name": "fire_extinguisher",
+  "role": "enamel_red",
+  "valid": true
+ },
+ {
+  "name": "bench_pin",
+  "role": "wood_light",
+  "valid": true
+ },
+ {
+  "name": "ring_mandrel",
+  "role": "steel",
+  "valid": true
+ },
+ {
+  "name": "finished_tray",
+  "role": "velvet",
+  "valid": true
+ },
+ {
+  "name": "ring_00",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "ring_01",
+  "role": "gold",
+  "valid": true
+ },
+ {
+  "name": "ring_10",
+  "role": "gold",
+  "valid": true
+ },
+ {
+  "name": "ring_11",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "ring_20",
+  "role": "silver",
+  "valid": true
+ },
+ {
+  "name": "ring_21",
+  "role": "gold",
+  "valid": true
+ }
+]

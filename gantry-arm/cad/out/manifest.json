@@ -1,0 +1,1342 @@
+[
+ {
+  "name": "j1_base_housing",
+  "body": "z_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "top face down, no supports",
+  "mass_g": 77.4,
+  "dims_mm": [
+   120.0,
+   120.0,
+   34.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 4.47,
+  "group": "arm",
+  "note": "drum around the fixed J1 bearing spigot (cad/internals.py)"
+ },
+ {
+  "name": "j1_turret_collar",
+  "body": "turret",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, no supports",
+  "mass_g": 28.7,
+  "dims_mm": [
+   112.0,
+   112.0,
+   7.5
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.77,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j2_shoulder_puck",
+  "body": "turret",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "axis vertical (Y up), tree supports inside puck only",
+  "mass_g": 110.0,
+  "dims_mm": [
+   126.0,
+   96.0,
+   96.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 6.28,
+  "group": "arm",
+  "note": "houses 2x STS3250 (J2) facing outward; split vertically at the column/puck seam if printing is hard"
+ },
+ {
+  "name": "j2_cap_outer",
+  "body": "turret",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down on textured plate",
+  "mass_g": 11.8,
+  "dims_mm": [
+   80.0,
+   80.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.83,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j2_cap_inner",
+  "body": "turret",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down on textured plate",
+  "mass_g": 12.3,
+  "dims_mm": [
+   80.0,
+   80.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.85,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "upper_arm_body",
+  "body": "upper_arm",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "inner face down (flat), supports in hub bores only",
+  "mass_g": 85.8,
+  "dims_mm": [
+   251.0,
+   92.0,
+   19.0
+  ],
+  "fits_bed": true,
+  "bed_note": "rotated 19\u00b0 on bed",
+  "print_h": 4.93,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "upper_arm_cover",
+  "body": "upper_arm",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "outer face down on smooth PEI (best surface)",
+  "mass_g": 62.1,
+  "dims_mm": [
+   251.0,
+   92.0,
+   13.0
+  ],
+  "fits_bed": true,
+  "bed_note": "rotated 17\u00b0 on bed",
+  "print_h": 3.62,
+  "group": "arm",
+  "note": "LED channel for WS2812 strip (60/m, 6 LEDs) under a diffuser"
+ },
+ {
+  "name": "upper_arm_led_diffuser",
+  "body": "upper_arm",
+  "role": "accent",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG natural (translucent)",
+  "orient": "on edge",
+  "mass_g": 0.8,
+  "dims_mm": [
+   99.0,
+   4.6,
+   1.3
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.21,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j3_elbow_puck",
+  "body": "forearm",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "axis vertical, supports inside only",
+  "mass_g": 74.5,
+  "dims_mm": [
+   88.0,
+   88.0,
+   82.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 4.31,
+  "group": "arm",
+  "note": "houses 2x STS3250 (J3)"
+ },
+ {
+  "name": "j3_cap_a",
+  "body": "forearm",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down",
+  "mass_g": 10.2,
+  "dims_mm": [
+   74.0,
+   74.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.74,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j3_cap_b",
+  "body": "forearm",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down",
+  "mass_g": 10.5,
+  "dims_mm": [
+   74.0,
+   74.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.75,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "forearm_body",
+  "body": "forearm",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "inner face down, supports in hub bores only",
+  "mass_g": 66.4,
+  "dims_mm": [
+   220.0,
+   76.0,
+   19.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 3.86,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "forearm_cover",
+  "body": "forearm",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "outer face down on smooth PEI",
+  "mass_g": 45.8,
+  "dims_mm": [
+   220.0,
+   76.0,
+   13.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 2.71,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "wrist_shell_front",
+  "body": "wrist",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "split face down (flat), no supports",
+  "mass_g": 26.0,
+  "dims_mm": [
+   83.0,
+   64.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.62,
+  "group": "arm",
+  "note": "halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5"
+ },
+ {
+  "name": "wrist_shell_back",
+  "body": "wrist",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "split face down (flat), no supports",
+  "mass_g": 26.0,
+  "dims_mm": [
+   83.0,
+   64.0,
+   32.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.62,
+  "group": "arm",
+  "note": "halves join on the XZ mid-plane with 4x M3; houses STS3215 J4 + STS3215 J5"
+ },
+ {
+  "name": "j4_cap_a",
+  "body": "wrist",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down",
+  "mass_g": 4.9,
+  "dims_mm": [
+   50.0,
+   50.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.44,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j4_cap_b",
+  "body": "wrist",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, face down",
+  "mass_g": 1.4,
+  "dims_mm": [
+   50.0,
+   50.0,
+   2.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.25,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "j5_roll_flange",
+  "body": "tool",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat",
+  "mass_g": 11.4,
+  "dims_mm": [
+   60.0,
+   60.0,
+   4.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.81,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "coupler_robot_half",
+  "body": "tool",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, magnet face up",
+  "mass_g": 18.5,
+  "dims_mm": [
+   60.0,
+   60.0,
+   8.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.2,
+  "group": "arm",
+  "note": "3x 8x3 mm N52 magnets; signal pogo pins 12V-logic, GND, DATA, TOOL_ID; 2x 3.5 mm high-current pins (12 V / GND, >= 5 A) for powered tools; cone socket"
+ },
+ {
+  "name": "coupler_magnets",
+  "body": "tool",
+  "role": "metal",
+  "qty": 1,
+  "printed": false,
+  "material": "N52 8x3 mm",
+  "orient": "",
+  "mass_g": 3.2,
+  "dims_mm": [
+   40.9,
+   36.5,
+   2.8
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "coupler_pogo_pins",
+  "body": "tool",
+  "role": "brass",
+  "qty": 1,
+  "printed": false,
+  "material": "4x pogo pin 2 mm (signal) + 2x pogo pin 3.5 mm >= 5 A (power) per robot half",
+  "orient": "",
+  "mass_g": 1.4,
+  "dims_mm": [
+   28.6,
+   15.5,
+   6.2
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "coupler_lock_sleeve",
+  "body": "tool",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, no supports",
+  "mass_g": 5.7,
+  "dims_mm": [
+   73.6,
+   65.2,
+   10.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.49,
+  "group": "arm",
+  "note": "quarter-turn bayonet: 3 internal ramps engage lugs on the tool half (mechanical lock)"
+ },
+ {
+  "name": "wrist_camera_pod",
+  "body": "tool",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "back face down",
+  "mass_g": 3.1,
+  "dims_mm": [
+   20.0,
+   18.0,
+   12.5
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.34,
+  "group": "arm",
+  "note": "fits a 32x32 mm USB UVC board"
+ },
+ {
+  "name": "wrist_camera_lens",
+  "body": "tool",
+  "role": "lens",
+  "qty": 1,
+  "printed": false,
+  "material": "camera lens",
+  "orient": "",
+  "mass_g": 0.2,
+  "dims_mm": [
+   8.4,
+   8.4,
+   1.6
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "coupler_tool_half",
+  "body": "tool",
+  "role": "shell",
+  "qty": 4,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat, cone up, no supports",
+  "mass_g": 19.1,
+  "dims_mm": [
+   63.0,
+   60.0,
+   12.6
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.23,
+  "group": "arm",
+  "note": "one per tool; 3 steel discs face the magnets, 4 brass contact pads"
+ },
+ {
+  "name": "coupler_contact_pads",
+  "body": "tool",
+  "role": "brass",
+  "qty": 4,
+  "printed": false,
+  "material": "brass pads / PCB: 4 signal + 2 power per tool",
+  "orient": "",
+  "mass_g": 0.3,
+  "dims_mm": [
+   30.2,
+   18.0,
+   0.5
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "gripper_housing",
+  "body": "tool",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "open end up, no supports",
+  "mass_g": 28.6,
+  "dims_mm": [
+   62.0,
+   62.0,
+   37.9
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.76,
+  "group": "arm",
+  "note": "STS3215 lies across the housing; pinion drives a twin rack"
+ },
+ {
+  "name": "gripper_smoke_cap",
+  "body": "tool",
+  "role": "smoke",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG translucent grey (or smoked PETG)",
+  "orient": "dome down, 100% infill, slow outer wall",
+  "mass_g": 5.4,
+  "dims_mm": [
+   58.0,
+   58.0,
+   8.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.47,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "gripper_pinion_rack",
+  "body": "tool",
+  "role": "metal",
+  "qty": 1,
+  "printed": false,
+  "material": "M0.5 pinion + rack (or printed PETG)",
+  "orient": "",
+  "mass_g": 15.1,
+  "dims_mm": [
+   28.0,
+   16.0,
+   8.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "gripper_fingers_vlink",
+  "body": "tool",
+  "role": "metal",
+  "qty": 1,
+  "printed": false,
+  "material": "2 mm stainless laser-cut links (or PETG + metallic paint)",
+  "orient": "",
+  "mass_g": 48.8,
+  "dims_mm": [
+   48.0,
+   39.0,
+   18.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": "2 fingers x (2 V-links pairs + finger plate)"
+ },
+ {
+  "name": "gripper_pivot_pins",
+  "body": "tool",
+  "role": "metal",
+  "qty": 1,
+  "printed": false,
+  "material": "3 mm steel dowel pins",
+  "orient": "",
+  "mass_g": 8.0,
+  "dims_mm": [
+   45.2,
+   21.0,
+   19.2
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "gripper_pads",
+  "body": "tool",
+  "role": "rubber",
+  "qty": 1,
+  "printed": false,
+  "material": "TPU 95A pads (or 2 mm silicone sheet)",
+  "orient": "",
+  "mass_g": 1.9,
+  "dims_mm": [
+   33.2,
+   18.0,
+   16.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "tool_suction_body",
+  "body": "tool_suction",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat end down",
+  "mass_g": 42.0,
+  "dims_mm": [
+   58.0,
+   48.0,
+   48.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 2.5,
+  "group": "arm",
+  "note": "holds a 370-size 12 V mini vacuum pump + solenoid; power via pogo 12 V"
+ },
+ {
+  "name": "tool_suction_cup",
+  "body": "tool_suction",
+  "role": "rubber",
+  "qty": 1,
+  "printed": false,
+  "material": "20 mm bellows suction cup",
+  "orient": "",
+  "mass_g": 3.9,
+  "dims_mm": [
+   26.0,
+   26.0,
+   12.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "tool_pen_holder",
+  "body": "tool_pen",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat end down",
+  "mass_g": 21.4,
+  "dims_mm": [
+   52.0,
+   36.0,
+   28.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.36,
+  "group": "arm",
+  "note": "spring-loaded sleeve, side thumb screw; fits 8-12 mm pens"
+ },
+ {
+  "name": "tool_pen_marker",
+  "body": "tool_pen",
+  "role": "accent",
+  "qty": 1,
+  "printed": false,
+  "material": "marker (not supplied)",
+  "orient": "",
+  "mass_g": 7.5,
+  "dims_mm": [
+   68.0,
+   11.0,
+   11.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "tool_phone_mount",
+  "body": "tool_phone",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "clamp face down",
+  "mass_g": 27.4,
+  "dims_mm": [
+   96.0,
+   60.0,
+   24.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.69,
+  "group": "arm",
+  "note": "spring jaw clamps phones 60-90 mm wide"
+ },
+ {
+  "name": "tool_phone_pads",
+  "body": "tool_phone",
+  "role": "rubber",
+  "qty": 1,
+  "printed": false,
+  "material": "TPU pads",
+  "orient": "",
+  "mass_g": 0.9,
+  "dims_mm": [
+   81.0,
+   14.0,
+   14.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "arm",
+  "note": ""
+ },
+ {
+  "name": "x_rail_2060",
+  "body": "world",
+  "role": "extrusion",
+  "qty": 1,
+  "printed": false,
+  "material": "2060 V-slot 1000 mm, black anodised",
+  "orient": "",
+  "mass_g": 1067.7,
+  "dims_mm": [
+   1000.0,
+   60.0,
+   20.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "x_rail_cover_strips",
+  "body": "world",
+  "role": "strip",
+  "qty": 1,
+  "printed": false,
+  "material": "V-slot cover strip (PVC), 2x 1 m",
+  "orient": "",
+  "mass_g": 18.9,
+  "dims_mm": [
+   1000.0,
+   46.2,
+   1.2
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "x_belt",
+  "body": "world",
+  "role": "belt",
+  "qty": 1,
+  "printed": false,
+  "material": "GT2 6 mm belt",
+  "orient": "",
+  "mass_g": 10.8,
+  "dims_mm": [
+   940.0,
+   6.0,
+   1.6
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "x_motor_housing",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "open bottom down",
+  "mass_g": 94.5,
+  "dims_mm": [
+   126.0,
+   80.0,
+   70.5
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 5.42,
+  "group": "gantry",
+  "note": "NEMA17 vertical, GT2 20T pulley; printed as 2 halves split at x=-540 (lap joint) if needed"
+ },
+ {
+  "name": "x_idler_cap",
+  "body": "world",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "open bottom down",
+  "mass_g": 20.3,
+  "dims_mm": [
+   84.0,
+   41.7,
+   37.7
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.3,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "x_cable_trough_1",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upside down (top on bed)",
+  "mass_g": 180.8,
+  "dims_mm": [
+   237.0,
+   78.0,
+   64.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 10.22,
+  "group": "gantry",
+  "note": "4 segments, hidden lap joint, brush strip in top slot"
+ },
+ {
+  "name": "x_cable_trough_2",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upside down (top on bed)",
+  "mass_g": 180.8,
+  "dims_mm": [
+   237.0,
+   78.0,
+   64.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 10.22,
+  "group": "gantry",
+  "note": "4 segments, hidden lap joint, brush strip in top slot"
+ },
+ {
+  "name": "x_cable_trough_3",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upside down (top on bed)",
+  "mass_g": 180.8,
+  "dims_mm": [
+   237.0,
+   78.0,
+   64.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 10.22,
+  "group": "gantry",
+  "note": "4 segments, hidden lap joint, brush strip in top slot"
+ },
+ {
+  "name": "x_cable_trough_4",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upside down (top on bed)",
+  "mass_g": 180.8,
+  "dims_mm": [
+   237.0,
+   78.0,
+   64.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 10.22,
+  "group": "gantry",
+  "note": "4 segments, hidden lap joint, brush strip in top slot"
+ },
+ {
+  "name": "controller_enclosure",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "open bottom down",
+  "mass_g": 104.1,
+  "dims_mm": [
+   120.0,
+   86.0,
+   78.5
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 5.96,
+  "group": "gantry",
+  "note": "ESP32 + 2x TMC2209 + Waveshare bus adapter + 12/24 V distribution"
+ },
+ {
+  "name": "estop_base",
+  "body": "world",
+  "role": "estop_yellow",
+  "qty": 1,
+  "printed": false,
+  "material": "22 mm e-stop",
+  "orient": "",
+  "mass_g": 19.2,
+  "dims_mm": [
+   44.0,
+   44.0,
+   10.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "estop_button",
+  "body": "world",
+  "role": "estop_red",
+  "qty": 1,
+  "printed": false,
+  "material": "22 mm e-stop",
+  "orient": "",
+  "mass_g": 15.2,
+  "dims_mm": [
+   34.0,
+   34.0,
+   14.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "x_carriage_shroud",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "top face down",
+  "mass_g": 195.8,
+  "dims_mm": [
+   156.0,
+   134.0,
+   76.9
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 11.05,
+  "group": "gantry",
+  "note": "covers 6 V-wheels, Z motor (NEMA17 under the column) and the column foot"
+ },
+ {
+  "name": "x_chain_arm",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat",
+  "mass_g": 14.0,
+  "dims_mm": [
+   50.0,
+   24.0,
+   12.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.95,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "z_column_2040",
+  "body": "x_carriage",
+  "role": "extrusion",
+  "qty": 1,
+  "printed": false,
+  "material": "2040 V-slot 700 mm, black anodised",
+  "orient": "",
+  "mass_g": 506.4,
+  "dims_mm": [
+   700.0,
+   40.0,
+   20.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "z_column_cover_strips",
+  "body": "x_carriage",
+  "role": "strip",
+  "qty": 1,
+  "printed": false,
+  "material": "V-slot cover strip (PVC), 4x 650 mm",
+  "orient": "",
+  "mass_g": 13.8,
+  "dims_mm": [
+   648.0,
+   26.0,
+   20.0
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "z_column_top_cap",
+  "body": "x_carriage",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "top down",
+  "mass_g": 95.8,
+  "dims_mm": [
+   88.0,
+   52.0,
+   22.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 5.49,
+  "group": "gantry",
+  "note": "holds the T8x2 top bearing (608ZZ)"
+ },
+ {
+  "name": "z_rear_cover_1",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "on its back (outer face down)",
+  "mass_g": 77.8,
+  "dims_mm": [
+   213.9,
+   48.0,
+   42.3
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 4.49,
+  "group": "gantry",
+  "note": "hides T8x2 lead screw + Z cable chain; 3 segments"
+ },
+ {
+  "name": "z_rear_cover_2",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "on its back (outer face down)",
+  "mass_g": 77.8,
+  "dims_mm": [
+   213.9,
+   48.0,
+   42.3
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 4.49,
+  "group": "gantry",
+  "note": "hides T8x2 lead screw + Z cable chain; 3 segments"
+ },
+ {
+  "name": "z_rear_cover_3",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "on its back (outer face down)",
+  "mass_g": 77.8,
+  "dims_mm": [
+   213.9,
+   48.0,
+   42.3
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 4.49,
+  "group": "gantry",
+  "note": "hides T8x2 lead screw + Z cable chain; 3 segments"
+ },
+ {
+  "name": "z_carriage_shroud",
+  "body": "z_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "top face down",
+  "mass_g": 102.8,
+  "dims_mm": [
+   130.8,
+   72.0,
+   68.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 5.88,
+  "group": "gantry",
+  "note": "covers 8 double-row V-wheels (2 rows x 4) and the T8 anti-backlash nut"
+ },
+ {
+  "name": "lift_platform",
+  "body": "z_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "top face down, ribs up, 5 walls 40% gyroid",
+  "mass_g": 217.3,
+  "dims_mm": [
+   165.0,
+   130.0,
+   76.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 12.24,
+  "group": "gantry",
+  "note": "option: 4 mm 6061 plate sandwich if long-term creep shows"
+ },
+ {
+  "name": "head_shell",
+  "body": "x_carriage",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "split on the XY mid-plane, outer faces down",
+  "mass_g": 49.4,
+  "dims_mm": [
+   112.0,
+   54.0,
+   53.7
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 2.91,
+  "group": "gantry",
+  "note": "houses a USB stereo camera board (60 mm baseline) + 2x 12-LED WS2812 rings; split on the mid-plane"
+ },
+ {
+  "name": "head_eye_bezels",
+  "body": "x_carriage",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "flat",
+  "mass_g": 0.4,
+  "dims_mm": [
+   92.0,
+   26.3,
+   21.1
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 0.19,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_lenses",
+  "body": "x_carriage",
+  "role": "lens",
+  "qty": 1,
+  "printed": false,
+  "material": "stereo camera lenses",
+  "orient": "",
+  "mass_g": 2.5,
+  "dims_mm": [
+   77.0,
+   14.8,
+   12.2
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_led_rings",
+  "body": "x_carriage",
+  "role": "accent",
+  "qty": 1,
+  "printed": false,
+  "material": "2x WS2812 12-LED ring (diffused)",
+  "orient": "",
+  "mass_g": 1.2,
+  "dims_mm": [
+   90.0,
+   24.5,
+   19.6
+  ],
+  "fits_bed": true,
+  "bed_note": "bought",
+  "print_h": 0,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "head_neck",
+  "body": "x_carriage",
+  "role": "cap",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "upright",
+  "mass_g": 24.0,
+  "dims_mm": [
+   50.0,
+   22.0,
+   22.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 1.5,
+  "group": "gantry",
+  "note": ""
+ },
+ {
+  "name": "tool_rack_1",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "back wall down (face on bed), supports under forks",
+  "mass_g": 339.3,
+  "dims_mm": [
+   189.8,
+   125.5,
+   73.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 19.02,
+  "group": "workcell",
+  "note": "slots for tools 1+2; two modules screw to the table side by side"
+ },
+ {
+  "name": "tool_rack_2",
+  "body": "world",
+  "role": "shell",
+  "qty": 1,
+  "printed": true,
+  "material": "PETG",
+  "orient": "back wall down (face on bed), supports under forks",
+  "mass_g": 353.8,
+  "dims_mm": [
+   189.8,
+   135.5,
+   73.0
+  ],
+  "fits_bed": true,
+  "bed_note": "flat",
+  "print_h": 19.82,
+  "group": "workcell",
+  "note": "slots for tools 3+4; two modules screw to the table side by side"
+ }
+]

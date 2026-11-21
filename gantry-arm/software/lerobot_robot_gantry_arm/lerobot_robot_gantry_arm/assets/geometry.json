@@ -1,0 +1,122 @@
+{
+ "fore": 150.0,
+ "j1_y": 127.0,
+ "j2_z0": 350.0,
+ "lateral": 2.0,
+ "limits_deg": {
+  "base_yaw": [
+   -150,
+   150
+  ],
+  "elbow_flex": [
+   -140,
+   140
+  ],
+  "shoulder_lift": [
+   -100,
+   135
+  ],
+  "wrist_flex": [
+   -110,
+   110
+  ],
+  "wrist_roll": [
+   -180,
+   180
+  ]
+ },
+ "preload_Nm": 0.15,
+ "rack": {
+  "groove": [
+   10.0,
+   14.0,
+   2.6
+  ],
+  "insert_mm": 45.0,
+  "lift_mm": 20.0,
+  "riser": 80.0,
+  "roll_deg": 90.0,
+  "slots": {
+   "1": 250.0,
+   "2": 315.0,
+   "3": 375.0,
+   "4": 450.0
+  },
+  "tcp_z": 110.0,
+  "y": 275.0
+ },
+ "servos": {
+  "base_yaw": {
+   "count": 1,
+   "efficiency": 1.0,
+   "encoder": false,
+   "model": "sts3215",
+   "motor_ratios": null,
+   "rated_Nm": 0.980665,
+   "ratio": 1.0,
+   "stall_Nm": 2.941995
+  },
+  "elbow_flex": {
+   "count": 2,
+   "efficiency": 0.95,
+   "encoder": true,
+   "model": "sts3250",
+   "motor_ratios": [
+    2.0,
+    2.142857142857143
+   ],
+   "rated_Nm": 1.569064,
+   "ratio": 2.0,
+   "stall_Nm": 4.903325
+  },
+  "gripper": {
+   "count": 1,
+   "efficiency": 1.0,
+   "encoder": false,
+   "model": "sts3215",
+   "motor_ratios": null,
+   "rated_Nm": 0.980665,
+   "ratio": 1.0,
+   "stall_Nm": 2.941995
+  },
+  "shoulder_lift": {
+   "count": 2,
+   "efficiency": 0.95,
+   "encoder": true,
+   "model": "sts3250",
+   "motor_ratios": [
+    2.0,
+    2.1176470588235294
+   ],
+   "rated_Nm": 1.569064,
+   "ratio": 2.0,
+   "stall_Nm": 4.903325
+  },
+  "wrist_flex": {
+   "count": 1,
+   "efficiency": 1.0,
+   "encoder": false,
+   "model": "sts3215",
+   "motor_ratios": null,
+   "rated_Nm": 0.980665,
+   "ratio": 1.0,
+   "stall_Nm": 2.941995
+  },
+  "wrist_roll": {
+   "count": 1,
+   "efficiency": 1.0,
+   "encoder": false,
+   "model": "sts3032",
+   "motor_ratios": null,
+   "rated_Nm": 0.14709975,
+   "ratio": 1.0,
+   "stall_Nm": 0.44129925000000003
+  }
+ },
+ "spring_k_N_per_mm": 0.9,
+ "tool": 135.0,
+ "upper": 165.0,
+ "x0": -400.0,
+ "x_travel": 800.0,
+ "z_travel": 500.0
+}
